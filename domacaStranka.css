@@ -1,0 +1,17 @@
+
+h1,h2 {
+    padding: 10px;
+    display: flex;
+    justify-content: start;
+    font-weight: bolder;
+    color: #D9BFA9;
+    max-width: 50%;
+    margin: auto;
+}
+
+p,li{
+    display: flex;
+    color: #D9BFA9;
+    max-width: 50%;
+    margin: auto;
+}
