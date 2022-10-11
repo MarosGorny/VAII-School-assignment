@@ -3,8 +3,8 @@
 }
 
 .navbar-nav img {
-    margin-left: 5px;
-    width: 1.4rem;
+    margin-left: 0.7rem;
+    width: 1.8rem;
     transition: transform .2s;
 }
 
@@ -14,16 +14,18 @@ img:hover {
     z-index: 2;
 }
 
-
+.icons {
+    margin: auto;
+}
 
 #instagramIcon:hover {
     filter: invert(66%) sepia(0%) saturate(0%) hue-rotate(314deg) brightness(92%) contrast(95%);
 }
 #facebookIcon:hover {
-    filter: invert(37%) sepia(92%) saturate(390%) hue-rotate(180deg) brightness(90%) contrast(89%) !important;
+    filter: invert(37%) sepia(92%) saturate(390%) hue-rotate(180deg) brightness(90%) contrast(89%);
 }
 #phoneIcon:hover {
-    filter: invert(70%) sepia(60%) saturate(522%) hue-rotate(42deg) brightness(93%) contrast(81%) !important;
+    filter: invert(70%) sepia(60%) saturate(522%) hue-rotate(42deg) brightness(93%) contrast(81%);
 }
 
 body {
