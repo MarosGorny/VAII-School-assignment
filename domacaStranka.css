@@ -4,14 +4,14 @@ h1,h2 {
     display: flex;
     justify-content: start;
     font-weight: bolder;
-    color: #D9BFA9;
+    color: #132330;
     max-width: 50%;
     margin: auto;
 }
 
 p,li{
     display: flex;
-    color: #D9BFA9;
+    color: #667786;
     max-width: 50%;
     margin: auto;
 }
