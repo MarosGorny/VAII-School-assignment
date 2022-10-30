@@ -1,3 +1,17 @@
+.navbar {
+    font-family: 'Bebas Neue', cursive;
+    font-size: x-large;
+}
+
+a.navbar-brand {
+    font-size: xx-large;
+    transition: transform .5s;
+}
+
+a.navbar-brand:hover {
+    transform: scale(1.5);
+}
+
 .navbar.navbar-expand-lg.navbar-dark {
     background-color: #3B4B59;
 }
@@ -28,6 +42,4 @@
     filter: invert(70%) sepia(60%) saturate(522%) hue-rotate(42deg) brightness(93%) contrast(81%);
 }
 
-body {
-    background-color: #0D0D0D;
-}
+
