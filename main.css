@@ -1,56 +1,63 @@
-/*Treningy */
-.container {
-    padding: 10px;
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
-.card-group {
-    padding: 10px;
-    margin: 10px;
-}
-
-/*Priestory*/
 body {
     background-color:#E1E2E1;
-    font-family: 'Roboto Condensed', sans-serif
+    color: #667786;
+    font-family: 'Roboto Condensed', sans-serif;
+    padding-top: 74px;
 }
 
-h1 {
-    position: relative;
-    text-align: center;
-    color: white;
-    text-shadow: 1px 1px black ;
-    z-index: 3;
-}
-
-img {
-    border-radius: 1%;
-    transition: transform .5s;
-}
 .container-fluid {
     margin: 0;
 }
-img:hover {
-    position: relative;
-    transform: scale(1.1);
-    z-index: 2;
-}
-
-/*DomacaStranka*/
-
 
 h1,h2 {
-    /*padding: 10px;*/
-    /*display: flex;*/
-    /*justify-content: start;*/
-    /*font-weight: bolder;*/
     color: #132330;
-    /*max-width: 50%;*/
-    /*margin: auto;*/
 }
 
-p,li{
-    /*display: flex;*/
-    color: #667786;
-    /*max-width: 50%;*/
-    /*margin: auto;*/
+p {
+    text-align: justify;
+    margin-left: 5vh;
+    margin-right: 5vh;
+    font-size: x-large;
+}
+
+.home-page-text h2 {
+    font-size: 2.5rem;
+}
+
+.home-page-text p {
+    font-size: 1.4rem;
+}
+
+.content {
+    margin-top: 80px;
+}
+
+#headingGroup h1 {
+    font-size: 3.5rem;
+}
+
+.home-block {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+@media (max-width: 1200px) {
+    #headingGroup h1 {
+        font-weight: 100;
+        font-size: 2.5rem;
+    }
+
+    .home-page-text h2 {
+        font-weight: bold;
+        font-size: 1.8rem;
+    }
+
+    .home-page-text p {
+        font-size: 1.1rem;
+    }
 }
