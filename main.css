@@ -59,13 +59,14 @@ img {
     -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
     filter: grayscale(100%);
     transition: filter 0.5s;
-    float: right;
 }
 
 img:hover {
     -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
     filter: grayscale(0%);
 }
+
+
 
 @media (max-width: 1200px) {
     #headingGroup h1 {
