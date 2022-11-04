@@ -61,10 +61,30 @@ img {
     transition: filter 0.5s;
 }
 
+.contacts-links img {
+    height: 3.2rem;
+    width: 3.2rem;
+    transition: transform .2s; /* Animation */
+}
+
+#gmail-logo {
+    height: 4rem;
+    width: 4rem;
+}
+
+.contacts-links img:hover {
+    transform: scale(1.5);
+}
+
+.contact-div {
+    text-align: center;
+}
+
 img:hover {
     -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
     filter: grayscale(0%);
 }
+
 
 
 

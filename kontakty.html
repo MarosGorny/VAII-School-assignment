@@ -20,7 +20,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand ml-3 mb-auto ml-lg-auto " href="domacaStranka.html">Body INN</a>
+            <a class="navbar-brand ml-3 mb-auto ml-lg-auto " href="index.html">Body INN</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -28,7 +28,7 @@
             <div class="collapse navbar-collapse justify-content-left " id="navbarNav">
                 <ul class="navbar-nav ml-3 mb-2 ml-lg-5">
                     <li class="nav-item ">
-                        <a class="nav-link" href="domacaStranka.html">Fitnescentrum</a>
+                        <a class="nav-link" href="index.html">Fitnescentrum</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="treningy.html">Tréningy</a>
@@ -68,14 +68,15 @@
 <section class="container-fluid px-0">
     <div class="row align-items-center">
         <div class="col-lg-6 home-block">
-            <div class="text-right d-none d-lg-inline-block">
-                <p>Plaváreň Štiavničky</p>
-                <p>Cesta olympionikov 1269/30</p>
-                <p>97404 Banská Bystrica</p>
-                <p>Tel. +421 48 4230401</p>
+            <div class="d-lg-inline-block">
+                <p class="text-center text-lg-left pt-4 pt-lg-0">Plaváreň Štiavničky</p>
+                <p class="text-center text-lg-left">Cesta olympionikov 1269/30</p>
+                <p class="text-center text-lg-left">97404 Banská Bystrica</p>
+                <p class="text-center text-lg-left">Tel. +421 48 4230401</p>
             </div>
         </div>
-        <div class="col-lg-6 home-block">
+<!--        TODO spravit aj aby sa text dal do stredu ked sa zmeni od lg-->
+        <div class="d-none d-lg-inline-flex  col-lg-6 home-block">
             <img class="img-fluid"
                  src="https://images.unsplash.com/photo-1591117207239-788bf8de6c3b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80"
                  alt="Box punch">
@@ -83,102 +84,65 @@
     </div>
 </section>
 
-
-<footer class="footer fixed-bottom">
-<section class="container-fluid px-0">
-    <div class="row">
-        <div class="col-lg-4 text-center py-2 shadow-sm">
-            <div class="d-lg-none text-center text-lg-left pl-lg-4">
-                <h1 class="d-none d-lg-flex">INSTAGRAM</h1>
-            </div>
-            <div class="row justify-content-start justify-content-lg-center">
-                <div class="col-4">
-                    <img class="img-fluid" src="Icons/instagram-logo.png" alt="Box punch">
-                </div>
-                <div class="text-center my-auto">
-                    <h2>@Bodyinn_gym_zvolen</h2>
-                    <a class="btn btn-secondary btn-lg btn-block" href="#" role="button">Prihlásiť sa</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-4 text-center py-2 shadow-sm">
-            <div class="d-lg-none text-center text-lg-left pl-lg-4">
-                <h1 class="d-none d-lg-flex">FACEBOOK</h1>
-            </div>
-            <div class="row justify-content-end justify-content-lg-center">
-                <div class="col-4 order-2 order-lg-0">
-                    <img class="img-fluid" src="Icons/facebook-logo.png" alt="Box punch">
-                </div>
-                <div class="text-center my-auto">
-                    <h2>@Bodyinn_gym_zvolen</h2>
-                    <a class="btn btn-secondary btn-lg btn-block" href="#" role="button">Prihlásiť sa</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-4 text-center py-2 shadow-sm">
-            <div class="d-lg-none text-center text-lg-left pl-lg-4">
-                <h1 class="d-none d-lg-flex">WHATSAPP</h1>
-            </div>
-            <div class="row justify-content-start justify-content-lg-center">
-                <div class="col-4">
-                    <img class="img-fluid" src="Icons/whatsapp-logo.png" alt="Box punch">
-                </div>
-                <div class="text-center my-auto">
-                    <h2>@Bodyinn_gym_zvolen</h2>
-                    <a class="btn btn-secondary btn-lg btn-block" href="#" role="button">Prihlásiť sa</a>
-                </div>
-            </div>
-        </div>
-
+<!--TODO Treba dat svg vsade aby tam boli vectors-->
+<!--TODO Treba zarovnat obrazky na stred-->
+<div class="row my-4 contacts-links ">
+    <div class="offset-2 col-2 offset-lg-4 col-lg-1 my-auto contact-div">
+        <img src="Icons/instagram-logo.png" alt="Box punch">
     </div>
-</section>
-</footer>
-
+    <div class="col-2 col-lg-1 my-auto contact-div">
+        <img  src="Icons/facebook-logo.png" alt="Box punch">
+    </div>
+    <div class="col-2 col-lg-1 my-auto contact-div">
+        <img  src="Icons/whatsapp-logo.png" alt="Box punch">
+    </div>
+    <div class="col-2 col-lg-1 my-auto contact-div ">
+        <img id="gmail-logo" src = "/Icons/gmail-logo.png" alt="Phone contact" >
+    </div>
+</div>
 
 
 
 
 <!--TOTO MOZEM ODSTRANIT ALE MAM TU NEJAKE INFO STALE-->
-<div class="panel">
-    <div class="externa-appka-karta">
-        <img src="Icons/instagram-logo.png" alt="Instagram" class="externa-appka-img">
-        <h2 class="nazov-appky">INSTAGRAM</h2>
-        <span class="meno-v-appke">bodyinn_gym_zvolen</span>
-        <ul class="externa-appka-zoznam">
-            <li class="externa-appka-zoznam-item">Fotky</li>
-            <li class="externa-appka-zoznam-item">Videa</li>
-        </ul>
+<!--<div class="panel">-->
+<!--    <div class="externa-appka-karta">-->
+<!--        <img src="Icons/instagram-logo.png" alt="Instagram" class="externa-appka-img">-->
+<!--        <h2 class="nazov-appky">INSTAGRAM</h2>-->
+<!--        <span class="meno-v-appke">bodyinn_gym_zvolen</span>-->
+<!--        <ul class="externa-appka-zoznam">-->
+<!--            <li class="externa-appka-zoznam-item">Fotky</li>-->
+<!--            <li class="externa-appka-zoznam-item">Videa</li>-->
+<!--        </ul>-->
 
-        <a href="https://www.instagram.com/bodyinn_gym_zvolen/" target="_blank" class="appka-odkaz">FOLLOW</a>
-    </div>
+<!--        <a href="https://www.instagram.com/bodyinn_gym_zvolen/" target="_blank" class="appka-odkaz">FOLLOW</a>-->
+<!--    </div>-->
 
-    <div class="externa-appka-karta">
-        <img src="Icons/facebook-logo.png" alt="Facebook" class="externa-appka-img">
-        <h2 class="nazov-appky">FACEBOOK</h2>
-        <span class="meno-v-appke">Body INN</span>
-        <ul class="externa-appka-zoznam">
-            <li class="externa-appka-zoznam-item">Informacie</li>
-            <li class="externa-appka-zoznam-item">Novinky</li>
-        </ul>
+<!--    <div class="externa-appka-karta">-->
+<!--        <img src="Icons/facebook-logo.png" alt="Facebook" class="externa-appka-img">-->
+<!--        <h2 class="nazov-appky">FACEBOOK</h2>-->
+<!--        <span class="meno-v-appke">Body INN</span>-->
+<!--        <ul class="externa-appka-zoznam">-->
+<!--            <li class="externa-appka-zoznam-item">Informacie</li>-->
+<!--            <li class="externa-appka-zoznam-item">Novinky</li>-->
+<!--        </ul>-->
 
-        <a href="https://www.facebook.com/Body-INN-106794408867905" target="_blank" class="appka-odkaz">LIKE</a>
-    </div>
+<!--        <a href="https://www.facebook.com/Body-INN-106794408867905" target="_blank" class="appka-odkaz">LIKE</a>-->
+<!--    </div>-->
 
-    <div class="externa-appka-karta">
-        <img src="Icons/whatsapp-logo.png" alt="Whatsapp" class="externa-appka-img">
-        <h2 class="nazov-appky">WHATSAPP</h2>
-        <span class="meno-v-appke">0915 552 573</span>
-        <ul class="externa-appka-zoznam">
-            <li class="externa-appka-zoznam-item">Objednavky</li>
-            <li class="externa-appka-zoznam-item">Rezervacie miestnosti</li>
-        </ul>
+<!--    <div class="externa-appka-karta">-->
+<!--        <img src="Icons/whatsapp-logo.png" alt="Whatsapp" class="externa-appka-img">-->
+<!--        <h2 class="nazov-appky">WHATSAPP</h2>-->
+<!--        <span class="meno-v-appke">0915 552 573</span>-->
+<!--        <ul class="externa-appka-zoznam">-->
+<!--            <li class="externa-appka-zoznam-item">Objednavky</li>-->
+<!--            <li class="externa-appka-zoznam-item">Rezervacie miestnosti</li>-->
+<!--        </ul>-->
 
-        <a href="https://api.whatsapp.com/send?phone=421915552573" class="appka-odkaz" target="_blank">SEND MESSAGE</a>
-    </div>
+<!--        <a href="https://api.whatsapp.com/send?phone=421915552573" class="appka-odkaz" target="_blank">SEND MESSAGE</a>-->
+<!--    </div>-->
 
-</div>
+<!--</div>-->
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
