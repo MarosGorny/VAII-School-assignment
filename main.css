@@ -8,7 +8,21 @@ body {
     color: #667786;
     font-family: 'Roboto Condensed', sans-serif;
     padding-top: 74px;
+    min-height: 100vh;
 }
+#footer-text {
+    background-color: #E1E2E1;
+}
+
+#footer-text p {
+    font-size: small;
+    text-align: left;
+    position: sticky;
+    Width: 100%;
+    bottom: 0;
+}
+
+
 
 .container-fluid {
     margin: 0;
