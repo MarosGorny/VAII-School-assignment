@@ -37,7 +37,7 @@
                         <a class="nav-link" href="?c=domov&a=treningy">Tréningy</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="?c=domov&a=priestory">Rezervácia priestoru</a>
+                        <a class="nav-link" href="?c=rezervaciePriestor">Rezervácia priestoru</a>
                     </li>
                 </ul>
 
