@@ -8,7 +8,7 @@ class RezervaciaPriestor extends Model
 {
     protected $id;
     protected $den;
-    protected $zacitok;
+    protected $zaciatok;
     protected $koniec;
 
     /**
@@ -46,17 +46,17 @@ class RezervaciaPriestor extends Model
     /**
      * @return mixed
      */
-    public function getZacitok()
+    public function getZaciatok()
     {
-        return $this->zacitok;
+        return $this->zaciatok;
     }
 
     /**
-     * @param mixed $zacitok
+     * @param mixed $zaciatok
      */
-    public function setZacitok($zacitok): void
+    public function setZacitok($zaciatok): void
     {
-        $this->zacitok = $zacitok;
+        $this->zaciatok = $zaciatok;
     }
 
     /**

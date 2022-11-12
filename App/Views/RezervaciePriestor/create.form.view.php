@@ -10,17 +10,18 @@
     </div>
     <div class="form-group">
         <label for="exampleFormControlSelect1">Den</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-            <option>Pondelok</option>
+        <select class="form-control" id="exampleFormControlSelect1" name="den">
+
+            <option value="Pondelok" >Pondelok</option>
             <option>Utorok</option>
             <option>Streda</option>
             <option>Stvrtok</option>
             <option>Piatok</option>
         </select>
-        <label for="exampleFormControlSelect2">Den</label>
-        <select class="form-control" id="exampleFormControlSelect2">
-            <option>8</option>
-            <option>9</option>
+        <label for="exampleFormControlSelect2">Zaciatok</label>
+        <select class="form-control" id="exampleFormControlSelect2" name="zaciatok">
+            <option value="8">8:00</option>
+            <option value="9">9</option>
             <option>10</option>
             <option>11</option>
             <option>12</option>
@@ -34,9 +35,9 @@
             <option>20</option>
             <option>21</option>
         </select>
-        <label for="exampleFormControlSelect3">Den</label>
-        <select class="form-control" id="exampleFormControlSelect3">
-            <option>9</option>
+        <label for="exampleFormControlSelect3">Koniec</label>
+        <select class="form-control" id="exampleFormControlSelect3" name="koniec">
+            <option value="9">9:00</option>
             <option>10</option>
             <option>11</option>
             <option>12</option>

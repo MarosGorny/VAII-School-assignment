@@ -9,3 +9,16 @@
     <p>Ahoj ahoj </p>
 </div>
 
+<?php
+foreach($data as $rezervaciaPriestor) {
+
+    ?><div class="card text-center my-3" style="width: 200px">
+    <div class="card-body">
+        <!--        <h5 class="card-title">Card title</h5>-->
+        <p class="card-text">
+            <?php echo $rezervaciaPriestor->getDen() ?>
+        </p>
+    </div>
+    </div>
+<?php } ?>
+
