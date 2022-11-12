@@ -39,8 +39,17 @@ class RezervaciePriestorController extends AControllerBase
         $rezervaciaPriestor->setDen($this->request()->getValue('den'));
         $rezervaciaPriestor->setZacitok($this->request()->getValue('zaciatok'));
         $rezervaciaPriestor->setKoniec($this->request()->getValue('koniec'));
-        $rezervaciaPriestor->save();
-        return $this->redirect("?c=rezervaciePriestor");
+
+        if($this->request()->getValue('zaciatok') >= $this->request()->getValue('koniec')) {
+            echo "<script>alert('ZLE ');</script>";
+            return $this->html($rezervaciaPriestor, viewName: 'create.form');
+        } else
+        {
+            $rezervaciaPriestor->save();
+            return $this->redirect("?c=rezervaciePriestor");
+        }
+
+
     }
 
     public function delete() {
@@ -54,6 +63,16 @@ class RezervaciePriestorController extends AControllerBase
             $rezerviaciaNaVymazanie->delete();
         }
         return $this->redirect("?c=rezervaciePriestor");
+    }
+
+    public function edit() {
+        //najprv si musim post vytiahnut
+        $id = $this->request()->getValue('id');
+
+
+        $rezervaciaNaEdit = RezervaciaPriestor::getOne($id); //zislo by sa dorobit, ze co ak mi id neexistuje?
+
+        return $this->html($rezervaciaNaEdit, viewName: 'create.form');
     }
 
     public function create() {

@@ -12,45 +12,43 @@
         <label for="exampleFormControlSelect1">Den</label>
         <select class="form-control" id="exampleFormControlSelect1" name="den">
 
-            <option value="Pondelok" >Pondelok</option>
-            <option>Utorok</option>
-            <option>Streda</option>
-            <option>Stvrtok</option>
-            <option>Piatok</option>
+            <?php
+            $array = array("Pondelok","Utorok","Streda","Stvrtok","Piatok");
+            foreach ($array as $item) {
+                    if($data->getDen() == $item) {
+                        echo "<option selected>$item</option>";
+                    } else {
+                        echo "<option>$item</option>";
+                    }
+            }
+            ?>
         </select>
         <label for="exampleFormControlSelect2">Zaciatok</label>
         <select class="form-control" id="exampleFormControlSelect2" name="zaciatok">
-            <option value="8">8:00</option>
-            <option value="9">9</option>
-            <option>10</option>
-            <option>11</option>
-            <option>12</option>
-            <option>13</option>
-            <option>14</option>
-            <option>15</option>
-            <option>16</option>
-            <option>17</option>
-            <option>18</option>
-            <option>19</option>
-            <option>20</option>
-            <option>21</option>
+
+            <?php
+
+            for ($i = 8; $i <= 21 ;$i++) {
+                if($data->getZaciatok() == $i) {
+                    echo "<option selected value=\"$i\">$i:00</option>";
+                } else {
+                    echo "<option value=\"$i\">$i:00</option>";
+                }
+            }
+            ?>
         </select>
         <label for="exampleFormControlSelect3">Koniec</label>
         <select class="form-control" id="exampleFormControlSelect3" name="koniec">
-            <option value="9">9:00</option>
-            <option>10</option>
-            <option>11</option>
-            <option>12</option>
-            <option>13</option>
-            <option>14</option>
-            <option>15</option>
-            <option>16</option>
-            <option>17</option>
-            <option>18</option>
-            <option>19</option>
-            <option>20</option>
-            <option>21</option>
-            <option>22</option>
+            <?php
+
+            for ($i = 9; $i <= 22 ;$i++) {
+                if($data->getKoniec() == $i) {
+                    echo "<option selected value=\"$i\">$i:00</option>";
+                } else {
+                    echo "<option value=\"$i\">$i:00</option>";
+                }
+            }
+            ?>
         </select>
         <input type="submit" name="Odoslat">
     </div>
