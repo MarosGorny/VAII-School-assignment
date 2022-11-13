@@ -22,8 +22,14 @@ class RezervaciePriestorController extends AControllerBase
     public function index(): Response
     {
         //vytiahnut vsetky rezervacie
-        $rezervacie = RezervaciaPriestor::getAll(orderBy: "den,zaciatok");
-        return $this->html($rezervacie);
+        $rezervacie_pondelok = RezervaciaPriestor::getAll(whereClause: "den = 'Pondelok'" ,orderBy: "zaciatok");
+        $rezervacie_utorok = RezervaciaPriestor::getAll(whereClause: "den = 'Utorok'");
+        $rezervacie_streda = RezervaciaPriestor::getAll(whereClause: "den = 'Streda'");
+        $rezervacie_stvrtok = RezervaciaPriestor::getAll(whereClause: "den = 'Stvrtok'");
+        $rezervacie_piatok = RezervaciaPriestor::getAll(whereClause: "den = 'Piatok'");
+        return $this->html(['pondelok' => $rezervacie_pondelok,'utorok' => $rezervacie_utorok , 'streda' => $rezervacie_streda,
+            'stvrtok' => $rezervacie_stvrtok, 'piatok' => $rezervacie_piatok
+        ]);
     }
 
     public function store() {

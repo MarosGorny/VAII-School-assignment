@@ -31,7 +31,7 @@
             ?>
         </select>
         <label for="exampleFormControlSelect2">Zaciatok</label>
-        <div class="text-left text-danger font-weight-light font-italic">
+        <div class="text-left text-danger font-weight-lighter font-italic">
             <?= @$sprava_data  ?>
         </div>
         <select class="form-control" id="exampleFormControlSelect2" name="zaciatok">
