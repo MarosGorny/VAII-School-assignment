@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
-use App\Models\Post;
 use App\Models\RezervaciaPriestor;
 
 class RezervaciePriestorController extends AControllerBase
@@ -23,9 +22,8 @@ class RezervaciePriestorController extends AControllerBase
     public function index(): Response
     {
         //vytiahnut vsetky rezervacie
-        $rezervacie = RezervaciaPriestor::getAll();
+        $rezervacie = RezervaciaPriestor::getAll(orderBy: "den,zaciatok");
         return $this->html($rezervacie);
-        //return $this->html();
     }
 
     public function store() {
@@ -40,9 +38,9 @@ class RezervaciePriestorController extends AControllerBase
         $rezervaciaPriestor->setZacitok($this->request()->getValue('zaciatok'));
         $rezervaciaPriestor->setKoniec($this->request()->getValue('koniec'));
 
+
         if($this->request()->getValue('zaciatok') >= $this->request()->getValue('koniec')) {
-            echo "<script>alert('ZLE ');</script>";
-            return $this->html($rezervaciaPriestor, viewName: 'create.form');
+            return $this->html(['rezervacia' => $rezervaciaPriestor, 'sprava' => "** Zaciatok nemoze byt neskor ako koniec **"],viewName: 'create.form');
         } else
         {
             $rezervaciaPriestor->save();
@@ -72,10 +70,10 @@ class RezervaciePriestorController extends AControllerBase
 
         $rezervaciaNaEdit = RezervaciaPriestor::getOne($id); //zislo by sa dorobit, ze co ak mi id neexistuje?
 
-        return $this->html($rezervaciaNaEdit, viewName: 'create.form');
+        return $this->html(['rezervacia' => $rezervaciaNaEdit,'sprava' => null], viewName: 'create.form');
     }
 
     public function create() {
-        return $this->html(new RezervaciaPriestor(),viewName: 'create.form');
+        return $this->html(['rezervacia' => new RezervaciaPriestor(),'sprava' => null],viewName: 'create.form');
     }
 }
