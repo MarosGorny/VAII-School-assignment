@@ -47,4 +47,8 @@ class DomovController extends AControllerBase
     public function priestory(): Response {
         return $this->html();
     }
+
+    public function otazkyOdpovede(): Response {
+        return $this->html();
+    }
 }

@@ -1,3 +1,16 @@
+<?php
+/** @var App\Core\IAuthenticator $auth */
+/** @var App\Models\Trening[] $data */
+
+$trening1 = null;
+
+foreach ($data as $trening) {
+    if ($trening->getId() == 1)
+        $trening1 = $trening;
+}
+
+?>
+
 <section class="container-fluid px-0">
     <div class="row align-items-center">
         <div class="col-lg-6 home-block">
@@ -21,7 +34,37 @@
         <div class="col-md-8 text-center">
             <div class="row justify-content-center">
                 <div class="col-10 col-lg-8  mb-0 home-block home-page-text">
-                    <h2>Skupinové individuálne tréningy</h2>
+
+                    <h2>Skupinové tréningy - Obsadenost <span id="p1Display">
+                            <?php echo $trening1->getAktualnyPocet();  ?> </span> / <span id="p2Display">
+                            <?php echo $trening1->getMaximalnaKapacita(); ?>
+                        </span> </h2>
+
+                    <?php if ($auth->isLogged()) { ?>
+                        <div class="text-right">
+                            <!--                        <a class="btn btn-secondary" href="?c=trening&a=navysPocet&id=1" id="p1Button" role="button">+1</a>-->
+                            <a class="btn btn-success" href="javascript:void(0);" id="p1Button" role="button">+1</a>
+                            <a class="btn btn-danger" href="javascript:void(0);" id="p2Button" role="button">-1</a>
+                            <a class="btn btn-warning" href="javascript:void(0);" id="reset" role="button">RESET</a>
+                        </div>
+                        <div class="text-right py-1">
+                            <a>Maximalna kapacita: </a>
+                            <input type="number" id="maxKapacita" value=""  min="0" max="20">
+                        </div>
+                        <div class="text-right">
+                            <form method="post" action="?c=trening&a=update">
+                                <input type="hidden" id="trening1" name="id" value="1">
+                                <input type="hidden" id="pocet1" name="pocet" value="NOT_SET">
+                                <input type="hidden" id="kapacita1" name="kapacita" value="NOT_SET">
+                                <input class="btn btn-success" id="aktualizujTrening1"  value="Aktualizuj" type="submit" name="aktualizuj">
+                            </form>
+                        </div>
+
+
+
+
+
+                    <?php } ?>
                     <p class="lead">Individuálne tréningy s naším trénerom si viete dohodnúť aj ako skupinka.</p>
                     <h2>Samostatné individuálne tréningy</h2>
                     <p class="lead">Výhodou pri osobných tréningoch je, že v priestore sa nachádzate iba vy a tréner.</p>

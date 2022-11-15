@@ -34,7 +34,7 @@ class AuthController extends AControllerBase
             $logged = $this->app->getAuth()->login($formData['login'], $formData['password']);
             if ($logged) {
                 //po uspesnom prihlaseni presmerovanie na posty
-                return $this->redirect('?c=posts');
+                return $this->redirect('?c=rezervaciePriestor');
             }
         }
 
@@ -50,6 +50,6 @@ class AuthController extends AControllerBase
     {
         $this->app->getAuth()->logout();
         //po uspesnom prihlaseni presmerovanie na posty
-        return $this->redirect('?c=posts');
+        return $this->redirect('?c=rezervaciePriestor');
     }
 }

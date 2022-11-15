@@ -10,23 +10,32 @@
     $rezervacie_piatok = $data['piatok'];
 
 ?>
-<div>
-    <a href="?c=rezervaciePriestor&a=create" class="btn btn-success mt-2">Vytvor rezervaciu</a>
-</div>
 
 
 <div class="row" >
-    <div class="col-2 offset-1">
+    <div class="col-1 ">
+        <?php if ($auth->isLogged()) { ?>
+            <a href="?c=rezervaciePriestor&a=create" class="btn btn-success mt-2">Vytvor rezervaciu</a>
+        <?php }?>
+    </div>
+    <div class="col-2">
+        <h1 class="text-center mt-2">PONDELOK</h1>
         <?php
         foreach($rezervacie_pondelok as $rezervaciaPriestor) { ?>
         <div class="card text-center my-3 ">
             <div class="card-body">
                 <p class="card-text text-left m-0" >
                     <?php echo $rezervaciaPriestor->getDen() ?>
-                <div class="text-left">
-                    <?php echo $rezervaciaPriestor->getZaciatok() .":00" . " - " . $rezervaciaPriestor->getKoniec() .":00" ?>
-                    <a href="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-danger">X</a>
-                    <a href="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-warning">/</a>
+                <div class="text-left row">
+                    <div class="col-7">
+                        <?php echo $rezervaciaPriestor->getZaciatok() .":00" . " - " . $rezervaciaPriestor->getKoniec() .":00" ?>
+                    </div>
+                    <div class="col-5 text-right">
+                        <?php if ($auth->isLogged()) { ?>
+                            <a href="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-warning">UPRAV</a>
+                            <a href="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-danger">X</a>
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
         </div>
@@ -34,16 +43,23 @@
     </div>
 
     <div class="col-2">
+        <h1 class="text-center mt-2">UTOROK</h1>
         <?php
         foreach($rezervacie_utorok as $rezervaciaPriestor) { ?>
             <div class="card text-center my-3 ">
                 <div class="card-body">
                     <p class="card-text text-left m-0" >
                         <?php echo $rezervaciaPriestor->getDen() ?>
-                    <div class="text-left">
-                        <?php echo $rezervaciaPriestor->getZaciatok() .":00" . " - " . $rezervaciaPriestor->getKoniec() .":00" ?>
-                        <a href="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-danger">X</a>
-                        <a href="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-warning">/</a>
+                    <div class="text-left row">
+                        <div class="col-6">
+                            <?php echo $rezervaciaPriestor->getZaciatok() .":00" . " - " . $rezervaciaPriestor->getKoniec() .":00" ?>
+                        </div>
+                        <div class="col-6 text-right">
+                            <?php if ($auth->isLogged()) { ?>
+                                <a href="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-warning">UPRAV</a>
+                                <a href="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-danger">X</a>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -51,16 +67,23 @@
     </div>
 
     <div class="col-2">
+        <h1 class="text-center mt-2">STREDA</h1>
         <?php
         foreach($rezervacie_streda as $rezervaciaPriestor) { ?>
             <div class="card text-center my-3 ">
                 <div class="card-body">
                     <p class="card-text text-left m-0" >
                         <?php echo $rezervaciaPriestor->getDen() ?>
-                    <div class="text-left">
-                        <?php echo $rezervaciaPriestor->getZaciatok() .":00" . " - " . $rezervaciaPriestor->getKoniec() .":00" ?>
-                        <a href="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-danger">X</a>
-                        <a href="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-warning">/</a>
+                    <div class="text-left row">
+                        <div class="col-6">
+                            <?php echo $rezervaciaPriestor->getZaciatok() .":00" . " - " . $rezervaciaPriestor->getKoniec() .":00" ?>
+                        </div>
+                        <div class="col-6 text-right">
+                            <?php if ($auth->isLogged()) { ?>
+                                <a href="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-warning">UPRAV</a>
+                                <a href="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-danger">X</a>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -68,16 +91,23 @@
     </div>
 
     <div class="col-2">
+        <h1 class="text-center mt-2">STVRTOK</h1>
         <?php
         foreach($rezervacie_stvrtok as $rezervaciaPriestor) { ?>
             <div class="card text-center my-3 ">
                 <div class="card-body">
                     <p class="card-text text-left m-0" >
                         <?php echo $rezervaciaPriestor->getDen() ?>
-                    <div class="text-left">
-                        <?php echo $rezervaciaPriestor->getZaciatok() .":00" . " - " . $rezervaciaPriestor->getKoniec() .":00" ?>
-                        <a href="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-danger">X</a>
-                        <a href="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-warning">/</a>
+                    <div class="text-left row">
+                        <div class="col-6">
+                            <?php echo $rezervaciaPriestor->getZaciatok() .":00" . " - " . $rezervaciaPriestor->getKoniec() .":00" ?>
+                        </div>
+                        <div class="col-6 text-right">
+                            <?php if ($auth->isLogged()) { ?>
+                                <a href="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-warning">UPRAV</a>
+                                <a href="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-danger">X</a>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -85,16 +115,23 @@
     </div>
 
     <div class="col-2">
+        <h1 class="text-center mt-2">PIATOK</h1>
         <?php
         foreach($rezervacie_piatok as $rezervaciaPriestor) { ?>
             <div class="card text-center my-3 ">
                 <div class="card-body">
                     <p class="card-text text-left m-0" >
                         <?php echo $rezervaciaPriestor->getDen() ?>
-                    <div class="text-left">
-                        <?php echo $rezervaciaPriestor->getZaciatok() .":00" . " - " . $rezervaciaPriestor->getKoniec() .":00" ?>
-                        <a href="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-danger">X</a>
-                        <a href="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-warning">/</a>
+                    <div class="text-left row">
+                        <div class="col-6">
+                            <?php echo $rezervaciaPriestor->getZaciatok() .":00" . " - " . $rezervaciaPriestor->getKoniec() .":00" ?>
+                        </div>
+                        <div class="col-6 text-right">
+                            <?php if ($auth->isLogged()) { ?>
+                                <a href="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-warning">UPRAV</a>
+                                <a href="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-danger">X</a>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
             </div>

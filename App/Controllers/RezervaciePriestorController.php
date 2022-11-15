@@ -16,6 +16,14 @@ class RezervaciePriestorController extends AControllerBase
      */
     public function authorize($action)
     {
+        //Metody ktore sa ukazu ked sa odhlasim/prihlasim
+        switch ($action) {
+            case "delete":
+            case "create":
+            case "store":
+            case "edit":
+                return $this->app->getAuth()->isLogged();
+        }
         return true;
     }
 

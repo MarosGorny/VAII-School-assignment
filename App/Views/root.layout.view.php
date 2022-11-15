@@ -18,6 +18,9 @@
     <meta content='maximum-scale=1.0, initial-scale=1.0, width=device-width' name='viewport'>
     <link rel="stylesheet" href="../../public/css/main.css">
     <link rel="stylesheet" href="../../public/css/navBar.css">
+
+
+
 </head>
 <body>
 <header>
@@ -34,7 +37,7 @@
                         <a class="nav-link" href="?c=domov">Fitnescentrum<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="?c=domov&a=treningy">Tréningy</a>
+                        <a class="nav-link" href="?c=trening">Tréningy</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="?c=rezervaciePriestor">Rezervácia priestoru</a>
@@ -42,6 +45,16 @@
                 </ul>
 
                 <ul class="navbar-nav ml-3 mb-2 ml-lg-auto">
+                    <?php if ($auth->isLogged()) { ?>
+                        <span class="navbar-text">Prihlásený používateľ: <b><?= $auth->getLoggedUserName() ?></b></span>
+                            <li class="nav-item">
+                                <a class="nav-link" href="?c=auth&a=logout">Odhlásenie</a>
+                            </li>
+                    <?php } else { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= \App\Config\Configuration::LOGIN_URL ?>">Prihlásiť sa</a>
+                            </li>
+                    <?php } ?>
                     <li class="nav-item">
                         <a class="nav-link"  id="Kontakty" href="?c=domov&a=kontakty">
                             Kontakty
@@ -93,5 +106,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+
+<!--    own js-->
+<script src="../../public/js/obsadenost.js" type="application/javascript"></script>
+
 </body>
 </html>

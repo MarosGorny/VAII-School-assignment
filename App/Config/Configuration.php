@@ -20,7 +20,7 @@ class Configuration
     public const DB_USER = 'root'; // change to vaiicko_user, if docker you use docker
     public const DB_PASS = 'dtb456';
 
-    public const LOGIN_URL = '?c=domov';
+    public const LOGIN_URL = '?c=auth&a=login';
 
     public const ROOT_LAYOUT = 'root';
 
