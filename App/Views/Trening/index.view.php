@@ -35,28 +35,27 @@ foreach ($data as $trening) {
             <div class="row justify-content-center">
                 <div class="col-10 col-lg-8  mb-0 home-block home-page-text">
 
-                    <h2>Skupinové tréningy - Obsadenost <span id="p1Display">
-                            <?php echo $trening1->getAktualnyPocet();  ?> </span> / <span id="p2Display">
+                    <h2>Skupinové tréningy - Obsadenost <span id="obsadenostPocetDisplay">
+                            <?php echo $trening1->getAktualnyPocet();  ?> </span> / <span id="obsadenostMaxKapacitaDisplay">
                             <?php echo $trening1->getMaximalnaKapacita(); ?>
                         </span> </h2>
 
                     <?php if ($auth->isLogged()) { ?>
                         <div class="text-right">
-                            <!--                        <a class="btn btn-secondary" href="?c=trening&a=navysPocet&id=1" id="p1Button" role="button">+1</a>-->
-                            <a class="btn btn-success" href="javascript:void(0);" id="p1Button" role="button">+1</a>
-                            <a class="btn btn-danger" href="javascript:void(0);" id="p2Button" role="button">-1</a>
-                            <a class="btn btn-warning" href="javascript:void(0);" id="reset" role="button">RESET</a>
+                            <a class="btn btn-success" href="javascript:void(0);" id="add1Button" role="button">+1</a>
+                            <a class="btn btn-danger" href="javascript:void(0);" id="minus1Button" role="button">-1</a>
+                            <a class="btn btn-warning" href="javascript:void(0);" id="reset" role="button">Vynuluj</a>
                         </div>
                         <div class="text-right py-1">
-                            <a>Maximalna kapacita: </a>
-                            <input type="number" id="maxKapacita" value=""  min="0" max="20">
+                            <label for="maxKapacitaInput">Maximalna kapacita:</label>
+                            <input type="number" id="maxKapacitaInput" value="" min="0" max="20">
                         </div>
                         <div class="text-right">
                             <form method="post" action="?c=trening&a=update">
                                 <input type="hidden" id="trening1" name="id" value="1">
                                 <input type="hidden" id="pocet1" name="pocet" value="NOT_SET">
                                 <input type="hidden" id="kapacita1" name="kapacita" value="NOT_SET">
-                                <input class="btn btn-success" id="aktualizujTrening1"  value="Aktualizuj" type="submit" name="aktualizuj">
+                                <input class="btn btn-success" id="aktualizujTrening1"  value="Potvrd zmenu" type="submit" name="aktualizuj">
                             </form>
                         </div>
 

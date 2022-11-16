@@ -46,7 +46,7 @@
 
                 <ul class="navbar-nav ml-3 mb-2 ml-lg-auto">
                     <?php if ($auth->isLogged()) { ?>
-                        <span class="navbar-text">Prihlásený používateľ: <b><?= $auth->getLoggedUserName() ?></b></span>
+                        <span class="navbar-text"><b><?= $auth->getLoggedUserName() ?></b></span>
                             <li class="nav-item">
                                 <a class="nav-link" href="?c=auth&a=logout">Odhlásenie</a>
                             </li>

@@ -1,80 +1,98 @@
-
-const p1Button = document.querySelector('#p1Button');
-const p2Button = document.querySelector('#p2Button');
+const add1Button = document.querySelector('#add1Button');
+const minus1Button = document.querySelector('#minus1Button');
 const resetButton = document.querySelector('#reset');
-const p1Display = document.querySelector('#p1Display');
-const p2Display = document.querySelector('#p2Display');
-const maxKapacitaInput = document.querySelector('#maxKapacita');
+const obsadenostDisplay = document.querySelector('#obsadenostPocetDisplay');
+const kapacitaDisplay = document.querySelector('#obsadenostMaxKapacitaDisplay');
+const maxKapacitaInput = document.querySelector('#maxKapacitaInput');
 const trening1 = document.querySelector('#aktualizujTrening1');
 
-let p1Score = Number(p1Display.textContent)
-let winningScore = Number(p2Display.textContent);
-let isGameFull = false;
-let isGameEmpty = true;
+let obsadenost = Number(obsadenostDisplay.textContent);
+let maxKapacita = Number(kapacitaDisplay.textContent);
+let jePlny;
+let jePrazdny;
 
-// TODO Nastavit staty uz podla toho ze ako to je. Treba refactor
+updateStates();
 
-document.getElementById("maxKapacita").value = Number(p2Display.textContent);
-
-p1Button.addEventListener("click",function () {
-    isGameEmpty = false;
-
-    if(!isGameFull) {
-        p1Score += 1;
-        if(p1Score >= winningScore) {
-            isGameFull = true;
-            p1Display.classList.add("plnyTrening");
-            p2Display.classList.add("plnyTrening");
+add1Button.addEventListener("click",function () {
+    if(!jePlny) {
+        obsadenost += 1;
+        jePrazdny = false;
+        if(obsadenost >= maxKapacita) {
+            jePlny = true;
         }
-        p1Display.textContent = p1Score;
     }
+    updateStates()
 })
 
-p2Button.addEventListener("click",function () {
-    isGameFull = false;
-    p2Display.classList.remove("plnyTrening");
-    p1Display.classList.remove("plnyTrening");
-
-    if(!isGameEmpty) {
-        p1Score -= 1;
-        if(p1Score <= 0) {
-            isGameEmpty = true;
+minus1Button.addEventListener("click",function () {
+    if(!jePrazdny) {
+        obsadenost -= 1;
+        jePlny= false;
+        if(obsadenost <= 0) {
+            jePrazdny = true;
         }
-        p1Display.textContent = p1Score;
     }
+    updateStates()
 })
 
 maxKapacitaInput.addEventListener('change', function() {
-    winningScore = parseInt(this.value);
-    p2Display.textContent = winningScore;
+    maxKapacita = parseInt(this.value);
+    kapacitaDisplay.textContent = maxKapacita;
 })
 
+function updateStates() {
+    if (maxKapacitaInput) {
+        maxKapacitaInput.value = Number(kapacitaDisplay.textContent);
+    }
+
+    obsadenostDisplay.textContent = obsadenost;
+    if(obsadenost <= 0 ) {
+        jePrazdny = true;
+        removeColors();
+    } else if (obsadenost >= maxKapacita) {
+        jePlny = true;
+        addRedColor();
+    } else {
+        removeColors()
+    }
+}
+
+function removeColors() {
+    obsadenostDisplay.classList.remove("plnyTrening");
+    kapacitaDisplay.classList.remove("plnyTrening");
+}
+
+function addRedColor() {
+    obsadenostDisplay.classList.add("plnyTrening");
+    kapacitaDisplay.classList.add("plnyTrening");
+}
+
 resetButton.addEventListener('click', function() {
-    isGameEmpty = true;
-    isGameFull = false;
-    p1Score = 0;
-    p1Display.textContent = p1Score;
-    p1Display.classList.remove("plnyTrening");
-    p2Display.classList.remove("plnyTrening");
+    jePrazdny = true;
+    jePlny = false;
+    obsadenost = 0;
+    obsadenostDisplay.textContent = obsadenost;
+    obsadenostDisplay.classList.remove("plnyTrening");
+    kapacitaDisplay.classList.remove("plnyTrening");
 })
 
 
 function updateTraining() {
-    let pocet = document.getElementById("p1Display").innerHTML;
+    let pocet = document.getElementById("obsadenostPocetDisplay").innerHTML;
     document.getElementById("pocet1").value = pocet;
     alert(pocet);
 }
 
 trening1.addEventListener('click',function() {
-    let pocet = document.getElementById("p1Display").innerHTML;
-    let maxKapacita = document.getElementById('p2Display').innerHTML;
+    let pocet = document.getElementById("obsadenostPocetDisplay").innerHTML;
+    let maxKapacita = document.getElementById('obsadenostMaxKapacitaDisplay').innerHTML;
     document.getElementById("pocet1").value = pocet;
     document.getElementById("kapacita1").value = maxKapacita;
     document.getElementById('maxKapacita').value = maxKapacita;
 })
 
 trening1.addEventListener('submit',function() {
-    let pocet = document.getElementById("p1Display").innerHTML;
+    let pocet = document.getElementById("obsadenostPocetDisplay").innerHTML;
     document.getElementById("pocet1").value = pocet;
     alert(pocet);
 })

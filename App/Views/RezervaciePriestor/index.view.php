@@ -13,12 +13,12 @@
 
 
 <div class="row" >
-    <div class="col-1 ">
+    <div class="col-xl-1 col-lg-1 col-md-12 col-12 ">
         <?php if ($auth->isLogged()) { ?>
             <a href="?c=rezervaciePriestor&a=create" class="btn btn-success mt-2">Vytvor rezervaciu</a>
         <?php }?>
     </div>
-    <div class="col-2">
+    <div class="col-xl-2 col-lg-5 col-md-6 col-sm-12">
         <h1 class="text-center mt-2">PONDELOK</h1>
         <?php
         foreach($rezervacie_pondelok as $rezervaciaPriestor) { ?>
@@ -42,7 +42,7 @@
         <?php } ?>
     </div>
 
-    <div class="col-2">
+    <div class="col-xl-2 col-lg-5 col-md-6 col-sm-12">
         <h1 class="text-center mt-2">UTOROK</h1>
         <?php
         foreach($rezervacie_utorok as $rezervaciaPriestor) { ?>
@@ -66,7 +66,7 @@
         <?php } ?>
     </div>
 
-    <div class="col-2">
+    <div class="col-xl-2 col-lg-5 offset-lg-1 offset-xl-0 col-md-6 col-sm-12">
         <h1 class="text-center mt-2">STREDA</h1>
         <?php
         foreach($rezervacie_streda as $rezervaciaPriestor) { ?>
@@ -90,7 +90,7 @@
         <?php } ?>
     </div>
 
-    <div class="col-2">
+    <div class="col-xl-2 col-lg-5 col-md-6 col-sm-12">
         <h1 class="text-center mt-2">STVRTOK</h1>
         <?php
         foreach($rezervacie_stvrtok as $rezervaciaPriestor) { ?>
@@ -114,7 +114,7 @@
         <?php } ?>
     </div>
 
-    <div class="col-2">
+    <div class="col-xl-2 col-lg-10 offset-lg-1 offset-xl-0 col-md-12 col-sm-12">
         <h1 class="text-center mt-2">PIATOK</h1>
         <?php
         foreach($rezervacie_piatok as $rezervaciaPriestor) { ?>
