@@ -27,13 +27,13 @@
                 <p class="card-text text-left m-0" >
                     <?php echo $rezervaciaPriestor->getDen() ?>
                 <div class="text-left row">
-                    <div class="col-7">
+                    <div class="col-6">
                         <?php echo $rezervaciaPriestor->getZaciatok() .":00" . " - " . $rezervaciaPriestor->getKoniec() .":00" ?>
                     </div>
-                    <div class="col-5 text-right">
+                    <div class="col-6 text-right">
                         <?php if ($auth->isLogged()) { ?>
-                            <a href="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-warning">UPRAV</a>
-                            <a href="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-danger">X</a>
+                            <a href="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-warning"><img alt="edit icon" src="../../../public/icons/pencil-square.svg"></a>
+                            <a href="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-danger"><img alt="delete icon" src="../../../public/icons/trash.svg"></a>
                         <?php } ?>
                     </div>
                 </div>
@@ -56,8 +56,8 @@
                         </div>
                         <div class="col-6 text-right">
                             <?php if ($auth->isLogged()) { ?>
-                                <a href="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-warning">UPRAV</a>
-                                <a href="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-danger">X</a>
+                                <a href="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-warning"><img  alt="edit icon" src="../../../public/icons/pencil-square.svg"></a>
+                                <a href="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-danger"><img alt="delete icon" src="../../../public/icons/trash.svg"></a>
                             <?php } ?>
                         </div>
                     </div>
@@ -80,8 +80,8 @@
                         </div>
                         <div class="col-6 text-right">
                             <?php if ($auth->isLogged()) { ?>
-                                <a href="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-warning">UPRAV</a>
-                                <a href="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-danger">X</a>
+                                <a href="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-warning"><img alt="edit icon" src="../../../public/icons/pencil-square.svg"></a>
+                                <a href="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-danger"><img alt="delete icon" src="../../../public/icons/trash.svg"></a>
                             <?php } ?>
                         </div>
                     </div>
@@ -104,8 +104,8 @@
                         </div>
                         <div class="col-6 text-right">
                             <?php if ($auth->isLogged()) { ?>
-                                <a href="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-warning">UPRAV</a>
-                                <a href="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-danger">X</a>
+                                <a href="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-warning"><img alt="edit icon" src="../../../public/icons/pencil-square.svg"></a>
+                                <a href="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-danger"><img alt="delete icon" src="../../../public/icons/trash.svg"></a>
                             <?php } ?>
                         </div>
                     </div>
@@ -128,8 +128,8 @@
                         </div>
                         <div class="col-6 text-right">
                             <?php if ($auth->isLogged()) { ?>
-                                <a href="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-warning">UPRAV</a>
-                                <a href="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-danger">X</a>
+                                <a href="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-warning"><img alt="edit icon" src="../../../public/icons/pencil-square.svg"></a>
+                                <a href="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-danger"><img alt="delete icon" src="../../../public/icons/trash.svg"></a>
                             <?php } ?>
                         </div>
                     </div>

@@ -1,6 +1,7 @@
 <?php
 /** @var string $contentHTML */
 /** @var \App\Core\IAuthenticator $auth */
+$actual_request_uri = $_SERVER["REQUEST_URI"];
 ?>
 <!DOCTYPE html>
 <html lang="sk">
@@ -32,32 +33,46 @@
             </button>
 
             <div class="collapse navbar-collapse justify-content-left " id="navbarNav">
+                <?php $actual_request_uri = $_SERVER["REQUEST_URI"] ?>
                 <ul class="navbar-nav ml-3 mb-2 ml-lg-5">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="?c=domov">Fitnescentrum<span class="sr-only">(current)</span></a>
+
+                    <li class="nav-item <?php if ($actual_request_uri == "/?c=domov") echo 'active' ?>">
+                        <a class="nav-link" href="?c=domov">Fitnescentrum
+                            <?php if ($actual_request_uri == "/?c=domov")
+                                    echo "<span class=\"sr-only\">(current)</span>"; ?>
+                        </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="?c=trening">Tréningy</a>
+                    <li class="nav-item <?php if ($actual_request_uri == "/?c=trening") echo 'active' ?>">
+
+                        <a class="nav-link" href="?c=trening">Tréningy
+                            <?php if ($actual_request_uri == "/?c=trening")
+                            echo "<span class=\"sr-only\">(current)</span>"; ?>
+                        </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="?c=rezervaciePriestor">Rezervácia priestoru</a>
+                    <li class="nav-item <?php if ($actual_request_uri == "/?c=rezervaciePriestor") echo 'active' ?>">
+                        <a class="nav-link" href="?c=rezervaciePriestor">Rezervácia priestoru
+                            <?php if ($actual_request_uri == "/?c=rezervaciePriestor")
+                                echo "<span class=\"sr-only\">(current)</span>"; ?>
+                        </a>
                     </li>
                 </ul>
 
                 <ul class="navbar-nav ml-3 mb-2 ml-lg-auto">
                     <?php if ($auth->isLogged()) { ?>
-                        <span class="navbar-text"><b><?= $auth->getLoggedUserName() ?></b></span>
-                            <li class="nav-item">
-                                <a class="nav-link" href="?c=auth&a=logout">Odhlásenie</a>
+                        <span class="navbar-text d-md-none d-lg-inline-flex"><b><?= $auth->getLoggedUserName() ?> -</b></span>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="?c=auth&a=logout">Odhlásiť</a>
                             </li>
                     <?php } else { ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?= \App\Config\Configuration::LOGIN_URL ?>">Prihlásiť sa</a>
                             </li>
                     <?php } ?>
-                    <li class="nav-item">
+                    <li class="nav-item <?php if ($actual_request_uri == "/?c=domov&a=kontakty") echo 'active' ?>">
                         <a class="nav-link"  id="Kontakty" href="?c=domov&a=kontakty">
                             Kontakty
+                            <?php if ($actual_request_uri == "/?c=domov&a=kontakty")
+                                echo "<span class=\"sr-only\">(current)</span>"; ?>
                         </a>
                     </li>
                     <li class="icons d-none d-lg-flex">

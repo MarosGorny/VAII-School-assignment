@@ -4,8 +4,6 @@ namespace App\Controllers;
 
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
-use App\Models\Post;
-use App\Models\RezervaciaPriestor;
 use App\Models\Trening;
 
 class TreningController extends AControllerBase
@@ -19,10 +17,7 @@ class TreningController extends AControllerBase
     {
         //Metody ktore sa ukazu ked sa odhlasim/prihlasim
         switch ($action) {
-            case "delete":
-            case "create":
-            case "store":
-            case "edit":
+            case "update":
                 return $this->app->getAuth()->isLogged();
         }
         return true;
@@ -46,19 +41,5 @@ class TreningController extends AControllerBase
         return $this->redirect("?c=trening");
     }
 
-    public function navysPocet() {
-        //najprv si musim post vytiahnut
-        $id = $this->request()->getValue('id');
-        $postToEdit = Trening::getOne($id); //zislo by sa dorobit, ze co ak mi id neexistuje?
-        $postToEdit->navysPocet();
-        $postToEdit->save();
-
-
-        return $this->redirect($postToEdit);
-    }
-
-    public function pridajKapacitu() {
-        $id = $this->request()->getValue('id');
-    }
 
 }
