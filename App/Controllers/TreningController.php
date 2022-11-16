@@ -26,6 +26,11 @@ class TreningController extends AControllerBase
     public function index(): Response
     {
         $trenings = Trening::getAll(orderBy: 'id');
+        if ($trenings == null) {
+            // TODO Treba osetrit
+            return $this->redirect("?c=trening");
+        }
+
         return $this->html($trenings);
     }
 
@@ -33,6 +38,11 @@ class TreningController extends AControllerBase
 
         $id = $this->request()->getValue('id');
         $postToEdit = Trening::getOne($id); //zislo by sa dorobit, ze co ak mi id neexistuje?
+
+        if ($postToEdit == null) {
+            return $this->redirect("?c=trening");
+        }
+
         //text je podla toho ako sme ho nastavili v name
         //<input type="text" name="text">
         $postToEdit->setAktualnyPocet($this->request()->getValue('pocet'));

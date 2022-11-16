@@ -33,7 +33,7 @@ class AuthController extends AControllerBase
         if (isset($formData['submit'])) {
             $logged = $this->app->getAuth()->login($formData['login'], $formData['password']);
             if ($logged) {
-                //po uspesnom prihlaseni presmerovanie na posty
+                //po uspesnom prihlaseni presmerovanie na rezervacie
                 return $this->redirect('?c=rezervaciePriestor');
             }
         }
@@ -49,7 +49,7 @@ class AuthController extends AControllerBase
     public function logout(): Response
     {
         $this->app->getAuth()->logout();
-        //po uspesnom prihlaseni presmerovanie na posty
-        return $this->redirect('?c=rezervaciePriestor');
+        //po uspesnom odhlaseni presmerovanie na rezervacie
+        return $this->redirect('?c=domov');
     }
 }

@@ -84,6 +84,10 @@ class RezervaciePriestorController extends AControllerBase
 
         $rezervaciaNaEdit = RezervaciaPriestor::getOne($id); //zislo by sa dorobit, ze co ak mi id neexistuje?
 
+        if($rezervaciaNaEdit == null) {
+            return $this->redirect("?c=rezervaciePriestor");
+        }
+
         return $this->html(['rezervacia' => $rezervaciaNaEdit,'sprava' => null], viewName: 'create.form');
     }
 

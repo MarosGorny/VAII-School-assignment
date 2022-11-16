@@ -35,10 +35,17 @@ foreach ($data as $trening) {
             <div class="row justify-content-center">
                 <div class="col-10 col-lg-8  mb-0 home-block home-page-text">
 
-                    <h2>Skupinové tréningy - Obsadenost <span id="obsadenostPocetDisplay">
+
+
+
+
+                    <h2 class="mb-0 pb-0 ">Skupinové tréningy</h2>
+                    <p class="pt-0 mt-0"> <small>Počet prihlasených: <span id="obsadenostPocetDisplay">
                             <?php echo $trening1->getAktualnyPocet();  ?> </span> / <span id="obsadenostMaxKapacitaDisplay">
                             <?php echo $trening1->getMaximalnaKapacita(); ?>
-                        </span> </h2>
+                        </span> </small>
+                    </p>
+
 
                     <?php if ($auth->isLogged()) { ?>
                         <div class="text-right">

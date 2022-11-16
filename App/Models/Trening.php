@@ -58,13 +58,6 @@ class Trening extends Model
         $this->maximalnaKapacita = $maximalnaKapacita;
     }
 
-    public function navysPocet() {
-        $this->aktualnyPocet++;
-    }
-
-    public function znicPocet() {
-        $this->aktualnyPocet--;
-    }
 
 
 
