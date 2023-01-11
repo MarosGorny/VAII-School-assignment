@@ -37,7 +37,10 @@ minus1Button.addEventListener("click",function () {
 
 maxKapacitaInput.addEventListener('change', function() {
     maxKapacita = parseInt(this.value);
-    kapacitaDisplay.textContent = maxKapacita;
+    if(maxKapacita >= 0 && maxKapacita <= 20) {
+        kapacitaDisplay.textContent = maxKapacita;
+    }
+
 })
 
 function updateStates() {
