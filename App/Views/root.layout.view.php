@@ -67,6 +67,9 @@ $actual_request_uri = $_SERVER["REQUEST_URI"];
                             <li class="nav-item">
                                 <a class="nav-link" href="<?= \App\Config\Configuration::LOGIN_URL ?>">Prihlásiť sa</a>
                             </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= \App\Config\Configuration::REGISTER_URL ?>">Registrovať sa</a>
+                        </li>
                     <?php } ?>
                     <li class="nav-item <?php if ($actual_request_uri == "/?c=domov&a=kontakty") echo 'active' ?>">
                         <a class="nav-link"  id="Kontakty" href="?c=domov&a=kontakty">

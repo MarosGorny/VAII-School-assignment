@@ -52,4 +52,5 @@ class AuthController extends AControllerBase
         //po uspesnom odhlaseni presmerovanie na rezervacie
         return $this->redirect('?c=domov');
     }
+
 }
