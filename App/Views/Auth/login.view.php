@@ -13,7 +13,7 @@ $layout = 'auth';
                     </div>
                     <form class="form-signin" method="post" action="<?= \App\Config\Configuration::LOGIN_URL ?>">
                         <div class="form-label-group mb-3">
-                            <input name="login" type="text" id="login" class="form-control" placeholder="Login"
+                            <input name="login" type="email" id="email" class="form-control" placeholder="YourEmail@domain.com"
                                    required autofocus>
                         </div>
 

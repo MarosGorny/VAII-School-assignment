@@ -41,17 +41,19 @@ class RegisterController extends AControllerBase
         $registered = null;
 
         if(isset($formData['submit'])) {
-            $registered = $this->checkRegistration($formData['email'],$formData['password']);
+            $registered = $this->checkPasswordLength($formData['password']);
             if($registered) {
                 //po uspesnom zaregistrovani
 
                 if($this->tryCreateUser()) {
-                    //TODO prihlasit pouzivatela
+                    $_SESSION['user'] = $formData['email'];
+                    return $this->redirect('?c=domov');
                 } else {
                     //TODO uzivatel uz existuje
+                    $data = ['message' => 'Používateľ už existuje!'];
+                    return $this->html($data);
                 }
                 //echo '<script>alert("Úspešná registrácia!")</script>';
-                return $this->redirect('?c=domov');
             }
         }
 
@@ -59,10 +61,15 @@ class RegisterController extends AControllerBase
         return $this->html($data);
     }
 
-    public function tryCreateUser() {
+    /**
+     * Check if there is a user with same email, if not, then create it
+     * @return bool
+     */
+    public function tryCreateUser() : bool {
         $email = $this->request()->getValue('email');
         $password = $this->request()->getValue('password');
 
+        //TODO remove special characters and make it upper case?
         if($email != null && $password != null) {
             if(Pouzivatel::getAll(whereClause: "email = '$email'") == null) {
                 $newUser = new Pouzivatel();
@@ -77,9 +84,13 @@ class RegisterController extends AControllerBase
         return false;
     }
 
-    private function checkRegistration($email, $password): bool
+    /**
+     * Check password length
+     * @return bool
+     */
+    private function checkPasswordLength($password): bool
     {
-        echo '<script>alert("Checking!")</script>';
+        //echo '<script>alert("Checking!")</script>';
         //$emailString = strval($email);
         if(strlen($password) > 6) {
             return true;
