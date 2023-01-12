@@ -17,9 +17,10 @@ $actual_request_uri = $_SERVER["REQUEST_URI"];
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Condensed&display=swap" rel="stylesheet">
 
     <meta content='maximum-scale=1.0, initial-scale=1.0, width=device-width' name='viewport'>
+    <link rel=”stylesheet” href=”https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css”/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="../../public/css/main.css">
     <link rel="stylesheet" href="../../public/css/navBar.css">
-
 
 
 </head>
@@ -127,6 +128,7 @@ $actual_request_uri = $_SERVER["REQUEST_URI"];
 
 <!--    own js-->
 <script src="../../public/js/obsadenost.js" type="application/javascript"></script>
+<script src="../../public/js/rating.js" type="application/javascript"></script>
 
 </body>
 </html>

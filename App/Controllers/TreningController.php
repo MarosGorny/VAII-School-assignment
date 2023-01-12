@@ -51,5 +51,10 @@ class TreningController extends AControllerBase
         return $this->redirect("?c=trening");
     }
 
+    public function skupIndividTrening(): Response
+    {
+        return $this->html();
+    }
+
 
 }

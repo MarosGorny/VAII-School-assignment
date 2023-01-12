@@ -75,7 +75,8 @@ foreach ($data as $trening) {
                     <h2>Samostatné individuálne tréningy</h2>
                     <p class="lead">Výhodou pri osobných tréningoch je, že v priestore sa nachádzate iba vy a tréner.</p>
                 </div>
-                <a class="btn btn-secondary btn-lg btn-block rounded-0" href="#" role="button">Prihlásiť sa</a>
+                <a class="btn btn-secondary btn-lg btn-block rounded-0 " href="#" role="button">Prihlásiť sa</a>
+                <a class="infobtn btn btn-outline-secondary btn-lg btn-block rounded-0" href="?c=trening&a=skupIndividTrening" role="button">Informácie</a>
             </div>
         </div>
 
@@ -96,6 +97,7 @@ foreach ($data as $trening) {
                     <p class="lead">Silove treningy su vyborne na nabratie sily a zvacsanie svalov.</p>
                 </div>
                 <a class="btn btn-secondary btn-lg btn-block rounded-0" href="#" role="button">Prihlásiť sa</a>
+                <a class="infobtn btn btn-outline-secondary btn-lg btn-block rounded-0" href="#" role="button">Informácie</a>
             </div>
         </div>
         <div class="col-md-4 col-lg-4 d-none d-md-flex d-lg-flex home-block order-md-1">
@@ -114,6 +116,7 @@ foreach ($data as $trening) {
                     <p class="lead">Kondicne treningy su vhodne na chudnutie, rysovanie tela alebo zlepsenie si kondicky.</p>
                 </div>
                 <a class="btn btn-secondary btn-lg btn-block rounded-0" href="#" role="button">Prihlásiť sa</a>
+                <a class="infobtn btn btn-outline-secondary btn-lg btn-block rounded-0" href="#" role="button">Informácie</a>
             </div>
         </div>
 
@@ -133,6 +136,7 @@ foreach ($data as $trening) {
                     <p class="lead">Funkcne treningy sluzia na lepsiu stabilitu a koordinaciu celeho tela.</p>
                 </div>
                 <a class="btn btn-secondary btn-lg btn-block rounded-0" href="#" role="button">Prihlásiť sa</a>
+                <a class="infobtn btn btn-outline-secondary btn-lg btn-block rounded-0" href="#" role="button">Informácie</a>
             </div>
         </div>
         <div class="col-md-4 col-lg-4 d-none d-md-flex d-lg-flex home-block order-md-1">

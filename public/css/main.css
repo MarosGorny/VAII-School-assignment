@@ -115,6 +115,43 @@ div.form-group label {
     color: green;
 }
 
+.infobtn {
+    line-height: 0.8;
+    margin-top: 0;
+}
+
+.rating-header {
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+.container-star{
+    /*background-color: #3B4B59;*/
+    /*border-radius: 10px;*/
+    text-align: center;
+    /*box-shadow: 0px 2px 10px 0px rgb(0,0,0,100);*/
+
+}
+.container-star .star {
+    display: flex;
+    /*grid-gap: 100px;*/
+}
+
+.container-star .star a{
+    transition: .5s;
+    color:white;
+    font-size: 3rem;
+}
+
+.container-star .star a.active {
+    color: black;
+}
+
+
+
+
+
+
 
 
 @media (max-width: 1200px) {
@@ -132,3 +169,4 @@ div.form-group label {
         font-size: 1.1rem;
     }
 }
+
