@@ -4,8 +4,7 @@ use App\Models\Hodnotenie;
 /** @var App\Core\IAuthenticator $auth */
 /** @var Hodnotenie[] $data */
 
-$hodnotenia_individual = $data['Ind_trening'];
-$hodnotenia_skupina = $data['Sku_trening'];
+$hodnotenia_ind_sku = $data['Ind_Sku_trening'];
 
 ?>
 
@@ -35,8 +34,9 @@ $hodnotenia_skupina = $data['Sku_trening'];
     <div class="home-block home-page-text">
         <h1>Hodnotenia</h1>
     </div>
-    <?php foreach ($hodnotenia_individual as $hodnotenie) {
-        echo $hodnotenie->getText(); }?>
+    <?php foreach ($hodnotenia_ind_sku as $hodnotenie) { ?>
+    <p class="card-text text-left m-0" >
+        <?php echo $hodnotenie->getText(); }?>
 
 
 

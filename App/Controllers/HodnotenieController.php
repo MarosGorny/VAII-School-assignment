@@ -11,15 +11,15 @@ class HodnotenieController extends AControllerBase
     public function index(): Response
     {
 
-        //$hodnotenia_skupina = Hodnotenie::getAll(whereClause: "topic = 'Sku_trening'");
+
 
         return $this->html();
     }
 
     public function skupIndividTrening(): Response
     {
-        $hodnotenia_individual = Hodnotenie::getAll(whereClause: "topic = 'Ind_trening'");
-        return $this->html(['Ind_trening' => $hodnotenia_individual]);
+        $hodnotenia_ind_sku = Hodnotenie::getAll(whereClause: "topic = 'Ind_trening' OR topic = 'Sku_trening'");
+        return $this->html(['Ind_Sku_trening' => $hodnotenia_ind_sku]);
     }
 
     public function addComment() {
