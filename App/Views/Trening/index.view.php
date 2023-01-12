@@ -76,7 +76,7 @@ foreach ($data as $trening) {
                     <p class="lead">Výhodou pri osobných tréningoch je, že v priestore sa nachádzate iba vy a tréner.</p>
                 </div>
                 <a class="btn btn-secondary btn-lg btn-block rounded-0 " href="#" role="button">Prihlásiť sa</a>
-                <a class="infobtn btn btn-outline-secondary btn-lg btn-block rounded-0" href="?c=trening&a=skupIndividTrening" role="button">Informácie</a>
+                <a class="infobtn btn btn-outline-secondary btn-lg btn-block rounded-0" href="?c=hodnotenie&a=skupIndividTrening" role="button">Informácie</a>
             </div>
         </div>
 

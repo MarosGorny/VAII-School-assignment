@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
+use App\Models\Hodnotenie;
+use App\Models\RezervaciaPriestor;
 use App\Models\Trening;
 
 class TreningController extends AControllerBase
@@ -51,10 +53,7 @@ class TreningController extends AControllerBase
         return $this->redirect("?c=trening");
     }
 
-    public function skupIndividTrening(): Response
-    {
-        return $this->html();
-    }
+
 
 
 }
