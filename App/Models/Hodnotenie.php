@@ -10,6 +10,8 @@ class Hodnotenie extends Model
     protected $text;
     protected $userId;
     protected $topic;
+    protected $nickname;
+    protected $rating;
 
 
     /**
@@ -74,5 +76,37 @@ class Hodnotenie extends Model
     public function setTopic($topic): void
     {
         $this->topic = $topic;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNickname()
+    {
+        return $this->nickname;
+    }
+
+    /**
+     * @param mixed $nickname
+     */
+    public function setNickname($nickname): void
+    {
+        $this->nickname = $nickname;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRating()
+    {
+        return $this->rating;
+    }
+
+    /**
+     * @param mixed $rating
+     */
+    public function setRating($rating): void
+    {
+        $this->rating = $rating;
     }
 }

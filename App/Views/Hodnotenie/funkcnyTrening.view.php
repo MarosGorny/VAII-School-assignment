@@ -72,11 +72,11 @@ $hodnotenia_ind_sku = $data['Fun_trening'];
                                 <div class="col-sm-6 mx-auto row align-items-center content mt-0">
                                     <div class="container-star">
                                         <div class ="star">
-                                            <a href="#" class="bi-star-fill offset-2 col-2"></a>
-                                            <a href="#" class="bi-star-fill col-2"></a>
-                                            <a href="#" class="bi-star-fill col-2"></a>
-                                            <a href="#" class="bi-star-fill col-2"></a>
-                                            <a href="#" class="bi-star-fill col-2"></a>
+                                            <a href="#bottom" class="bi-star-fill offset-2 col-2"></a>
+                                            <a href="#bottom" class="bi-star-fill col-2"></a>
+                                            <a href="#bottom" class="bi-star-fill col-2"></a>
+                                            <a href="#bottom" class="bi-star-fill col-2"></a>
+                                            <a href="#bottom" class="bi-star-fill col-2"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -87,6 +87,7 @@ $hodnotenia_ind_sku = $data['Fun_trening'];
             </div>
         </div>
     </section>
+    <a id="bottom"></a>
     <?php }?>
 
 

@@ -111,7 +111,7 @@ $actual_request_uri = $_SERVER["REQUEST_URI"];
     <!-- Copyrights -->
     <div class="bg-light">
         <div id="footer-text"  class="container-fluid text-center">
-            <p class="text-muted mb-0">© 2022 Created by Maros Gorny</p>
+            <p class="text-muted mb-0">© 2023 Created by Maros Gorny</p>
         </div>
     </div>
 </footer>

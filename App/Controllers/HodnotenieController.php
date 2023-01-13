@@ -5,16 +5,39 @@ namespace App\Controllers;
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
 use App\Models\Hodnotenie;
+use App\Models\RezervaciaPriestor;
 
 class HodnotenieController extends AControllerBase
 {
     public function index(): Response
     {
 
-
-
         return $this->html();
     }
+
+    public function store() {
+
+        //ak ma hodnotu id, tak editujem, inak vytvram novy post
+        $id = $this->request()->getValue('id');
+
+        $hodnotenie = ( $id ? Hodnotenie::getOne($id) : new Hodnotenie());
+
+        //text je podla html atributu name
+        $hodnotenie->setText($this->request()->getValue('text'));
+        $hodnotenie->setNickname($this->request()->getValue('nickname'));
+        $hodnotenie->setTopic('Ind_trening');
+        $hodnotenie->setRating($this->request()->getValue('rating'));
+
+
+
+        $hodnotenie->save();
+
+        return $this->redirect("?c=hodnotenie&a=skupIndividTrening");
+
+
+
+    }
+
 
     public function skupIndividTrening(): Response
     {
