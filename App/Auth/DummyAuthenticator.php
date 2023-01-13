@@ -87,4 +87,19 @@ class DummyAuthenticator implements IAuthenticator
     {
         return $_SESSION['user'];
     }
+
+    /**
+     * Get the name of the logged-in user
+     * @return string
+     */
+    function getRole(): string
+    {
+        if($this->isLogged()) {
+            return $_SESSION['role'] ?? throw new \Exception("Role is not set");
+        } else {
+            throw new \Exception("User is not logged in");
+        }
+
+    }
+
 }

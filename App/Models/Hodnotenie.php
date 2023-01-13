@@ -8,7 +8,7 @@ class Hodnotenie extends Model
 {
     protected $id;
     protected $text;
-    protected $userId;
+    protected $userEmail;
     protected $topic;
     protected $nickname;
     protected $rating;
@@ -49,17 +49,17 @@ class Hodnotenie extends Model
     /**
      * @return mixed
      */
-    public function getUserId()
+    public function getUserEmail()
     {
-        return $this->userId;
+        return $this->userEmail;
     }
 
     /**
-     * @param mixed $userId
+     * @param mixed $userEmail
      */
-    public function setUserId($userId): void
+    public function setUserEmail($userEmail): void
     {
-        $this->userId = $userId;
+        $this->userEmail = $userEmail;
     }
 
     /**

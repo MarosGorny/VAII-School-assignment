@@ -46,4 +46,10 @@ interface IAuthenticator
      * @return bool
      */
     function isLogged(): bool;
+
+    /**
+     * Return role of logged
+     * @return string
+     */
+    function getRole(): string;
 }

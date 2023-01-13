@@ -13,6 +13,7 @@ class LoginAuthenticator extends DummyAuthenticator
         if($user != null) {
             if($user[0]->getPassword() === $password) {
                 $_SESSION['user'] = $login;
+                $_SESSION['role'] = $user[0]->getRole();
                 return true;
             }
         }

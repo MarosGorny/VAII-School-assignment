@@ -36,11 +36,15 @@ $hodnotenia_ind_sku = $data['Ind_Sku_trening'];
     </div>
     <?php foreach ($hodnotenia_ind_sku as $hodnotenie) { ?>
     <div>
-        <p class="card-text text-left m-0" >
-            <?php echo $hodnotenie->getText(); ?>
-            <b>
-            <?php echo $hodnotenie->getNickname();?>
-            </b>
+        <div class="card my-2">
+            <div class="card-body">
+                <h5 class="card-title"><?php echo $hodnotenie->getNickname();?></h5>
+                <h6 class="card-subtitle mb-2 text-muted">Datum</h6>
+                <p class="card-text"><?php echo $hodnotenie->getText(); ?></p>
+<!--                <a href="#" class="card-link">Card link</a>-->
+<!--                <a href="#" class="card-link">Another link</a>-->
+            </div>
+        </div>
         <?php } ?>
     </div>
 
@@ -57,6 +61,7 @@ $hodnotenia_ind_sku = $data['Ind_Sku_trening'];
                             <div class="card-body" >
                                 <div class="d-flex flex-start align-items-center">
                                     <div>
+                                        <?php echo $auth->getLoggedUserName(); ?>
                                             <input type="text" name="nickname" placeholder="Tvoje meno" required>
                                     </div>
                                 </div>

@@ -73,6 +73,8 @@ abstract class Model implements \JsonSerializable
      */
     static public function getAll(string $whereClause = '', array $whereParams = [], $orderBy = ''): array
     {
+
+
         self::connect();
         try {
             $sql = "SELECT * FROM `" . static::getTableName() . "`" . ($whereClause == '' ? '' : " WHERE $whereClause") . ($orderBy == '' ? '' : " ORDER BY $orderBy");
@@ -83,6 +85,8 @@ abstract class Model implements \JsonSerializable
         } catch (PDOException $e) {
             throw new \Exception('Query failed: ' . $e->getMessage(), 0, $e);
         }
+
+
     }
 
     /**
