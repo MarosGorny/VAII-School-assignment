@@ -13,12 +13,19 @@
                     </div>
                     <form class="form-signin" method="post" action="<?= \App\Config\Configuration::REGISTER_URL ?>">
                         <div class="form-label-group mb-3">
+                            <label for="email">Email</label>
                             <input name="email" type="email" id="email" class="form-control" placeholder="Email"
                                    required autofocus>
                         </div>
 
                         <div class="form-label-group mb-3">
+                            <label for="password">Heslo</label>
                             <input name="password" type="password" id="password" class="form-control"
+                                   placeholder="Password" required>
+                        </div>
+                        <div class="form-label-group mb-3">
+                            <label for="password_second">Zopakuj heslo</label>
+                            <input name="password_second" type="password" id="password_second" class="form-control"
                                    placeholder="Password" required>
                         </div>
                         <div class="text-center">

@@ -11,7 +11,8 @@ class LoginAuthenticator extends DummyAuthenticator
 
         $user = Pouzivatel::getAll(whereClause: "email = '$login' ");
         if($user != null) {
-            if($user[0]->getPassword() === $password) {
+
+            if(password_verify($password, $user[0]->getPassword())) {
                 $_SESSION['user'] = $login;
                 $_SESSION['role'] = $user[0]->getRole();
                 return true;

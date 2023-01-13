@@ -41,9 +41,12 @@ class RegisterController extends AControllerBase
         $registered = null;
 
         if(isset($formData['submit'])) {
-            $registered = $this->checkPasswordLength($formData['password']);
+            $passwordFirst = $formData['password'];
+            $passwordSecond = $formData['password_second'];
+            $registered = $this->checkPasswordLength($passwordFirst) && $this->checkEqualityOfPasswords($passwordFirst,$passwordSecond);
             if($registered) {
-                //po uspesnom zaregistrovani
+                //po splneniPodmienok
+
 
                 if($this->tryCreateUser()) {
                     $_SESSION['user'] = $formData['email'];
@@ -74,7 +77,9 @@ class RegisterController extends AControllerBase
             if(Pouzivatel::getAll(whereClause: "email = '$email'") == null) {
                 $newUser = new Pouzivatel();
                 $newUser->setEmail($email);
-                $newUser->setPassword($password);
+
+                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+                $newUser->setPassword($hashed_password);
                 $newUser->setRole("Klient");
                 $newUser->save();
                 return true;
@@ -90,13 +95,18 @@ class RegisterController extends AControllerBase
      */
     private function checkPasswordLength($password): bool
     {
-        //echo '<script>alert("Checking!")</script>';
-        //$emailString = strval($email);
-        if(strlen($password) > 6) {
-            return true;
-        } else {
-            return false;
-        }
+        //TODO append error msg
+        return strlen($password) >= 8;
+    }
+
+    /**
+     * Check if both passwords are the same
+     * @return bool
+     */
+    private function checkEqualityOfPasswords($password,$passwordSecond): bool
+    {
+        //TODO append error msg
+        return $password == $passwordSecond;
     }
 
 

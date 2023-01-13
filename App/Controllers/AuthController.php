@@ -34,7 +34,7 @@ class AuthController extends AControllerBase
             $logged = $this->app->getAuth()->login($formData['login'], $formData['password']);
             if ($logged) {
                 //po uspesnom prihlaseni presmerovanie na rezervacie
-                return $this->redirect('?c=rezervaciePriestor');
+                return $this->redirect('?c=domov');
             }
         }
 
