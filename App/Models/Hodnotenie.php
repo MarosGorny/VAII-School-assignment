@@ -12,6 +12,7 @@ class Hodnotenie extends Model
     protected $topic;
     protected $nickname;
     protected $rating;
+    protected $date;
 
 
     /**
@@ -35,7 +36,7 @@ class Hodnotenie extends Model
      */
     public function getText()
     {
-        return $this->text;
+        return utf8_decode($this->text);
     }
 
     /**
@@ -43,7 +44,8 @@ class Hodnotenie extends Model
      */
     public function setText($text): void
     {
-        $this->text = $text;
+        $this->text = utf8_encode($text);
+        //$this->text = $text;
     }
 
     /**
@@ -108,5 +110,23 @@ class Hodnotenie extends Model
     public function setRating($rating): void
     {
         $this->rating = $rating;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDate()
+    {
+
+        return date("d.m.Y", strtotime($this->date));
+        //return $this->date;
+    }
+
+    /**
+     * @param mixed $date
+     */
+    public function setDate($date): void
+    {
+        $this->date = $date;
     }
 }

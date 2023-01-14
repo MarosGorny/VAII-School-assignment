@@ -19,6 +19,7 @@ $actual_request_uri = $_SERVER["REQUEST_URI"];
     <meta content='maximum-scale=1.0, initial-scale=1.0, width=device-width' name='viewport'>
     <link rel=”stylesheet” href=”https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css”/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../../public/css/main.css">
     <link rel="stylesheet" href="../../public/css/navBar.css">
 
@@ -56,6 +57,15 @@ $actual_request_uri = $_SERVER["REQUEST_URI"];
                                 echo "<span class=\"sr-only\">(current)</span>"; ?>
                         </a>
                     </li>
+
+                    <?php if($auth->isLogged() && $auth->getRole() == 'Admin') { ?>
+                    <li class="nav-item <?php if ($actual_request_uri == "/?c=rezervaciePriestor") echo 'active' ?>">
+                        <a class="nav-link" href="?c=rezervaciePriestor">Pouzivatelia
+                            <?php if ($actual_request_uri == "/?c=rezervaciePriestor")
+                                echo "<span class=\"sr-only\">(current)</span>"; ?>
+                        </a>
+                    </li>
+                    <?php } ?>
                 </ul>
 
                 <ul class="navbar-nav ml-3 mb-2 ml-lg-auto">

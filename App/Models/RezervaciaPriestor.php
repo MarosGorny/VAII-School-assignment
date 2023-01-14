@@ -10,6 +10,7 @@ class RezervaciaPriestor extends Model
     protected $den;
     protected $zaciatok;
     protected $koniec;
+    protected $date;
 
     /**
      * @return mixed
@@ -73,6 +74,22 @@ class RezervaciaPriestor extends Model
     public function setKoniec($koniec): void
     {
         $this->koniec = $koniec;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param mixed $date
+     */
+    public function setDate($date): void
+    {
+        $this->date = $date;
     }
 
 

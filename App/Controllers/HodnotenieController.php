@@ -27,6 +27,7 @@ class HodnotenieController extends AControllerBase
         $hodnotenie->setNickname($this->request()->getValue('nickname'));
         $hodnotenie->setTopic('Ind_trening');
         $hodnotenie->setRating($this->request()->getValue('rating'));
+        $hodnotenie->setDate(date("Y-m-d"));
         $hodnotenie->setUserEmail($_SESSION['user']);
 
 

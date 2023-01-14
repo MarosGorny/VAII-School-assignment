@@ -39,7 +39,7 @@ $hodnotenia_ind_sku = $data['Ind_Sku_trening'];
         <div class="card my-2">
             <div class="card-body">
                 <h5 class="card-title"><?php echo $hodnotenie->getNickname();?></h5>
-                <h6 class="card-subtitle mb-2 text-muted">Datum</h6>
+                <h6 class="card-subtitle mb-2 text-muted"><?php echo $hodnotenie->getDate();?></h6>
                 <p class="card-text"><?php echo $hodnotenie->getText(); ?></p>
 <!--                <a href="#" class="card-link">Card link</a>-->
 <!--                <a href="#" class="card-link">Another link</a>-->

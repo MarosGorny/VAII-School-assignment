@@ -66,14 +66,18 @@ class RezervaciePriestorController extends AControllerBase
 
     public function delete() {
 
-        $id = $this->request()->getValue('id');
+        $deleteGet = $this->request()->getValue('delete');
+        if($deleteGet != null) {
+            $id = $this->request()->getValue('id');
 
-        $rezerviaciaNaVymazanie = RezervaciaPriestor::getOne($id);
+            $rezerviaciaNaVymazanie = RezervaciaPriestor::getOne($id);
 
-        //ak tam je tak ju vymazem
-        if($rezerviaciaNaVymazanie) {
-            $rezerviaciaNaVymazanie->delete();
+            //ak tam je tak ju vymazem
+            if($rezerviaciaNaVymazanie) {
+                $rezerviaciaNaVymazanie->delete();
+            }
         }
+
         return $this->redirect("?c=rezervaciePriestor");
     }
 

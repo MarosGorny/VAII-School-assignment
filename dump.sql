@@ -31,7 +31,7 @@ CREATE TABLE `rezervaciapriestors` (
   CONSTRAINT `check_den` CHECK (`den` in ('Pondelok','Utorok','Streda','Stvrtok','Piatok')),
   CONSTRAINT `check_koniec` CHECK (`koniec` >= 9 and `koniec` <= 22),
   CONSTRAINT `check_zaciatok` CHECK (`zaciatok` >= 8 and `zaciatok` <= 21)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
