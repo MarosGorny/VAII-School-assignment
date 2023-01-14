@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
+use App\Models\Pouzivatel;
+use App\Models\RezervaciaPriestor;
 
 /**
  * Class DomovController
@@ -50,5 +52,11 @@ class DomovController extends AControllerBase
 
     public function otazkyOdpovede(): Response {
         return $this->html();
+    }
+
+    public function pouzivatelia(): Response {
+        //vytiahnut vsetky rezervacie
+        $pouzivatelia = Pouzivatel::getAll(orderBy: "email");
+        return $this->html(['pouzivatelia' => $pouzivatelia]);
     }
 }

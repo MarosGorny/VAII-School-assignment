@@ -1,4 +1,9 @@
 
+function changeColor(element) {
+    element.style.backgroundColor = 'orange';
+}
+
+
 var stars = document.querySelectorAll('.star a');
 var submitBtn = document.querySelector('#hodnotenie');
 
@@ -14,8 +19,8 @@ stars.forEach((item,index1) => {
     }
 )
 
-
 function getActiveCount() {
     return document.querySelectorAll('.active').length;
 }
+
 

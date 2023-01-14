@@ -9,6 +9,7 @@ body {
     font-family: 'Roboto Condensed', sans-serif;
     padding-top: 74px;
     min-height: 100vh;
+    /*position: relative;*/
 }
 #footer-text {
     background-color: #E1E2E1;
@@ -149,6 +150,11 @@ div.form-group label {
 
 .fa {
     color: black;
+}
+
+.list-group-item {
+    /*Bootstrap is applying display: block to the list items, which kills the numbering*/
+    display: list-item;
 }
 
 
