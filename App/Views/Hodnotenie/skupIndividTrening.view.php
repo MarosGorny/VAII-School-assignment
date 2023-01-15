@@ -28,34 +28,41 @@ $hodnotenia_ind_sku = $data['Ind_Sku_trening'];
         $("#show_more_comments").click(function () {
             console.log("kliknute");
             $.ajax({
-                url: '?c=Hodnotenie&a=endPoint',
+                url: '?c=Hodnotenie&a=getTwoMoreReviews',
                 method: "GET",
                 data: {
                     count: offset
                 },
                 success: function (data) {
                     console.log(data);
-                    data.forEach(element => {
-                        element.nickname = decodeURIComponent(escape(element.nickname));
-                        element.text = decodeURIComponent(escape(element.text));
+                    console.log(data.length);
+                    if(data.length !== 0) {
+                        data.forEach(element => {
+
+                            element.nickname = decodeURIComponent(escape(element.nickname));
+                            element.text = decodeURIComponent(escape(element.text));
 
 
-                        element.date = convertDate(element.date);
+                            element.date = convertDate(element.date);
 
 
-                        $(
-                            '<div id="comments">\n' +
+                            $(
+                                '<div id="comments">\n' +
                                 '<div class="card my-2">\n' +
-                                    '<div class="card-body">\n' +
-                                        '<h5 class="card-title">' + element.nickname + '</h5>\n' +
-                                        '<h6 class="card-subtitle mb-2 text-muted">' + element.date + '</h6>\n' +
-                                        '<p class="card-text">' + element.text + '</p>\n' +
-                                    '</div>' +
+                                '<div class="card-body">\n' +
+                                '<h5 class="card-title">' + element.nickname + '</h5>\n' +
+                                '<h6 class="card-subtitle mb-2 text-muted">' + element.date + '</h6>\n' +
+                                '<p class="card-text">' + element.text + '</p>\n' +
                                 '</div>' +
-                            '</div>'
-                        ).insertBefore($('#show_more_comments'));
-                    });
-                    offset += 2;
+                                '</div>' +
+                                '</div>'
+                            ).insertBefore($('#show_more_comments'));
+                        });
+                        offset += data.length;
+                    } else {
+                        document.getElementById("show_more_comments").style.display = "none";
+                    }
+
                 }
             })
         });
@@ -65,38 +72,6 @@ $hodnotenia_ind_sku = $data['Ind_Sku_trening'];
 
 
 </script>
-
-<!--<script>-->
-<!--    $(document).ready(function() {-->
-<!--        $.getJSON("?c=Hodnotenie&a=endPoint", function(data) {-->
-<!--            console.log(data);-->
-<!--            console.log(data.length);-->
-<!--            console.log(data[0].id);-->
-<!---->
-<!--            var html = "";-->
-<!--            for (var i = 0; i < data.length; i++) {-->
-<!--                html += "<div>";-->
-<!--                console.log(data[i].id);-->
-<!--                html += "<h2>" + data[i].id + "</h2>";-->
-<!--                html += "<p>" + data[i].text + "</p>";-->
-<!--                html += "</div>";-->
-<!--            }-->
-<!--            $("#results").html(html);-->
-<!--        });-->
-<!--    });-->
-<!--</script>-->
-<!---->
-<!--<script>-->
-<!--    $(document).ready(function() {-->
-<!--        var commentCount = 2;-->
-<!--        $("#show_more_comments").click(function () {-->
-<!--            commentCount += 2;-->
-<!--            $("#comments").load("?c=Hodnotenie&a=skupIndividTrening",{-->
-<!--                commentNewCount: commentCount-->
-<!--            });-->
-<!--        });-->
-<!--    });-->
-<!--</script>-->
 
 <div id="results"></div>
 <section class="container-fluid px-0">
@@ -114,15 +89,18 @@ $hodnotenia_ind_sku = $data['Ind_Sku_trening'];
         <div class="col-md-6 text-center order-1 order-md-2 ">
             <div class="row justify-content-center">
                 <div class="col-10 col-lg-8  mb-5 mb-md-0 home-block home-page-text">
-                    <h1>Individuálny tréning</h1>
+                    <h1>Samostatné individuálne tréningy tréning</h1>
                     <p class="lead">Výhodou pri osobných tréningoch je, že v priestore sa nachádzate iba vy a tréner.</p>
+                    <h1>Skupinové tréningy</h1>
+                    <p class="lead">Individuálne tréningy s naším trénerom si viete dohodnúť aj ako skupina.</p>
+
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="home-block home-page-text">
-        <h1>Hodnotenia</h1>
+    <div class="home-block home-page-text hodnotenie-div">
+        <h1 class="text-center">Hodnotenia</h1>
     </div>
     <?php if(!empty($hodnotenia_ind_sku)) { ?>
     <?php foreach ($hodnotenia_ind_sku as $hodnotenie) { ?>
@@ -141,24 +119,6 @@ $hodnotenia_ind_sku = $data['Ind_Sku_trening'];
     <p> There are no comments !</p>
     <?php } ?>
 
-<!--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
-<!--    <script>-->
-<!---->
-<!--        $("#show_more_comments").click(function () {-->
-<!--            $.ajax({-->
-<!--                url: '?c=Hodnotenie&a=endPoint',-->
-<!--                method: "GET",-->
-<!--                success: function (data) {-->
-<!--                    alert("LOL");-->
-<!--                    $("#comments").insertAfter("#comments");-->
-<!--                    // $("#comments").html(data);-->
-<!--                }-->
-<!--            })-->
-<!--        });-->
-<!---->
-<!--    </script>-->
-
-
 
     <?php if ($auth->isLogged()) { ?>
     <section class="container-fluid">
@@ -170,8 +130,8 @@ $hodnotenia_ind_sku = $data['Ind_Sku_trening'];
                             <div class="card-body" >
                                 <div class="d-flex flex-start align-items-center">
                                     <div>
-                                        <?php echo $auth->getLoggedUserName(); ?>
-                                            <input type="text" name="nickname" placeholder="Tvoje meno" required>
+<!--                                        --><?php //echo $auth->getLoggedUserName(); ?>
+                                            <input type="text" name="nickname" class="form-control" placeholder="Tvoje meno" required">
                                     </div>
                                 </div>
                             </div>
@@ -187,19 +147,18 @@ $hodnotenia_ind_sku = $data['Ind_Sku_trening'];
                                 </div>
 
                                     <div class="row align-items-center content mt-0">
-                                        <div class=" col-md-6 float-end mt-2 pt-1">
-                                            <button type="submit" name="Odoslat" class="btn btn-primary btn-sm">Post comment</button>
-                                            <button type="button" class="btn btn-outline-primary btn-sm">Cancel</button>
+                                        <div class="text-center col-md-6 float-end mt-2 pt-1  ">
+                                            <button type="submit" name="Odoslat" class="btn btn-dark btn-sm">Odoslať hodnotenie!</button>
                                         </div>
                                         <input type="hidden" id="hodnotenie" name="rating" value="0">
-                                        <div class="col-sm-6 mx-auto row align-items-center content mt-0">
+                                        <div class="text-center col-md-0 col-sm-0 mx-auto row align-items-center content mt-0">
                                             <div class="container-star">
                                                 <div class ="star">
-                                                    <a href="#" class="bi-star-fill offset-2 col-2"></a>
-                                                    <a href="#" class="bi-star-fill col-2"></a>
-                                                    <a href="#" class="bi-star-fill col-2"></a>
-                                                    <a href="#" class="bi-star-fill col-2"></a>
-                                                    <a href="#" class="bi-star-fill col-2"></a>
+                                                    <a href="#bottom" class="bi-star-fill offset-2 col-2"></a>
+                                                    <a href="#bottom" class="bi-star-fill col-2"></a>
+                                                    <a href="#bottom" class="bi-star-fill col-2"></a>
+                                                    <a href="#bottom" class="bi-star-fill col-2"></a>
+                                                    <a href="#bottom" class="bi-star-fill col-2"></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -219,6 +178,6 @@ $hodnotenia_ind_sku = $data['Ind_Sku_trening'];
 
 
 
-
+    <a id="bottom"></a>,
 </section>
 
