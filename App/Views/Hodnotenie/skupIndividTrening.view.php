@@ -7,20 +7,98 @@ use App\Models\Hodnotenie;
 $hodnotenia_ind_sku = $data['Ind_Sku_trening'];
 
 ?>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
+    function convertDate($date) {
+        var newDate = new Date($date);
+        var options = {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        };
+        return newDate.toLocaleDateString('sk-SK', options);
+    }
+
+
     $(document).ready(function() {
-        var commentCount = 2;
+        console.log("Nacitane");
+        var offset = 2;
+
         $("#show_more_comments").click(function () {
-            commentCount += 2;
-            $("#comments").load("?c=Hodnotenie&a=skupIndividTrening",{
-                commentNewCount: commentCount
-            });
+            console.log("kliknute");
+            $.ajax({
+                url: '?c=Hodnotenie&a=endPoint',
+                method: "GET",
+                data: {
+                    count: offset
+                },
+                success: function (data) {
+                    console.log(data);
+                    data.forEach(element => {
+                        element.nickname = decodeURIComponent(escape(element.nickname));
+                        element.text = decodeURIComponent(escape(element.text));
+
+
+                        element.date = convertDate(element.date);
+
+
+                        $(
+                            '<div id="comments">\n' +
+                                '<div class="card my-2">\n' +
+                                    '<div class="card-body">\n' +
+                                        '<h5 class="card-title">' + element.nickname + '</h5>\n' +
+                                        '<h6 class="card-subtitle mb-2 text-muted">' + element.date + '</h6>\n' +
+                                        '<p class="card-text">' + element.text + '</p>\n' +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>'
+                        ).insertBefore($('#show_more_comments'));
+                    });
+                    offset += 2;
+                }
+            })
         });
+
     });
+
+
+
 </script>
 
+<!--<script>-->
+<!--    $(document).ready(function() {-->
+<!--        $.getJSON("?c=Hodnotenie&a=endPoint", function(data) {-->
+<!--            console.log(data);-->
+<!--            console.log(data.length);-->
+<!--            console.log(data[0].id);-->
+<!---->
+<!--            var html = "";-->
+<!--            for (var i = 0; i < data.length; i++) {-->
+<!--                html += "<div>";-->
+<!--                console.log(data[i].id);-->
+<!--                html += "<h2>" + data[i].id + "</h2>";-->
+<!--                html += "<p>" + data[i].text + "</p>";-->
+<!--                html += "</div>";-->
+<!--            }-->
+<!--            $("#results").html(html);-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+<!---->
+<!--<script>-->
+<!--    $(document).ready(function() {-->
+<!--        var commentCount = 2;-->
+<!--        $("#show_more_comments").click(function () {-->
+<!--            commentCount += 2;-->
+<!--            $("#comments").load("?c=Hodnotenie&a=skupIndividTrening",{-->
+<!--                commentNewCount: commentCount-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
 
+<div id="results"></div>
 <section class="container-fluid px-0">
     <div class="row align-items-center content">
 
@@ -54,8 +132,6 @@ $hodnotenia_ind_sku = $data['Ind_Sku_trening'];
                 <h5 class="card-title"><?php echo $hodnotenie->getNickname();?></h5>
                 <h6 class="card-subtitle mb-2 text-muted"><?php echo $hodnotenie->getDate();?></h6>
                 <p class="card-text"><?php echo $hodnotenie->getText(); ?></p>
-<!--                <a href="#" class="card-link">Card link</a>-->
-<!--                <a href="#" class="card-link">Another link</a>-->
             </div>
         </div>
         <?php } ?>
@@ -64,6 +140,23 @@ $hodnotenia_ind_sku = $data['Ind_Sku_trening'];
     <?php } else { ?>
     <p> There are no comments !</p>
     <?php } ?>
+
+<!--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+<!--    <script>-->
+<!---->
+<!--        $("#show_more_comments").click(function () {-->
+<!--            $.ajax({-->
+<!--                url: '?c=Hodnotenie&a=endPoint',-->
+<!--                method: "GET",-->
+<!--                success: function (data) {-->
+<!--                    alert("LOL");-->
+<!--                    $("#comments").insertAfter("#comments");-->
+<!--                    // $("#comments").html(data);-->
+<!--                }-->
+<!--            })-->
+<!--        });-->
+<!---->
+<!--    </script>-->
 
 
 

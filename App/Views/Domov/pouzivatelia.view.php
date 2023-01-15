@@ -51,3 +51,47 @@ $pouzivatelia = $data['pouzivatelia'];
 
 </section>
 
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    var request = null;
+
+    $(document).ready(function () {
+        //min dlzka na zacanie hladania
+        var minLength = 2;
+
+        $("#live_search").keyup(function() {
+            //ked keyup, tak daj to textu
+            var oldValue = this;
+            var text = $(this).val();
+
+
+            if(text !== "") {
+                $("#searchresult").css("display","inline");
+                if(text.length >= minLength) {
+                    //Ak tam ostal request(minuly), tak ho zabije
+                    if(request != null)
+                        request.abort();
+                    request = $.ajax({
+                        url: '?c=domov&a=pouziv',
+                        method:"POST",
+                        data:{text:text},
+
+                        success:function (data) {
+
+                            if (text===$(oldValue).val()) {
+                                $("#searchresult").html(data);
+                            }
+
+                        }
+                    })
+                }
+            } else {
+                $("#searchresult").css("display","none");
+            }
+        });
+    });
+</script>
+
+

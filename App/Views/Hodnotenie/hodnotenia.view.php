@@ -6,11 +6,39 @@
 $hodnotenia_ind_sku = $data['Ind_Sku_trening'];
 
 ?>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<script>
+    //function ukazHodnotenia() {
+        $(document).ready(function() {
+
+            $("#show_more_comments").click(function () {
+                $.ajax({
+                    url: '?c=Hodnotenie&a=endPoint',
+                    method: "GET",
+                    success: function (data) {
+                        alert("KKK");
+                        data.forEach(element => $('<div class="message">\n' +
+                            <?php if (isset($_SESSION["isAdmin"]) && $_SESSION["isAdmin"] == 1) {
+                                echo '\'<a onclick="vymaz(\'+element.id+\')">x</a>\n\' +';
+                            }
+                            ?>
+                            '            <div class="name">' + element.topic + '</div>\n' +
+                            '            <div style="padding: 1px 0 30px 41px;margin: 30px 5px 5px -37px;"> ' + element.text + ' </div>\n' +
+                            '        </div>').insertAfter($('#comments')))
+                    }
+                })
+            });
+
+        });
+    //}
+
+
+</script>
 <?php
     if(!empty($hodnotenia_ind_sku)) { ?>
 <?php foreach ($hodnotenia_ind_sku as $hodnotenie) { ?>
-    <div>
+    <div id="comments">
     <div class="card my-2">
         <div class="card-body">
             <h5 class="card-title"><?php echo $hodnotenie->getNickname();?></h5>

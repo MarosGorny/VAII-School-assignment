@@ -74,6 +74,14 @@ class HodnotenieController extends AControllerBase
         return $this->html(['Fun_trening' => $hodnotenia_funkcny]);
     }
 
+    public function endPoint():Response {
+
+        $count = $this->request()->getValue('count');
+//        $limit = $count . ' ' . $count+2;
+//        echo '<script>alert($limit)</script>';
+        return $this->json(Hodnotenie::getAll(limit: 2,offset: $count));
+    }
+
     public function addComment(): Response {
 
 

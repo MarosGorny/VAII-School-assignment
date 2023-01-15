@@ -85,7 +85,7 @@ class Hodnotenie extends Model
      */
     public function getNickname()
     {
-        return $this->nickname;
+        return utf8_encode($this->nickname);
     }
 
     /**
@@ -93,7 +93,7 @@ class Hodnotenie extends Model
      */
     public function setNickname($nickname): void
     {
-        $this->nickname = $nickname;
+        $this->nickname = utf8_encode($nickname);
     }
 
     /**
