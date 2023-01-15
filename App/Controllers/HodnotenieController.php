@@ -43,7 +43,16 @@ class HodnotenieController extends AControllerBase
 
     public function skupIndividTrening(): Response
     {
-        $hodnotenia_ind_sku = Hodnotenie::getAll(whereClause: "topic = 'Ind_trening' OR topic = 'Sku_trening'");
+        $hodnotenia_ind_sku = null;
+        if($this->request()->isAjax()) {
+            $commentNewCount = $this->request()->getValue('commentNewCount');
+            $hodnotenia_ind_sku = Hodnotenie::getAll(whereClause: "topic = 'Ind_trening' OR topic = 'Sku_trening'", limit: $commentNewCount);
+
+            return $this->html(['Ind_Sku_trening' => $hodnotenia_ind_sku],viewName: 'hodnotenia');
+        } else {
+            $hodnotenia_ind_sku = Hodnotenie::getAll(whereClause: "topic = 'Ind_trening' OR topic = 'Sku_trening'", limit: 2);
+        }
+
         return $this->html(['Ind_Sku_trening' => $hodnotenia_ind_sku]);
     }
 
@@ -79,5 +88,31 @@ class HodnotenieController extends AControllerBase
         //TODO dorobit topic aby sa spravne pridal a spravny view
         //zakomentoval som len kvoli ajaxu hore
         //return $this->html(['hodnotenie' => new Hodnotenie(),'topic' => null],viewName: 'create.form');
+    }
+
+    public function showComments(): Response {
+        if($this->request()->isAjax()) {
+            $commentNewCount = $this->request()->getValue('commentNewCount');
+            $hodnotenia_ind_sku = Hodnotenie::getAll(whereClause: "topic = 'Ind_trening' OR topic = 'Sku_trening'", limit: $commentNewCount);
+
+            if(!empty($hodnotenia_ind_sku)) { ?>
+                <?php foreach ($hodnotenia_ind_sku as $hodnotenie) { ?>
+                    <div>
+                    <div id="comments" class="card my-2">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo $hodnotenie->getNickname();?></h5>
+                            <h6 class="card-subtitle mb-2 text-muted"><?php echo $hodnotenie->getDate();?></h6>
+                            <p class="card-text"><?php echo $hodnotenie->getText(); ?></p>
+                        </div>
+                    </div>
+                <?php } ?>
+                </div>
+                <button id="show_more_comments">Show more comments</button>
+            <?php } else { ?>
+                <p> There are no comments !</p>
+            <?php }
+            return $this->html(['Ind_Sku_trening' => $hodnotenia_ind_sku]);
+        }
+        return $this->html();
     }
 }

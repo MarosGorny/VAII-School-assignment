@@ -88,3 +88,13 @@ $(document).ready(function () {
         }
     });
 });
+
+$(document).ready(function() {
+    var commentCount = 2;
+    $("#show_more_comments").click(function () {
+        commentCount += 2;
+        $("#comments").load("?c=Hodnotenie&a=skupIndividTrening",{
+            commentNewCount: commentCount
+        });
+    });
+});

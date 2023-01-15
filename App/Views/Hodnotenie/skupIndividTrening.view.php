@@ -8,6 +8,18 @@ $hodnotenia_ind_sku = $data['Ind_Sku_trening'];
 
 ?>
 
+<script>
+    $(document).ready(function() {
+        var commentCount = 2;
+        $("#show_more_comments").click(function () {
+            commentCount += 2;
+            $("#comments").load("?c=Hodnotenie&a=skupIndividTrening",{
+                commentNewCount: commentCount
+            });
+        });
+    });
+</script>
+
 
 <section class="container-fluid px-0">
     <div class="row align-items-center content">
@@ -34,8 +46,9 @@ $hodnotenia_ind_sku = $data['Ind_Sku_trening'];
     <div class="home-block home-page-text">
         <h1>Hodnotenia</h1>
     </div>
+    <?php if(!empty($hodnotenia_ind_sku)) { ?>
     <?php foreach ($hodnotenia_ind_sku as $hodnotenie) { ?>
-    <div>
+    <div id="comments" >
         <div class="card my-2">
             <div class="card-body">
                 <h5 class="card-title"><?php echo $hodnotenie->getNickname();?></h5>
@@ -47,7 +60,10 @@ $hodnotenia_ind_sku = $data['Ind_Sku_trening'];
         </div>
         <?php } ?>
     </div>
-
+        <button id="show_more_comments">Show more comments</button>
+    <?php } else { ?>
+    <p> There are no comments !</p>
+    <?php } ?>
 
 
 
@@ -102,9 +118,11 @@ $hodnotenia_ind_sku = $data['Ind_Sku_trening'];
                 </div>
             </div>
         </div>
+
+
+
     </section>
     <?php }?>
-
 
 
 

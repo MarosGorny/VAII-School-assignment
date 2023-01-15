@@ -6,6 +6,7 @@ use App\Models\Hodnotenie;
 
 $hodnotenia_ind_sku = $data['Kon_trening'];
 
+
 ?>
 
 
