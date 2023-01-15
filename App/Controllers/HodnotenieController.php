@@ -65,8 +65,19 @@ class HodnotenieController extends AControllerBase
         return $this->html(['Fun_trening' => $hodnotenia_funkcny]);
     }
 
-    public function addComment() {
+    public function addComment(): Response {
+
+
+//        echo "Hello";
+        if($this->request()->isAjax()) {
+            echo '<script>alert("AJAX")</script>';
+        } else {
+            echo '<script>alert("NOT AJAX")</script>';
+        }
+        return $this->html();
+
         //TODO dorobit topic aby sa spravne pridal a spravny view
-        return $this->html(['hodnotenie' => new Hodnotenie(),'topic' => null],viewName: 'create.form');
+        //zakomentoval som len kvoli ajaxu hore
+        //return $this->html(['hodnotenie' => new Hodnotenie(),'topic' => null],viewName: 'create.form');
     }
 }

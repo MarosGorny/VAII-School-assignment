@@ -1,21 +1,20 @@
-<?php ///** @var Array $data */
+<?php
 
 use App\Models\Pouzivatel;
 ///** @var App\Core\IAuthenticator $auth */
 /** @var Pouzivatel[] $data */
 
-//$pouzivatelia = $data['pouzivateliaHladat'];
-$pouzivatelia = $data['pouzivatelia'];
+$pouzivateliaHladat = $data['pouzivateliaHladat'];
+//$pouzivatelia = $data['pouzivatelia'];
 ?>
+<!---->
+<!--<section class="container-fluid px-0">-->
+<!--    <div class="row align-items-center justify-content-around mt-2">-->
+<!--        <div class="text-center home-block">-->
 
-
-<section class="container-fluid px-0">
-    <div class="row  justify-content-around mt-2">
-        <div class="text-center home-block">
-
-            <ol class="list-group list-group-numbered">
+            <ol class="list-group list-group-numbered pt-4">
                 <?php
-                foreach ($pouzivatelia as $pouzivatel) { ?>
+                foreach ($pouzivateliaHladat as $pouzivatel) { ?>
                     <li onchange="changeColor(this)" class="list-group-item"><?php echo $pouzivatel->getEmail();?>
                         <select class="form-select form-select-sm pouzivatelia" id="pouzivatelia" aria-label=".form-select-sm example">
                             <?php
@@ -34,20 +33,22 @@ $pouzivatelia = $data['pouzivatelia'];
                     </li>
                 <?php  }?>
             </ol>
-            <button type="button" class="btn btn-success mt-2">Potvrdiť zmeny</button>
+<!--            <button type="button" class="btn btn-success mt-2">Potvrdiť zmeny</button>-->
+<!---->
+<!---->
+<!--        </div>-->
+<!--        <div class="text-left home-block">-->
+<!---->
+<!--            <input type="text" class="form-control" id="live_search" autocomplete="off"-->
+<!--                   placeholder="Search">-->
+<!--            <div id="searchresult"></div>-->
+<!---->
+<!--        </div>-->
+<!---->
+<!--    </div>-->
+<!---->
+<!---->
+<!--</section>-->
+<!---->
 
-
-       </div>
-        <div class="text-left home-block top-0">
-
-            <input type="text" class="form-control top-0" id="live_search" autocomplete="off"
-                   placeholder="Search">
-            <div id="searchresult"></div>
-
-        </div>
-
-    </div>
-
-
-</section>
 

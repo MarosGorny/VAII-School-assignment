@@ -117,14 +117,13 @@ $actual_request_uri = $_SERVER["REQUEST_URI"];
     </div>
 </div>
 
-<footer class="bg-white">
-    <!-- Copyrights -->
-    <div class="bg-light">
-        <div id="footer-text"  class="container-fluid text-center">
-            <p class="text-muted mb-0">© 2023 Created by Maros Gorny</p>
-        </div>
-    </div>
-</footer>
+<!--<footer class="bg-white">-->
+<!--    <div class="bg-light">-->
+<!--        <div id="footer-text"  class="container-fluid text-center">-->
+<!--            <p class="text-muted mb-0">© 2023 Created by Maros Gorny</p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</footer>-->
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -136,9 +135,18 @@ $actual_request_uri = $_SERVER["REQUEST_URI"];
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
+<!--ajax-->
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+<!--<script src="../../public/js/jquery-3.6.3.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+
+
 <!--    own js-->
 <script src="../../public/js/obsadenost.js" type="application/javascript"></script>
 <script src="../../public/js/rating.js" type="application/javascript"></script>
+<script src="../../public/js/ajaxTesting.js" type="application/javascript"></script>
 
 </body>
 </html>

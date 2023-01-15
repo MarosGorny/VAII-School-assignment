@@ -11,6 +11,7 @@ foreach ($data as $trening) {
 
 ?>
 
+
 <section class="container-fluid px-0">
     <div class="row align-items-center">
         <div class="col-lg-6 home-block">
@@ -146,3 +147,4 @@ foreach ($data as $trening) {
         </div>
     </div>
 </section>
+

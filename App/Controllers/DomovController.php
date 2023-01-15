@@ -59,4 +59,27 @@ class DomovController extends AControllerBase
         $pouzivatelia = Pouzivatel::getAll(orderBy: "email");
         return $this->html(['pouzivatelia' => $pouzivatelia]);
     }
+
+    public function pouziv(): Response {
+//        $pouzivatelia = Pouzivatel::getAll(orderBy: "email");
+        $pouzivateliaHladat = null;
+
+
+        if($this->request()->isAjax()) {
+            $input = $this->request()->getValue('text');
+
+            //vytiahnut vsetky rezervacie
+            $pouzivateliaHladat = Pouzivatel::getAll(whereClause: "email LIKE '{$input}%'",orderBy: "email");
+            if(!empty($pouzivateliaHladat)) { ?>
+
+                <?php
+
+            } else {
+                echo "<h6 class='text-danger text-center mt-3'>No data found</h6>";
+            }
+        }
+        return $this->html(['pouzivateliaHladat' => $pouzivateliaHladat]);
+
+
+    }
 }
