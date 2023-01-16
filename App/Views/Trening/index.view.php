@@ -5,7 +5,7 @@
 $trening1 = null;
 
 foreach ($data as $trening) {
-    if ($trening->getId() == 1)
+    if ($trening->getTopic() == "Ind_trening")
         $trening1 = $trening;
 }
 

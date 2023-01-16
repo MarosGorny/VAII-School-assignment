@@ -6,6 +6,7 @@ use App\Core\AControllerBase;
 use App\Core\Responses\Response;
 use App\Models\Hodnotenie;
 use App\Models\RezervaciaPriestor;
+use App\Models\Trening;
 
 class HodnotenieController extends AControllerBase
 {
@@ -43,26 +44,32 @@ class HodnotenieController extends AControllerBase
 
     public function skupIndividTrening(): Response
     {
-        $hodnotenia_ind_sku = Hodnotenie::getAll(whereClause: "topic = 'Ind_trening' OR topic = 'Sku_trening'", limit: 2, orderBy: 'date DESC');
+        $hodnotenia_ind_sku = Hodnotenie::getAll(whereClause: "topic = 'Ind_trening' OR topic = 'Sku_trening'", limit: 3, orderBy: 'date DESC');
         return $this->html(['Ind_Sku_trening' => $hodnotenia_ind_sku]);
     }
 
     public function silovyTrening(): Response
     {
-        $hodnotenia_silovy = Hodnotenie::getAll(whereClause: "topic = 'Sil_trening'");
-        return $this->html(['Sil_trening' => $hodnotenia_silovy]);
+        $topicWhere = "topic = 'Sil_trening'";
+        $hodnotenia_silovy = Hodnotenie::getAll(whereClause: $topicWhere, limit: 3, orderBy: 'date DESC');
+        $trening_silovy = Trening::getOne('Sil_trening');
+        return $this->html(['Hodnotenie' => $hodnotenia_silovy,'Trening' => $trening_silovy],viewName: 'vsetkyTreningy');
     }
 
     public function kondicnyTrening(): Response
     {
-        $hodnotenia_kondicny = Hodnotenie::getAll(whereClause: "topic = 'Kon_trening'");
-        return $this->html(['Kon_trening' => $hodnotenia_kondicny]);
+        $topicWhere = "topic = 'Kon_trening'";
+        $hodnotenia_silovy = Hodnotenie::getAll(whereClause: $topicWhere, limit: 3, orderBy: 'date DESC');
+        $trening_silovy = Trening::getOne('Kon_trening');
+        return $this->html(['Hodnotenie' => $hodnotenia_silovy,'Trening' => $trening_silovy],viewName: 'vsetkyTreningy');
     }
 
     public function funkcnyTrening(): Response
     {
-        $hodnotenia_funkcny = Hodnotenie::getAll(whereClause: "topic = 'Fun_trening'");
-        return $this->html(['Fun_trening' => $hodnotenia_funkcny]);
+        $topicWhere = "topic = 'Fun_trening'";
+        $hodnotenia_silovy = Hodnotenie::getAll(whereClause: $topicWhere, limit: 3, orderBy: 'date DESC');
+        $trening_silovy = Trening::getOne('Fun_trening');
+        return $this->html(['Hodnotenie' => $hodnotenia_silovy,'Trening' => $trening_silovy],viewName: 'vsetkyTreningy');
     }
 
     public function getTwoMoreReviews():Response {

@@ -51,7 +51,23 @@ abstract class Model implements \JsonSerializable
      */
     public static function getPkColumnName() : string
     {
-        return 'id';
+
+        /*
+         * Edited by Maros Gorny - get pk by flag
+         */
+        $whereParams = [];
+        $sql = "SELECT * FROM `" . static::getTableName() . "`";
+        $stmt = self::$connection->prepare($sql);
+        $stmt->execute($whereParams);
+        $primary_key_column = 'id';
+        for ($i = 0; $i < $stmt->columnCount(); $i++) {
+            $col = $stmt->getColumnMeta($i);
+            if(count($col['flags']) > 1 && $col['flags'][1] == 'primary_key') {
+                $primary_key_column = $col['name'];
+                break;
+            }
+        }
+        return $primary_key_column;
     }
 
     /**
@@ -91,20 +107,20 @@ abstract class Model implements \JsonSerializable
 
     /**
      * Gets one model by primary key
-     * @param $id
+     * @param $pkName
      * @return static|null
      * @throws \Exception
      */
-    static public function getOne($id): ?static
+    static public function getOne($pkName): ?static
     {
-        if ($id == null) return null;
+        if ($pkName == null) return null;
 
         self::connect();
         try {
             $sql = "SELECT * FROM `" . static::getTableName() . "` WHERE `" . static::getPkColumnName() . "`=?";
             $stmt = self::$connection->prepare($sql);
             $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, static::class);
-            $stmt->execute([$id]);
+            $stmt->execute([$pkName]);
             return $stmt->fetch() ?: null;
         } catch (PDOException $e) {
             throw new \Exception('Query failed: ' . $e->getMessage(), 0, $e);
