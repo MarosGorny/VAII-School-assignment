@@ -47,9 +47,12 @@ class RegisterController extends AControllerBase
             if($registered) {
                 //po splneniPodmienok
 
+                $pouzivatel = $this->tryCreateUser();
 
-                if($this->tryCreateUser()) {
-                    $_SESSION['user'] = $formData['email'];
+
+                if($pouzivatel != null ) {
+                    $_SESSION['user'] = $pouzivatel->getEmail();
+                    $_SESSION['role'] = $pouzivatel->getRole();
                     return $this->redirect('?c=domov');
                 } else {
                     //TODO uzivatel uz existuje
@@ -65,10 +68,11 @@ class RegisterController extends AControllerBase
     }
 
     /**
-     * Check if there is a user with same email, if not, then create it
-     * @return bool
+     * Check if there is a user with same email, if not, then create it and return it,
+     * if there is alerady user, return null
+     * @return Pouzivatel|null
      */
-    public function tryCreateUser() : bool {
+    public function tryCreateUser() : ?Pouzivatel {
         $email = $this->request()->getValue('email');
         $password = $this->request()->getValue('password');
 
@@ -81,12 +85,12 @@ class RegisterController extends AControllerBase
                 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
                 $newUser->setPassword($hashed_password);
                 $newUser->setRole("Klient");
-                $newUser->create();
-                return true;
+                $newUser->save();
+                return $newUser;
             }
         }
 
-        return false;
+        return null;
     }
 
     /**

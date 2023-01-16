@@ -51,23 +51,7 @@ abstract class Model implements \JsonSerializable
      */
     public static function getPkColumnName(): string
     {
-
-        /*
-         * Edited by Maros Gorny - get pk by flag
-         */
-        $whereParams = [];
-        $sql = "SELECT * FROM `" . static::getTableName() . "`";
-        $stmt = self::$connection->prepare($sql);
-        $stmt->execute($whereParams);
-        $primary_key_column = 'id';
-        for ($i = 0; $i < $stmt->columnCount(); $i++) {
-            $col = $stmt->getColumnMeta($i);
-            if (count($col['flags']) > 1 && $col['flags'][1] == 'primary_key') {
-                $primary_key_column = $col['name'];
-                break;
-            }
-        }
-        return $primary_key_column;
+        return 'id';
     }
 
     /**

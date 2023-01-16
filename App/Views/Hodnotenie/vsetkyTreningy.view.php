@@ -55,15 +55,17 @@ $trening = $data['Trening'];
     //GET hodnotenia AJAX
     $(document).ready(function() {
         console.log("Nacitane");
-        var offset = 2;
+        var offset = 3;
 
         $("#show_more_comments").click(function () {
             console.log("kliknute");
+            console.log(offset)
             $.ajax({
                 url: '?c=Hodnotenie&a=getTwoMoreReviews',
                 method: "GET",
                 data: {
-                    count: offset
+                    count: offset,
+                    topic: '<?php echo $trening->getTopic() ?>'
                 },
                 success: function (data) {
                     console.log(data);
@@ -91,6 +93,9 @@ $trening = $data['Trening'];
                             ).insertBefore($('#show_more_comments'));
                         });
                         offset += data.length;
+                        if(data.length < 2) {
+                            document.getElementById("show_more_comments").style.display = "none";
+                        }
                     } else {
                         document.getElementById("show_more_comments").style.display = "none";
                     }
@@ -121,14 +126,20 @@ $trening = $data['Trening'];
                         text: text,
                         rating: rating,
                         topic: '<?php echo $trening->getTopic() ?>'
-
                     },
                     success: function (response) {
-                        if (response === "success") {
-                            //hande succesfull form submission
-                        } else {
-                            $('#form-message').html(response);
-                        }
+                        $('#nickname-id').val('');
+                        $('#text-id').val('');
+                        document.getElementById("form-message").innerHTML = "Hodnotenie sa odoslalo.";
+                        console.log(response);
+                        // if (response === "success") {
+                        //     console.log("??");
+                        //     $('#nickname-id').val('');
+                        //     $('#text-id').val('');
+                        // } else {
+                        //     console.log("!!!");
+                        //     $('#form-message').html(response);
+                        // }
                     }
                 })
             }

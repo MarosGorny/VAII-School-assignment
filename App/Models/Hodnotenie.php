@@ -7,6 +7,8 @@ use App\Core\Model;
 class Hodnotenie extends Model
 {
     protected $id;
+    protected $userID;
+    protected $treningID;
     protected $text;
     protected $userEmail;
     protected $topic;
@@ -29,6 +31,38 @@ class Hodnotenie extends Model
     public function setId($id): void
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserID()
+    {
+        return $this->userID;
+    }
+
+    /**
+     * @param mixed $userID
+     */
+    public function setUserID($userID): void
+    {
+        $this->userID = $userID;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTreningID()
+    {
+        return $this->treningID;
+    }
+
+    /**
+     * @param mixed $TreningID
+     */
+    public function setTreningID($TreningID): void
+    {
+        $this->treningID = $TreningID;
     }
 
     /**
