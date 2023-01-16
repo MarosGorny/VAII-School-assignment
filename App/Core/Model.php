@@ -49,7 +49,7 @@ abstract class Model implements \JsonSerializable
      * Return default primary key column name
      * @return string
      */
-    public static function getPkColumnName() : string
+    public static function getPkColumnName(): string
     {
 
         /*
@@ -62,7 +62,7 @@ abstract class Model implements \JsonSerializable
         $primary_key_column = 'id';
         for ($i = 0; $i < $stmt->columnCount(); $i++) {
             $col = $stmt->getColumnMeta($i);
-            if(count($col['flags']) > 1 && $col['flags'][1] == 'primary_key') {
+            if (count($col['flags']) > 1 && $col['flags'][1] == 'primary_key') {
                 $primary_key_column = $col['name'];
                 break;
             }
@@ -87,7 +87,7 @@ abstract class Model implements \JsonSerializable
      * @return static[]
      * @throws \Exception
      */
-    static public function getAll(string $whereClause = '',string $limit = '',string $offset ='', array $whereParams = [], $orderBy = ''): array
+    static public function getAll(string $whereClause = '', string $limit = '', string $offset = '', array $whereParams = [], $orderBy = ''): array
     {
 
 

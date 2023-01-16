@@ -99,7 +99,15 @@ class DummyAuthenticator implements IAuthenticator
         } else {
             throw new \Exception("User is not logged in");
         }
-
     }
 
+    function isAdmin(): bool
+    {
+        if($this->isLogged()) {
+            if($this->getRole() === 'Admin') {
+                return true;
+            }
+        }
+        return false;
+    }
 }

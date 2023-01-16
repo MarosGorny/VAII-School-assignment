@@ -52,4 +52,10 @@ interface IAuthenticator
      * @return string
      */
     function getRole(): string;
+
+    /**
+     * Check if user is Admin
+     * @return bool
+     */
+    function isAdmin(): bool;
 }

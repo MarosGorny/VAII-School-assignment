@@ -81,7 +81,7 @@ class RegisterController extends AControllerBase
                 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
                 $newUser->setPassword($hashed_password);
                 $newUser->setRole("Klient");
-                $newUser->save();
+                $newUser->create();
                 return true;
             }
         }

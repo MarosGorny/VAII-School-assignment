@@ -131,7 +131,7 @@ $hodnotenia_ind_sku = $data['Ind_Sku_trening'];
                                 <div class="d-flex flex-start align-items-center">
                                     <div>
 <!--                                        --><?php //echo $auth->getLoggedUserName(); ?>
-                                            <input type="text" name="nickname" class="form-control" placeholder="Tvoje meno" required">
+                                            <input id="nickname-id" type="text" name="nickname" class="form-control" placeholder="Tvoje meno" required">
                                     </div>
                                 </div>
                             </div>
@@ -140,9 +140,9 @@ $hodnotenia_ind_sku = $data['Ind_Sku_trening'];
                             <div class="card-footer py-3 border-0">
                                 <div class="d-flex flex-start w-100">
                                     <div class="form-outline w-100">
-                                        <textarea class="form-control" id="textAreaExample" rows="4"
+                                        <textarea class="form-control" id="text-id" rows="4"
                                                   style="background: #fff;" name="text"></textarea>
-                                        <label class="form-label" for="textAreaExample">Message</label>
+<!--                                        <label class="form-label" for="text-id">Message</label>-->
                                     </div>
                                 </div>
 

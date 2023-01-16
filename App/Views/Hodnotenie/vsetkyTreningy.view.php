@@ -11,9 +11,15 @@ use App\Core\IAuthenticator;
 
 $hodnotenia = $data['Hodnotenie'];
 $trening = $data['Trening'];
+//$trening2 = null;
+//if($trening->getTopic === 'Ind_trening') {
+//    $trening2 = $data['Trening2'];
+//}
 
 ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!--<script type="text/javascript" src="public/js/ajaxHodnotenia.js"></script>-->
 
 <script>
     function convertDate($date) {
@@ -26,7 +32,27 @@ $trening = $data['Trening'];
         return newDate.toLocaleDateString('sk-SK', options);
     }
 
+    function submitHodnotenieCheck(){
+        console.log("hodnotenie");
+        var nickname = document.getElementById('nickname-id').value;
+        var text = document.getElementById('text-id').value;
+        var rating = getActiveCount();
 
+        if(!nickname || !text) {
+            document.getElementById("form-message").innerHTML = "Musis vyplnit aj meno aj text.";
+            return false;
+        }
+        if (rating === 0) {
+            document.getElementById("form-message").innerHTML = "Este oznac hviezdicky :).";
+            return false;
+        }
+        document.getElementById("form-message").innerHTML = "";
+        return true;
+
+    }
+
+
+    //GET hodnotenia AJAX
     $(document).ready(function() {
         console.log("Nacitane");
         var offset = 2;
@@ -75,7 +101,41 @@ $trening = $data['Trening'];
 
     });
 
+    //POST HODNOTENIE AJAX
+    <?php if($auth->isLogged()) { ?>
+    $(document).ready(function () {
+        console.log("???");
+        $('#hodnotenie-form').submit(function (e) {
+            e.preventDefault(); //Zakaze vo form action a metodu
+            var nickname = $('#nickname-id').val();
+            var text = $('#text-id').val();
+            var submitButton = $('#hodnotenie-submit').val();
+            var rating = getActiveCount();
+            if(submitHodnotenieCheck()) {
+                $.ajax({
+                    type: 'POST',
+                    url: '?c=Hodnotenie&a=saveReview',
+                    data: {
+                        nickname: nickname,
+                        email: '<?php echo $auth->getLoggedUserName(); ?>',
+                        text: text,
+                        rating: rating,
+                        topic: '<?php echo $trening->getTopic() ?>'
 
+                    },
+                    success: function (response) {
+                        if (response === "success") {
+                            //hande succesfull form submission
+                        } else {
+                            $('#form-message').html(response);
+                        }
+                    }
+                })
+            }
+
+        });
+    });
+    <?php } ?>
 
 </script>
 
@@ -116,10 +176,16 @@ $trening = $data['Trening'];
         <?php foreach ($hodnotenia as $hodnotenie) { ?>
             <div id="comments" >
             <div class="card my-2">
-                <div class="card-body">
+                <div class="card-body ">
                     <h5 class="card-title"><?php echo $hodnotenie->getNickname();?></h5>
                     <h6 class="card-subtitle mb-2 text-muted"><?php echo $hodnotenie->getDate();?></h6>
                     <p class="card-text"><?php echo $hodnotenie->getText(); ?></p>
+<!--                    --><?php //if($auth->isAdmin() || ($auth->getLoggedUserName() == $hodnotenie->getUserEmail())) { ?>
+<!--                    <div class="text-right hodnotenie-delete">-->
+<!--                        <a href="?c=rezervaciePriestor&a=delete&id=" class="btn btn-danger"><img alt="delete icon" src="../../../public/icons/trash.svg"></a>-->
+<!--                    </div>-->
+<!--                    --><?php //} ?>
+
                 </div>
             </div>
         <?php } ?>
@@ -136,12 +202,13 @@ $trening = $data['Trening'];
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-12 col-lg-10 col-xl-8">
                         <div class="card">
-                            <form method="post" action="?c=Hodnotenie&a=store">
+                            <form id="hodnotenie-form" method="post">
+<!--                            <form method="post" action="?c=Hodnotenie&a=store">-->
                                 <div class="card-body" >
                                     <div class="d-flex flex-start align-items-center">
                                         <div>
                                             <!--                                        --><?php //echo $auth->getLoggedUserName(); ?>
-                                            <input type="text" name="nickname" class="form-control" placeholder="Tvoje meno" required">
+                                            <input id="nickname-id" type="text" name="nickname" class="form-control" placeholder="Tvoje meno" required">
                                         </div>
                                     </div>
                                 </div>
@@ -150,15 +217,16 @@ $trening = $data['Trening'];
                                 <div class="card-footer py-3 border-0">
                                     <div class="d-flex flex-start w-100">
                                         <div class="form-outline w-100">
-                                        <textarea class="form-control" id="textAreaExample" rows="4"
+                                        <textarea class="form-control" id="text-id" rows="4"
                                                   style="background: #fff;" name="text"></textarea>
-                                            <label class="form-label" for="textAreaExample">Message</label>
+                                            <p id="form-message"></p>
+<!--                                            <label class="form-label" for="textAreaExample">Message</label>-->
                                         </div>
                                     </div>
 
                                     <div class="row align-items-center content mt-0">
                                         <div class="text-center col-md-6 float-end mt-2 pt-1  ">
-                                            <button type="submit" name="Odoslat" class="btn btn-dark btn-sm">Odoslať hodnotenie!</button>
+                                            <button id="hodnotenie-submit" type="submit" name="Odoslat" class="btn btn-dark btn-sm">Odoslať hodnotenie!</button>
                                         </div>
                                         <input type="hidden" id="hodnotenie" name="rating" value="0">
                                         <div class="text-center col-md-0 col-sm-0 mx-auto row align-items-center content mt-0">
