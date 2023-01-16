@@ -32,11 +32,13 @@
                     </div>
                     <div class="col-6 text-right">
                         <?php if ($auth->isLogged()) { ?>
+                            <form class="d-inline-block" method="post" action="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>">
+                                <button name="edit" value="edit" type="submit" class="btn btn-warning px-2"><i class="fa fa-pencil"></i></i></button>
+                            </form>
 
-                            <a href="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-warning"><img alt="edit icon" src="../../../public/icons/pencil-square.svg"></a>
-                        <form method="post" action="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>">
-                            <button name="delete" value="delete" type="submit" class="btn btn-danger px-3"><i class="fa fa-trash-o" ></i></button>
-<!--                            <a type="submit" href="?c=rezervaciePriestor&a=delete&id=--><?php //echo $rezervaciaPriestor->getId() ?><!--" class="btn btn-danger"><img alt="delete icon" src="../../../public/icons/trash.svg"></a>-->
+                        <form class="d-inline-block" method="post" action="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>">
+                            <button name="delete" value="delete" type="submit" class=" btn btn-danger px-2"><i class="fa fa-trash-o" ></i></button>
+
                         </form>
                         <?php } ?>
                     </div>
@@ -60,8 +62,14 @@
                         </div>
                         <div class="col-6 text-right">
                             <?php if ($auth->isLogged()) { ?>
-                                <a href="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-warning"><img  alt="edit icon" src="../../../public/icons/pencil-square.svg"></a>
-                                <a href="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-danger"><img alt="delete icon" src="../../../public/icons/trash.svg"></a>
+                                <form class="d-inline-block" method="post" action="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>">
+                                    <button name="edit" value="edit" type="submit" class="btn btn-warning px-2"><i class="fa fa-pencil"></i></i></button>
+                                </form>
+
+                                <form class="d-inline-block" method="post" action="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>">
+                                    <button name="delete" value="delete" type="submit" class=" btn btn-danger px-2"><i class="fa fa-trash-o" ></i></button>
+
+                                </form>
                             <?php } ?>
                         </div>
                     </div>
@@ -84,8 +92,14 @@
                         </div>
                         <div class="col-6 text-right">
                             <?php if ($auth->isLogged()) { ?>
-                                <a href="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-warning"><img alt="edit icon" src="../../../public/icons/pencil-square.svg"></a>
-                                <a href="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-danger"><img alt="delete icon" src="../../../public/icons/trash.svg"></a>
+                                <form class="d-inline-block" method="post" action="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>">
+                                    <button name="edit" value="edit" type="submit" class="btn btn-warning px-2"><i class="fa fa-pencil"></i></i></button>
+                                </form>
+
+                                <form class="d-inline-block" method="post" action="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>">
+                                    <button name="delete" value="delete" type="submit" class=" btn btn-danger px-2"><i class="fa fa-trash-o" ></i></button>
+
+                                </form>
                             <?php } ?>
                         </div>
                     </div>
@@ -108,8 +122,14 @@
                         </div>
                         <div class="col-6 text-right">
                             <?php if ($auth->isLogged()) { ?>
-                                <a href="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-warning"><img alt="edit icon" src="../../../public/icons/pencil-square.svg"></a>
-                                <a href="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-danger"><img alt="delete icon" src="../../../public/icons/trash.svg"></a>
+                                <form class="d-inline-block" method="post" action="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>">
+                                    <button name="edit" value="edit" type="submit" class="btn btn-warning px-2"><i class="fa fa-pencil"></i></i></button>
+                                </form>
+
+                                <form class="d-inline-block" method="post" action="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>">
+                                    <button name="delete" value="delete" type="submit" class=" btn btn-danger px-2"><i class="fa fa-trash-o" ></i></button>
+
+                                </form>
                             <?php } ?>
                         </div>
                     </div>
@@ -132,8 +152,14 @@
                         </div>
                         <div class="col-6 text-right">
                             <?php if ($auth->isLogged()) { ?>
-                                <a href="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-warning"><img alt="edit icon" src="../../../public/icons/pencil-square.svg"></a>
-                                <a href="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>" class="btn btn-danger"><img alt="delete icon" src="../../../public/icons/trash.svg"></a>
+                                <form class="d-inline-block" method="post" action="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>">
+                                    <button name="edit" value="edit" type="submit" class="btn btn-warning px-2"><i class="fa fa-pencil"></i></i></button>
+                                </form>
+
+                                <form class="d-inline-block" method="post" action="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>">
+                                    <button name="delete" value="delete" type="submit" class=" btn btn-danger px-2"><i class="fa fa-trash-o" ></i></button>
+
+                                </form>
                             <?php } ?>
                         </div>
                     </div>

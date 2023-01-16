@@ -17,6 +17,23 @@ class HodnotenieController extends AControllerBase
         return $this->html();
     }
 
+    public function delete() {
+        $deleteGet = $this->request()->getValue('delete');
+        $urlParam = $this->request()->getValue('urlParam');
+        if($deleteGet != null) {
+            $id = $this->request()->getValue('id');
+
+            $hodnotenieNaVymazanie = Hodnotenie::getOne($id);
+
+            //ak tam je tak ju vymazem
+            if($hodnotenieNaVymazanie) {
+                $hodnotenieNaVymazanie->delete();
+            }
+        }
+        $redirectValue = "?c=hodnotenie&a=$urlParam";
+        return $this->redirect($redirectValue);
+    }
+
     public function store() {
 
         //ak ma hodnotu id, tak editujem, inak vytvram novy post
@@ -48,7 +65,7 @@ class HodnotenieController extends AControllerBase
         $hodnotenia_ind_sku = Hodnotenie::getAll(whereClause: "topic = 'Ind_trening' OR topic = 'Sku_trening'", limit: 3, orderBy: 'date DESC');
         $trening_ind = Trening::getOne('1');
         //TODO dorobit aby som passol aj druhy trening a radiobutton pri submite hodnotenia podla toho aky trening
-        return $this->html(['Hodnotenie' => $hodnotenia_ind_sku, 'Trening' => $trening_ind],viewName: 'vsetkyTreningy');
+        return $this->html(['Hodnotenie' => $hodnotenia_ind_sku, 'Trening' => $trening_ind,'param' => "skupIndividTrening"],viewName: 'vsetkyTreningy');
     }
 
     public function silovyTrening(): Response
@@ -56,7 +73,7 @@ class HodnotenieController extends AControllerBase
         $topicWhere = "topic = 'Sil_trening'";
         $hodnotenia_silovy = Hodnotenie::getAll(whereClause: $topicWhere, limit: 3, orderBy: 'date DESC');
         $trening_silovy = Trening::getOne('3');
-        return $this->html(['Hodnotenie' => $hodnotenia_silovy,'Trening' => $trening_silovy],viewName: 'vsetkyTreningy');
+        return $this->html(['Hodnotenie' => $hodnotenia_silovy,'Trening' => $trening_silovy,'param' => "silovyTrening"],viewName: 'vsetkyTreningy');
     }
 
     public function kondicnyTrening(): Response
@@ -64,7 +81,7 @@ class HodnotenieController extends AControllerBase
         $topicWhere = "topic = 'Kon_trening'";
         $hodnotenia_silovy = Hodnotenie::getAll(whereClause: $topicWhere, limit: 3, orderBy: 'date DESC');
         $trening_silovy = Trening::getOne('4');
-        return $this->html(['Hodnotenie' => $hodnotenia_silovy,'Trening' => $trening_silovy],viewName: 'vsetkyTreningy');
+        return $this->html(['Hodnotenie' => $hodnotenia_silovy,'Trening' => $trening_silovy,'param' => "kondicnyTrening"],viewName: 'vsetkyTreningy');
     }
 
     public function funkcnyTrening(): Response
@@ -72,7 +89,7 @@ class HodnotenieController extends AControllerBase
         $topicWhere = "topic = 'Fun_trening'";
         $hodnotenia_silovy = Hodnotenie::getAll(whereClause: $topicWhere, limit: 3, orderBy: 'date DESC');
         $trening_silovy = Trening::getOne('5');
-        return $this->html(['Hodnotenie' => $hodnotenia_silovy,'Trening' => $trening_silovy],viewName: 'vsetkyTreningy');
+        return $this->html(['Hodnotenie' => $hodnotenia_silovy,'Trening' => $trening_silovy,'param' => "funkcnyTrening"],viewName: 'vsetkyTreningy');
     }
 
     public function getTwoMoreReviews():Response {

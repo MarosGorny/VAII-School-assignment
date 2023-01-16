@@ -8,9 +8,11 @@ use App\Core\IAuthenticator;
 /** @var $data */
 /** @var Hodnotenie[] $hodnotenia */
 /** @var Trening[] $hodnotenia */
+/** @var String $param_url */
 
 $hodnotenia = $data['Hodnotenie'];
 $trening = $data['Trening'];
+$param_url = $data['param'];
 //$trening2 = null;
 //if($trening->getTopic === 'Ind_trening') {
 //    $trening2 = $data['Trening2'];
@@ -51,60 +53,76 @@ $trening = $data['Trening'];
 
     }
 
+    var offset = 3;
+
+    function nacitajHodnotenia() {
+        $.ajax({
+            url: '?c=Hodnotenie&a=getTwoMoreReviews',
+            method: "GET",
+            data: {
+                count: offset,
+                topic: '<?php echo $trening->getTopic() ?>'
+            },
+            success: function (data) {
+                console.log(data);
+                console.log(data.length);
+                if(data.length !== 0) {
+                    data.forEach(element => {
+
+                        element.nickname = decodeURIComponent(escape(element.nickname));
+                        element.text = decodeURIComponent(escape(element.text));
+
+
+                        element.date = convertDate(element.date);
+
+
+                        $(
+                            '<div id="comments">\n' +
+                            '<div class="card my-2">\n' +
+                            '<div class="card-body">\n' +
+                            '<h5 class="card-title">' + element.nickname + '</h5>\n' +
+                            '<h6 class="card-subtitle mb-2 text-muted">' + element.date + '</h6>\n' +
+                            '<p class="card-text">' + element.text + '</p>\n' +
+                            '<div class="text-right hodnotenie-delete"> \n' +
+
+                            '<form method="post" action="?c=hodnotenie&a=delete&id='+ element.id + '"> \n' +
+                                '<button name="delete" value="delete" type="submit" class="btn btn-danger px-3"><i class="fa fa-trash-o" ></i></button>\n' +
+                                '<input type="hidden" id="trening-topic" name="topic" value="">' +
+                            '</form>\n' +
+                            '</div>\n' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>'
+                        ).insertBefore($('#show_more_comments'));
+                    });
+                    offset += data.length;
+                    if(data.length < 2) {
+                        document.getElementById("show_more_comments").style.display = "none";
+                    }
+                } else {
+                    document.getElementById("show_more_comments").style.display = "none";
+                }
+
+            }
+        })
+    }
+
+
+
 
     //GET hodnotenia AJAX
     $(document).ready(function() {
         console.log("Nacitane");
-        var offset = 3;
+
 
         $("#show_more_comments").click(function () {
-            console.log("kliknute");
-            console.log(offset)
-            $.ajax({
-                url: '?c=Hodnotenie&a=getTwoMoreReviews',
-                method: "GET",
-                data: {
-                    count: offset,
-                    topic: '<?php echo $trening->getTopic() ?>'
-                },
-                success: function (data) {
-                    console.log(data);
-                    console.log(data.length);
-                    if(data.length !== 0) {
-                        data.forEach(element => {
-
-                            element.nickname = decodeURIComponent(escape(element.nickname));
-                            element.text = decodeURIComponent(escape(element.text));
-
-
-                            element.date = convertDate(element.date);
-
-
-                            $(
-                                '<div id="comments">\n' +
-                                '<div class="card my-2">\n' +
-                                '<div class="card-body">\n' +
-                                '<h5 class="card-title">' + element.nickname + '</h5>\n' +
-                                '<h6 class="card-subtitle mb-2 text-muted">' + element.date + '</h6>\n' +
-                                '<p class="card-text">' + element.text + '</p>\n' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>'
-                            ).insertBefore($('#show_more_comments'));
-                        });
-                        offset += data.length;
-                        if(data.length < 2) {
-                            document.getElementById("show_more_comments").style.display = "none";
-                        }
-                    } else {
-                        document.getElementById("show_more_comments").style.display = "none";
-                    }
-
-                }
-            })
+            nacitajHodnotenia();
         });
 
     });
+
+
+
 
     //POST HODNOTENIE AJAX
     <?php if($auth->isLogged()) { ?>
@@ -131,7 +149,7 @@ $trening = $data['Trening'];
                         $('#nickname-id').val('');
                         $('#text-id').val('');
                         document.getElementById("form-message").innerHTML = "Hodnotenie sa odoslalo.";
-                        console.log(response);
+                        nacitajHodnotenia();
                         // if (response === "success") {
                         //     console.log("??");
                         //     $('#nickname-id').val('');
@@ -191,11 +209,19 @@ $trening = $data['Trening'];
                     <h5 class="card-title"><?php echo $hodnotenie->getNickname();?></h5>
                     <h6 class="card-subtitle mb-2 text-muted"><?php echo $hodnotenie->getDate();?></h6>
                     <p class="card-text"><?php echo $hodnotenie->getText(); ?></p>
-<!--                    --><?php //if($auth->isAdmin() || ($auth->getLoggedUserName() == $hodnotenie->getUserEmail())) { ?>
-<!--                    <div class="text-right hodnotenie-delete">-->
-<!--                        <a href="?c=rezervaciePriestor&a=delete&id=" class="btn btn-danger"><img alt="delete icon" src="../../../public/icons/trash.svg"></a>-->
-<!--                    </div>-->
-<!--                    --><?php //} ?>
+                    <?php if($auth->isAdmin() || ($auth->getLoggedUserName() == $hodnotenie->getUserEmail())) { ?>
+                    <div class="text-right hodnotenie-delete">
+                        <form method="post" action="?c=hodnotenie&a=edit&id=<?php echo $hodnotenie->getId() ?>">
+                            <button name="edit" value="edit" type="submit" class="btn btn-warning px-3"><i class="fa fa-pencil"></i></i></button>
+                            <input type="hidden" id="trening-urlParam" name="urlParam" value="<?php echo $param_url;?>">
+                        </form>
+
+                        <form method="post" action="?c=hodnotenie&a=delete&id=<?php echo $hodnotenie->getId() ?>">
+                            <button name="delete" value="delete" type="submit" class="btn btn-danger px-3"><i class="fa fa-trash-o" ></i></button>
+                            <input type="hidden" id="trening-urlParam" name="urlParam" value="<?php echo $param_url;?>">
+                        </form>
+                    </div>
+                    <?php } ?>
 
                 </div>
             </div>
