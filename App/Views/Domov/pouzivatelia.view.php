@@ -59,7 +59,7 @@ $pouzivatelia = $data['pouzivatelia'];
 
     $(document).ready(function () {
         //min dlzka na zacanie hladania
-        var minLength = 2;
+        var minLength = 1;
 
         $("#live_search").keyup(function() {
             //ked keyup, tak daj to textu
