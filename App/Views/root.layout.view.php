@@ -29,7 +29,7 @@ $actual_request_uri = $_SERVER["REQUEST_URI"];
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand ml-3 mb-auto ml-lg-auto " href="?c=domov">Body INN</a>
+            <a id="big-title" class="navbar-brand ml-3 mb-auto ml-lg-auto " href="?c=domov">Body INN</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -70,7 +70,7 @@ $actual_request_uri = $_SERVER["REQUEST_URI"];
 
                 <ul class="navbar-nav ml-3 mb-2 ml-lg-auto">
                     <?php if ($auth->isLogged()) { ?>
-                        <span class="navbar-text d-md-none d-lg-inline-flex"><b><?= $auth->getLoggedUserName();  ?> -</b></span>
+                        <span class="navbar-text d-md-none d-lg-inline-flex"><b id="loggedUsername"><?= $auth->getLoggedUserName();  ?> -</b></span>
                             <li class="nav-item ">
                                 <a class="nav-link" href="?c=auth&a=logout">Odhlásiť</a>
                             </li>

@@ -1,32 +1,30 @@
-<?php ///** @var Array $data */
+<?php
 
 use App\Models\Pouzivatel;
-///** @var App\Core\IAuthenticator $auth */
+
 /** @var Pouzivatel[] $data */
 
-//$pouzivatelia = $data['pouzivateliaHladat'];
 $pouzivatelia = $data['pouzivatelia'];
 ?>
 
 
-<section class="container-fluid px-0">
+<section class="container-fluid px-0 text-center" >
     <div class="row  justify-content-around mt-2">
-        <div class="text-center home-block">
-
+        <div class="text-center home-block pl-4 ml-md-3 ml-lg-0">
+            <h2> Všetci používatelia</h2>
             <ol class="list-group list-group-numbered">
-                <?php
-                foreach ($pouzivatelia as $pouzivatel) { ?>
-                    <li onchange="changeColor(this)" class="list-group-item"><?php echo $pouzivatel->getEmail();?>
-                        <select class="form-select form-select-sm pouzivatelia" id="pouzivatelia" aria-label=".form-select-sm example">
+                <?php foreach ($pouzivatelia as $pouzivatel) { ?>
+                    <li  class="list-group-item" data-pouzivatel-id="<?php echo $pouzivatel->getId(); ?>" ><?php echo "[". $pouzivatel->getId()."]" .$pouzivatel->getEmail();?>
+                        <select onclick="changeColor(this)" class="form-select form-select-sm pouzivatelia" id="pouzivatelia" aria-label=".form-select-sm example">
                             <?php
                             $array = array("Admin","Trener","Klient");
                             $userRole = $pouzivatel->getRole();
 
                             foreach ($array as $index=>$role) {
                                 if($role == $userRole) {
-                                    echo "<option value=\"$role\" selected>$role</option>";
+                                    echo "<option value='$role' selected>$role</option>";
                                 } else {
-                                    echo "<option value=\"$role\" >$role</option>";
+                                    echo "<option value='$role'>$role</option>";
                                 }
                             }
                             ?>
@@ -34,17 +32,15 @@ $pouzivatelia = $data['pouzivatelia'];
                     </li>
                 <?php  }?>
             </ol>
-            <button type="button" class="btn btn-success mt-2">Potvrdiť zmeny</button>
-
-
        </div>
-        <div class="text-left home-block top-0">
+        <div class="search-div text-left home-block ">
 
-            <input type="text" class="form-control top-0" id="live_search" autocomplete="off"
-                   placeholder="Search">
+            <input type="text" class="form-control top-0 mt-4 pt-sm-3 mt-md-0"  id="live_search" autocomplete="off"
+                   placeholder="Zadaj userId alebo email">
             <div id="searchresult"></div>
 
         </div>
+
 
     </div>
 
@@ -55,6 +51,9 @@ $pouzivatelia = $data['pouzivatelia'];
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
+
+
+
     var request = null;
 
     $(document).ready(function () {
@@ -79,6 +78,9 @@ $pouzivatelia = $data['pouzivatelia'];
                         data:{text:text},
 
                         success:function (data) {
+                            if (data.success) {
+
+                            }
 
                             if (text===$(oldValue).val()) {
                                 $("#searchresult").html(data);

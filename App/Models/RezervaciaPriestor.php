@@ -7,10 +7,13 @@ use App\Core\Model;
 class RezervaciaPriestor extends Model
 {
     protected $id;
+    protected $userID;
     protected $den;
     protected $zaciatok;
     protected $koniec;
     protected $date;
+    protected $nazov;
+
 
     /**
      * @return mixed
@@ -27,6 +30,23 @@ class RezervaciaPriestor extends Model
     {
         $this->id = $id;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUserID()
+    {
+        return $this->userID;
+    }
+
+    /**
+     * @param mixed $userID
+     */
+    public function setUserID($userID): void
+    {
+        $this->userID = $userID;
+    }
+
 
     /**
      * @return mixed
@@ -90,6 +110,22 @@ class RezervaciaPriestor extends Model
     public function setDate($date): void
     {
         $this->date = $date;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNazov()
+    {
+        return $this->nazov;
+    }
+
+    /**
+     * @param mixed $nazov
+     */
+    public function setNazov($nazov): void
+    {
+        $this->nazov = $nazov;
     }
 
 

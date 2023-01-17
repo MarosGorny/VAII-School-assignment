@@ -2,12 +2,14 @@
     use App\Models\RezervaciaPriestor;
     /** @var App\Core\IAuthenticator $auth */
     /** @var RezervaciaPriestor[] $data */
+    /** @var \App\Models\Pouzivatel[] $pouzivatela */
 
     $rezervacie_pondelok = $data['pondelok'];
     $rezervacie_utorok = $data['utorok'];
     $rezervacie_streda = $data['streda'];
     $rezervacie_stvrtok = $data['stvrtok'];
     $rezervacie_piatok = $data['piatok'];
+
 
 ?>
 
@@ -25,7 +27,7 @@
         <div class="card text-center my-3 ">
             <div class="card-body">
                 <p class="card-text text-left m-0" >
-                    <?php echo $rezervaciaPriestor->getDen() ?>
+                    <?php echo $rezervaciaPriestor->getNazov(); if($auth->isAdmin()) echo " [User: " . $rezervaciaPriestor->getUserID() . "]";   ?>
                 <div class="text-left row">
                     <div class="col-6">
                         <?php echo $rezervaciaPriestor->getZaciatok() .":00" . " - " . $rezervaciaPriestor->getKoniec() .":00" ?>
@@ -55,10 +57,10 @@
             <div class="card text-center my-3 ">
                 <div class="card-body">
                     <p class="card-text text-left m-0" >
-                        <?php echo $rezervaciaPriestor->getDen() ?>
+                        <?php echo $rezervaciaPriestor->getNazov() ?>
                     <div class="text-left row">
                         <div class="col-6">
-                            <?php echo $rezervaciaPriestor->getZaciatok() .":00" . " - " . $rezervaciaPriestor->getKoniec() .":00" ?>
+                            <?php echo $rezervaciaPriestor->getNazov(); if($auth->isAdmin()) echo " [User: " . $rezervaciaPriestor->getUserID() . "]";   ?>
                         </div>
                         <div class="col-6 text-right">
                             <?php if ($auth->isLogged()) { ?>
@@ -85,7 +87,7 @@
             <div class="card text-center my-3 ">
                 <div class="card-body">
                     <p class="card-text text-left m-0" >
-                        <?php echo $rezervaciaPriestor->getDen() ?>
+                        <?php echo $rezervaciaPriestor->getNazov(); if($auth->isAdmin()) echo " [User: " . $rezervaciaPriestor->getUserID() . "]";   ?>
                     <div class="text-left row">
                         <div class="col-6">
                             <?php echo $rezervaciaPriestor->getZaciatok() .":00" . " - " . $rezervaciaPriestor->getKoniec() .":00" ?>
@@ -115,7 +117,7 @@
             <div class="card text-center my-3 ">
                 <div class="card-body">
                     <p class="card-text text-left m-0" >
-                        <?php echo $rezervaciaPriestor->getDen() ?>
+                        <?php echo $rezervaciaPriestor->getNazov(); if($auth->isAdmin()) echo " [User: " . $rezervaciaPriestor->getUserID() . "]";   ?>
                     <div class="text-left row">
                         <div class="col-6">
                             <?php echo $rezervaciaPriestor->getZaciatok() .":00" . " - " . $rezervaciaPriestor->getKoniec() .":00" ?>
@@ -145,7 +147,7 @@
             <div class="card text-center my-3 ">
                 <div class="card-body">
                     <p class="card-text text-left m-0" >
-                        <?php echo $rezervaciaPriestor->getDen() ?>
+                        <?php echo $rezervaciaPriestor->getNazov(); if($auth->isAdmin()) echo " [User: " . $rezervaciaPriestor->getUserID() . "]";   ?>
                     <div class="text-left row">
                         <div class="col-6">
                             <?php echo $rezervaciaPriestor->getZaciatok() .":00" . " - " . $rezervaciaPriestor->getKoniec() .":00" ?>

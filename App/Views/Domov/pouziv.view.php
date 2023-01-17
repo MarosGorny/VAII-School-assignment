@@ -9,8 +9,8 @@ $pouzivateliaHladat = $data['pouzivateliaHladat'];
 <ol class="list-group list-group-numbered pt-4">
     <?php
     foreach ($pouzivateliaHladat as $pouzivatel) { ?>
-        <li onchange="changeColor(this)" class="list-group-item"><?php echo $pouzivatel->getEmail();?>
-            <select class="form-select form-select-sm pouzivatelia" id="pouzivatelia" aria-label=".form-select-sm example">
+        <li  class="list-group-item" data-pouzivatel-id="<?php echo $pouzivatel->getId(); ?>" ><?php echo "[". $pouzivatel->getId()."]" .$pouzivatel->getEmail();?>
+            <select onclick="changeColor(this)"  class="form-select form-select-sm pouzivatelia" id="pouzivatelia" aria-label=".form-select-sm example">
                 <?php
                 $array = array("Admin","Trener","Klient");
                 $userRole = $pouzivatel->getRole();

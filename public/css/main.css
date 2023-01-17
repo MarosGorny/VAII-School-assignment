@@ -214,6 +214,9 @@ div.form-group label {
     }
 }
 
+/*#loggedUsername {*/
+/*    display: none;*/
+/*}*/
 
 @media (max-width: 1200px) {
     #headingGroup h1 {
@@ -232,6 +235,18 @@ div.form-group label {
 
     .container-star .star a{
         font-size: 1.5rem;
+    }
+
+    #loggedUsername {
+        display: none;
+    }
+    #big-title {
+        display: none;
+    }
+
+    .search-div {
+        width: 70%;
+        padding-left: 3%;
     }
 }
 

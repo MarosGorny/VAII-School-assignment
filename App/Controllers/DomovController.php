@@ -71,14 +71,42 @@ class DomovController extends AControllerBase
             $input = $this->request()->getValue('text');
 
             //vytiahnut vsetky rezervacie
-            $pouzivateliaHladat = Pouzivatel::getAll(whereClause: "email LIKE '{$input}%'",orderBy: "email");
+            $pouzivateliaHladat = Pouzivatel::getAll(whereClause: "email LIKE '{$input}%' OR id LIKE'{$input}%'",orderBy: "email");
             if(empty($pouzivateliaHladat)) {
                 echo "<h6 class='text-danger text-center mt-3'>Ziadne data sa nenasli</h6>";?><?php
+            }
+
+            if(!empty($pouzivateliaHladat)) {
+                return $this->html(['pouzivateliaHladat' => $pouzivateliaHladat]);
+            } else {
+                return $this->json(['success' => false]);
             }
         }
 
         return $this->html(['pouzivateliaHladat' => $pouzivateliaHladat]);
+    }
+
+    public function changeRole(): Response {
+        $pouzivateliaHladat = null;
 
 
+        if($this->request()->isAjax()) {
+            $userId = $this->request()->getValue('pouzivatel_id');
+            $role = $this->request()->getValue('role');
+
+            if($role != null && $userId != null) {
+                $whereClause = "email = '$userId'";
+                $pouzivatel = Pouzivatel::getOne($userId);
+
+                $pouzivatel->setRole($role);
+                $pouzivatel->save();
+                return $this->json(['success' => true,'message' => "Používateľská rola zmenená"]);
+
+            }
+
+            return $this->json(['success' => false]);
+        }
+
+        return $this->html(['pouzivateliaHladat' => $pouzivateliaHladat]);
     }
 }

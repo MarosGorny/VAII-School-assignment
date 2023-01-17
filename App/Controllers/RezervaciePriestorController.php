@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
+use App\Models\Pouzivatel;
 use App\Models\RezervaciaPriestor;
 
 class RezervaciePriestorController extends AControllerBase
@@ -35,8 +36,10 @@ class RezervaciePriestorController extends AControllerBase
         $rezervacie_streda = RezervaciaPriestor::getAll(whereClause: "den = 'Streda'");
         $rezervacie_stvrtok = RezervaciaPriestor::getAll(whereClause: "den = 'Stvrtok'");
         $rezervacie_piatok = RezervaciaPriestor::getAll(whereClause: "den = 'Piatok'");
+        $pouzivatelia = Pouzivatel::getAll();
         return $this->html(['pondelok' => $rezervacie_pondelok,'utorok' => $rezervacie_utorok , 'streda' => $rezervacie_streda,
-            'stvrtok' => $rezervacie_stvrtok, 'piatok' => $rezervacie_piatok
+            'stvrtok' => $rezervacie_stvrtok, 'piatok' => $rezervacie_piatok,
+            'pouzivatela' => $pouzivatelia
         ]);
     }
 
