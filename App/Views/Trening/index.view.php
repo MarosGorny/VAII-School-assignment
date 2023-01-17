@@ -1,12 +1,16 @@
 <?php
 /** @var App\Core\IAuthenticator $auth */
 /** @var App\Models\Trening[] $data */
+/** @var App\Models\Trening[] $treningy */
 
 $trening1 = null;
 
+$treningy = array(null);
+
 foreach ($data as $trening) {
-    if ($trening->getTopic() == "Ind_trening")
-        $trening1 = $trening;
+    $treningy[] = $trening;
+//    if ($trening->getTopic() == "Ind_trening")
+//        $trening1 = $trening;
 }
 
 ?>
@@ -41,37 +45,8 @@ foreach ($data as $trening) {
 
 
                     <h2 class="mb-0 pb-0 ">Skupinové tréningy</h2>
-                    <p class="pt-0 mt-0"> <small>Počet prihlasených: <span id="obsadenostPocetDisplay">
-                            <?php echo $trening1->getAktualnyPocet();  ?> </span> / <span id="obsadenostMaxKapacitaDisplay">
-                            <?php echo $trening1->getMaximalnaKapacita(); ?>
-                        </span> </small>
-                    </p>
 
 
-                    <?php if ($auth->isLogged()) { ?>
-                        <div class="text-right">
-                            <a class="btn btn-success" href="javascript:void(0);" id="add1Button" role="button">+1</a>
-                            <a class="btn btn-danger" href="javascript:void(0);" id="minus1Button" role="button">-1</a>
-                            <a class="btn btn-warning" href="javascript:void(0);" id="reset" role="button">Vynuluj</a>
-                        </div>
-                        <div class="text-right py-1">
-                            <label for="maxKapacitaInput">Maximalna kapacita:</label>
-                            <input type="number" id="maxKapacitaInput" value="" min="0" max="20">
-                        </div>
-                        <div class="text-right">
-                            <form method="post" action="?c=trening&a=update">
-                                <input type="hidden" id="trening1" name="id" value="1">
-                                <input type="hidden" id="pocet1" name="pocet" value="NOT_SET">
-                                <input type="hidden" id="kapacita1" name="kapacita" value="NOT_SET">
-                                <input class="btn btn-success" id="aktualizujTrening1"  value="Potvrd zmenu" type="submit" name="aktualizuj">
-                            </form>
-                        </div>
-
-
-
-
-
-                    <?php } ?>
                     <p class="lead">Individuálne tréningy s naším trénerom si viete dohodnúť aj ako skupinka.</p>
                     <h2>Samostatné individuálne tréningy</h2>
                     <p class="lead">Výhodou pri osobných tréningoch je, že v priestore sa nachádzate iba vy a tréner.</p>
@@ -95,6 +70,32 @@ foreach ($data as $trening) {
             <div class="row justify-content-center ">
                 <div class="col-10 col-lg-8 mb-0 home-page-text">
                     <h2>Silove treningy</h2>
+                    <p class="pt-0 mt-0"> <small>Počet prihlasených: <span id="obsadenostPocetDisplay">
+                            <?php echo $treningy[3]->getAktualnyPocet();  ?> </span> / <span id="obsadenostMaxKapacitaDisplay">
+                            <?php echo $treningy[3]->getMaximalnaKapacita(); ?>
+                        </span> </small>
+                    </p>
+
+
+                    <?php if ($auth->isAdmin() ) { ?>
+                        <div class="text-right">
+                            <a class="btn btn-success" href="javascript:void(0);" id="add1Button" role="button">+1</a>
+                            <a class="btn btn-danger" href="javascript:void(0);" id="minus1Button" role="button">-1</a>
+                            <a class="btn btn-warning" href="javascript:void(0);" id="reset" role="button">Vynuluj</a>
+                        </div>
+                        <div class="text-right py-1">
+                            <label for="maxKapacitaInput">Maximalna kapacita:</label>
+                            <input type="number" id="maxKapacitaInput" value="<?php echo $treningy[3]->getMaximalnaKapacita() ?>" min="0" max="20">
+                        </div>
+                        <div class="text-right">
+                            <form method="post" action="?c=trening&a=update">
+                                <input type="hidden" id="trening" name="id" value="3">
+                                <input type="hidden" id="pocet" name="pocet" value="NOT_SET">
+                                <input type="hidden" id="kapacita" name="kapacita" value="NOT_SET">
+                                <input class="btn btn-success" id="aktualizujTrening"  value="Potvrd zmenu" type="submit" name="aktualizuj">
+                            </form>
+                        </div>
+                    <?php } ?>
                     <p class="lead">Silove treningy su vyborne na nabratie sily a zvacsanie svalov.</p>
                 </div>
                 <a class="btn btn-secondary btn-lg btn-block rounded-0" href="#" role="button">Prihlásiť sa</a>
@@ -114,6 +115,32 @@ foreach ($data as $trening) {
             <div class="row justify-content-center">
                 <div class="col-10 col-lg-8  mb-0 home-block home-page-text">
                     <h2>Kondicne treningy</h2>
+                    <p class="pt-0 mt-0"> <small>Počet prihlasených: <span id="obsadenostPocetDisplay">
+                            <?php echo $treningy[4]->getAktualnyPocet();  ?> </span> / <span id="obsadenostMaxKapacitaDisplay">
+                            <?php echo $treningy[4]->getMaximalnaKapacita(); ?>
+                        </span> </small>
+                    </p>
+
+
+                    <?php if ($auth->isAdmin()) { ?>
+                        <div class="text-right">
+                            <a class="btn btn-success" href="javascript:void(0);" id="add1Button" role="button">+1</a>
+                            <a class="btn btn-danger" href="javascript:void(0);" id="minus1Button" role="button">-1</a>
+                            <a class="btn btn-warning" href="javascript:void(0);" id="reset" role="button">Vynuluj</a>
+                        </div>
+                        <div class="text-right py-1">
+                            <label for="maxKapacitaInput">Maximalna kapacita:</label>
+                            <input type="number" id="maxKapacitaInput" value="<?php echo $treningy[4]->getMaximalnaKapacita() ?>" min="0" max="20">
+                        </div>
+                        <div class="text-right">
+                            <form method="post" action="?c=trening&a=update">
+                                <input type="hidden" id="trening" name="id" value="4">
+                                <input type="hidden" id="pocet" name="pocet" value="NOT_SET">
+                                <input type="hidden" id="kapacita" name="kapacita" value="NOT_SET">
+                                <input class="btn btn-success" id="aktualizujTrening"  value="Potvrd zmenu" type="submit" name="aktualizuj">
+                            </form>
+                        </div>
+                    <?php } ?>
                     <p class="lead">Kondicne treningy su vhodne na chudnutie, rysovanie tela alebo zlepsenie si kondicky.</p>
                 </div>
                 <a class="btn btn-secondary btn-lg btn-block rounded-0" href="#" role="button">Prihlásiť sa</a>
@@ -134,6 +161,32 @@ foreach ($data as $trening) {
             <div class="row justify-content-center ">
                 <div class="col-10 col-lg-8 mb-0 home-page-text">
                     <h2>Funkcne treningy</h2>
+                    <p class="pt-0 mt-0"> <small>Počet prihlasených: <span id="obsadenostPocetDisplay">
+                            <?php echo $treningy[5]->getAktualnyPocet();  ?> </span> / <span id="obsadenostMaxKapacitaDisplay">
+                            <?php echo $treningy[5]->getMaximalnaKapacita(); ?>
+                        </span> </small>
+                    </p>
+
+
+                    <?php if ($auth->isAdmin()) { ?>
+                        <div class="text-right">
+                            <a class="btn btn-success" href="javascript:void(0);" id="add1Button" role="button">+1</a>
+                            <a class="btn btn-danger" href="javascript:void(0);" id="minus1Button" role="button">-1</a>
+                            <a class="btn btn-warning" href="javascript:void(0);" id="reset" role="button">Vynuluj</a>
+                        </div>
+                        <div class="text-right py-1">
+                            <label for="maxKapacitaInput">Maximalna kapacita:</label>
+                            <input type="number" id="maxKapacitaInput" value="<?php echo $treningy[5]->getMaximalnaKapacita() ?>" min="0" max="20">
+                        </div>
+                        <div class="text-right">
+                            <form method="post" action="?c=trening&a=update">
+                                <input type="hidden" id="trening" name="id" value="5">
+                                <input type="hidden" id="pocet" name="pocet" value="NOT_SET">
+                                <input type="hidden" id="kapacita" name="kapacita" value="NOT_SET">
+                                <input class="btn btn-success" id="aktualizujTrening"  value="Potvrd zmenu" type="submit" name="aktualizuj">
+                            </form>
+                        </div>
+                    <?php } ?>
                     <p class="lead">Funkcne treningy sluzia na lepsiu stabilitu a koordinaciu celeho tela.</p>
                 </div>
                 <a class="btn btn-secondary btn-lg btn-block rounded-0" href="#" role="button">Prihlásiť sa</a>

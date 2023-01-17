@@ -1,66 +1,86 @@
 
+    const buttonsAdd = document.querySelectorAll('#add1Button');
+    const buttonMinus = document.querySelectorAll('#minus1Button');
+    const buttonsRest = document.querySelectorAll('#reset');
 
-    const add1Button = document.querySelector('#add1Button');
-    const minus1Button = document.querySelector('#minus1Button');
-    const resetButton = document.querySelector('#reset');
-    const obsadenostDisplay = document.querySelector('#obsadenostPocetDisplay');
-    const kapacitaDisplay = document.querySelector('#obsadenostMaxKapacitaDisplay');
-    const maxKapacitaInput = document.querySelector('#maxKapacitaInput');
-    const trening1 = document.querySelector('#aktualizujTrening1');
+    const inputsMaxKapacity = document.querySelectorAll('#maxKapacitaInput');
 
-    let obsadenost = Number(obsadenostDisplay.textContent);
-    let maxKapacita = Number(kapacitaDisplay.textContent);
-    let jePlny;
-    let jePrazdny;
+    const submitButtons = document.querySelectorAll('#aktualizujTrening');
 
-    updateStates();
 
-    add1Button.addEventListener("click", function () {
-        if (!jePlny) {
-            obsadenost += 1;
-            jePrazdny = false;
-            if (obsadenost >= maxKapacita) {
-                jePlny = true;
+    buttonsAdd.forEach(button => {
+        button.addEventListener("click", function () {
+            var closestParent = this.parentElement.parentElement;
+            var obsadenostPocet = closestParent.querySelector("#obsadenostPocetDisplay");
+            var kapacitaPocet = closestParent.querySelector("#obsadenostMaxKapacitaDisplay");
+
+
+
+            if (parseInt(obsadenostPocet.innerHTML) < parseInt(kapacitaPocet.innerHTML)) {
+                obsadenostPocet.innerHTML = parseInt(obsadenostPocet.innerHTML) + 1;
+                if(parseInt(obsadenostPocet.innerHTML) >= parseInt(kapacitaPocet.innerHTML)) {
+                    obsadenostPocet.classList.add("plnyTrening");
+                    kapacitaPocet.classList.add("plnyTrening");
+                } else {
+                    obsadenostPocet.classList.remove("plnyTrening");
+                    kapacitaPocet.classList.remove("plnyTrening");
+                }
             }
-        }
-        updateStates()
-    })
+        })
+    });
 
-    minus1Button.addEventListener("click", function () {
-        if (!jePrazdny) {
-            obsadenost -= 1;
-            jePlny = false;
-            if (obsadenost <= 0) {
-                jePrazdny = true;
+    buttonMinus.forEach(button => {
+        button.addEventListener("click", function () {
+            var closestParent = this.parentElement.parentElement;
+            var obsadenostPocet = closestParent.querySelector("#obsadenostPocetDisplay");
+            var kapacitaPocet = closestParent.querySelector("#obsadenostMaxKapacitaDisplay");
+
+            if (parseInt(obsadenostPocet.innerHTML) > 0) {
+                obsadenostPocet.innerHTML = parseInt(obsadenostPocet.innerHTML) - 1;
+                if(parseInt(obsadenostPocet.innerHTML) < parseInt(kapacitaPocet.innerHTML) ) {
+                    obsadenostPocet.classList.remove("plnyTrening");
+                    kapacitaPocet.classList.remove("plnyTrening");
+                }
+
             }
-        }
-        updateStates()
-    })
+        })
+    });
 
-    maxKapacitaInput.addEventListener('change', function () {
-        maxKapacita = parseInt(this.value);
-        if (maxKapacita >= 0 && maxKapacita <= 20) {
-            kapacitaDisplay.textContent = maxKapacita;
-        }
+    buttonsRest.forEach(button => {
+        button.addEventListener('click', function () {
+            var closestParent = this.parentElement.parentElement;
+            var obsadenostPocet = closestParent.querySelector("#obsadenostPocetDisplay");
+            var kapacitaPocet = closestParent.querySelector("#obsadenostMaxKapacitaDisplay");
 
-    })
 
-    function updateStates() {
-        if (maxKapacitaInput) {
-            maxKapacitaInput.value = Number(kapacitaDisplay.textContent);
-        }
+            obsadenostPocet.innerHTML = '0';
+            obsadenostPocet.classList.remove("plnyTrening");
+            kapacitaPocet.classList.remove("plnyTrening");
+        })
+    });
 
-        obsadenostDisplay.textContent = obsadenost;
-        if (obsadenost <= 0) {
-            jePrazdny = true;
-            removeColors();
-        } else if (obsadenost >= maxKapacita) {
-            jePlny = true;
-            addRedColor();
-        } else {
-            removeColors()
-        }
-    }
+    inputsMaxKapacity.forEach( input => {
+        input.addEventListener('change', function () {
+            var closestParent = this.parentElement.parentElement;
+            var obsadenostPocet = closestParent.querySelector("#obsadenostPocetDisplay");
+            var kapacitaPocet = closestParent.querySelector("#obsadenostMaxKapacitaDisplay");
+
+            var maxKapacita = parseInt(this.value);
+            if (maxKapacita >= 0 && maxKapacita <= 20) {
+                kapacitaPocet.textContent = maxKapacita;
+            }
+            if(parseInt(obsadenostPocet.innerHTML) >= parseInt(kapacitaPocet.innerHTML) ) {
+                obsadenostPocet.classList.add("plnyTrening");
+                kapacitaPocet.classList.add("plnyTrening");
+            } else {
+                obsadenostPocet.classList.remove("plnyTrening");
+                kapacitaPocet.classList.remove("plnyTrening");
+            }
+
+
+        })
+    });
+
 
     function removeColors() {
         obsadenostDisplay.classList.remove("plnyTrening");
@@ -72,14 +92,7 @@
         kapacitaDisplay.classList.add("plnyTrening");
     }
 
-    resetButton.addEventListener('click', function () {
-        jePrazdny = true;
-        jePlny = false;
-        obsadenost = 0;
-        obsadenostDisplay.textContent = obsadenost;
-        obsadenostDisplay.classList.remove("plnyTrening");
-        kapacitaDisplay.classList.remove("plnyTrening");
-    })
+
 
 
     function updateTraining() {
@@ -88,18 +101,19 @@
         alert(pocet);
     }
 
-    trening1.addEventListener('click', function () {
-        let pocet = document.getElementById("obsadenostPocetDisplay").innerHTML;
-        let maxKapacita = document.getElementById('obsadenostMaxKapacitaDisplay').innerHTML;
-        document.getElementById("pocet1").value = pocet;
-        document.getElementById("kapacita1").value = maxKapacita;
-        document.getElementById('maxKapacita').value = maxKapacita;
-    })
+    submitButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            var closestParent = this.parentElement.parentElement.parentElement;
+            var obsadenostPocet = closestParent.querySelector("#obsadenostPocetDisplay");
+            var kapacitaPocet = closestParent.querySelector("#obsadenostMaxKapacitaDisplay");
+            var hiddenInputPocet = closestParent.querySelector("#pocet");
+            var hiddenInputKapacita = closestParent.querySelector("#kapacita");
 
-    trening1.addEventListener('submit', function () {
-        let pocet = document.getElementById("obsadenostPocetDisplay").innerHTML;
-        document.getElementById("pocet1").value = pocet;
-        alert(pocet);
-    })
+            hiddenInputPocet.value = parseInt(obsadenostPocet.innerHTML);
+            hiddenInputKapacita.value = parseInt(kapacitaPocet.innerHTML);
+
+        })
+    });
+
 
 

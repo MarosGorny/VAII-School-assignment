@@ -29,7 +29,7 @@ class TreningController extends AControllerBase
 
     public function index(): Response
     {
-        $trenings = Trening::getAll();
+        $trenings = Trening::getAll(orderBy: 'id');
         if ($trenings == null) {
             // TODO Treba osetrit
             return $this->redirect("?c=trening");
@@ -40,8 +40,8 @@ class TreningController extends AControllerBase
 
     public function update() {
 
-        $topic = $this->request()->getValue('topic');
-        $postToEdit = Trening::getOne($topic); //zislo by sa dorobit, ze co ak mi id neexistuje?
+        $id = $this->request()->getValue('id');
+        $postToEdit = Trening::getOne($id); //zislo by sa dorobit, ze co ak mi id neexistuje?
 
         if ($postToEdit == null) {
             return $this->redirect("?c=trening");

@@ -114,6 +114,10 @@ $actual_request_uri = $_SERVER["REQUEST_URI"];
 <div class="container-fluid">
     <div class="web-content">
         <?= $contentHTML ?>
+        <div id="arrow-up">
+            <i class="fa fa-arrow-up"></i>
+        </div>
+        <div id="time"></div>
     </div>
 </div>
 
@@ -147,6 +151,7 @@ $actual_request_uri = $_SERVER["REQUEST_URI"];
 <script src="../../public/js/obsadenost.js" type="application/javascript"></script>
 <script src="../../public/js/rating.js" type="application/javascript"></script>
 <script src="../../public/js/ajaxHodnotenia.js" type="application/javascript"></script>
+<script src="../../public/js/smallWidgets.js" type="application/javascript"></script>
 
 </body>
 </html>
