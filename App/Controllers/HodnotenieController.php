@@ -108,33 +108,40 @@ class HodnotenieController extends AControllerBase
 
     public function skupIndividTrening(): Response
     {
-        $hodnotenia_ind_sku = Hodnotenie::getAll(whereClause: "topic = 'Ind_trening' OR topic = 'Sku_trening'", limit: 3, orderBy: 'date DESC');
-        $trening_ind = Trening::getOne('1');
+        $ind = 1;
+        $sku = 2;
+
+
+        $hodnotenia_ind_sku = Hodnotenie::getAll(whereClause: "treningID = '$ind' OR treningID = '$sku'", limit: 3, orderBy: 'date DESC');
+        $trening_ind = Trening::getOne($ind);
         //TODO dorobit aby som passol aj druhy trening a radiobutton pri submite hodnotenia podla toho aky trening
         return $this->html(['Hodnotenie' => $hodnotenia_ind_sku, 'Trening' => $trening_ind,'param' => "skupIndividTrening"],viewName: 'vsetkyTreningy');
     }
 
     public function silovyTrening(): Response
     {
-        $topicWhere = "topic = 'Sil_trening'";
+        $sil = 3;
+        $topicWhere = "treningId = '$sil'";
         $hodnotenia_silovy = Hodnotenie::getAll(whereClause: $topicWhere, limit: 3, orderBy: 'date DESC');
-        $trening_silovy = Trening::getOne('3');
+        $trening_silovy = Trening::getOne($sil);
         return $this->html(['Hodnotenie' => $hodnotenia_silovy,'Trening' => $trening_silovy,'param' => "silovyTrening"],viewName: 'vsetkyTreningy');
     }
 
     public function kondicnyTrening(): Response
     {
-        $topicWhere = "topic = 'Kon_trening'";
+        $kon = 4;
+        $topicWhere = "treningId = '$kon'";
         $hodnotenia_silovy = Hodnotenie::getAll(whereClause: $topicWhere, limit: 3, orderBy: 'date DESC');
-        $trening_silovy = Trening::getOne('4');
+        $trening_silovy = Trening::getOne($kon);
         return $this->html(['Hodnotenie' => $hodnotenia_silovy,'Trening' => $trening_silovy,'param' => "kondicnyTrening"],viewName: 'vsetkyTreningy');
     }
 
     public function funkcnyTrening(): Response
     {
-        $topicWhere = "topic = 'Fun_trening'";
+        $fun = 4;
+        $topicWhere = "treningId = '$fun'";
         $hodnotenia_silovy = Hodnotenie::getAll(whereClause: $topicWhere, limit: 3, orderBy: 'date DESC');
-        $trening_silovy = Trening::getOne('5');
+        $trening_silovy = Trening::getOne($fun);
         return $this->html(['Hodnotenie' => $hodnotenia_silovy,'Trening' => $trening_silovy,'param' => "funkcnyTrening"],viewName: 'vsetkyTreningy');
     }
 
@@ -142,8 +149,8 @@ class HodnotenieController extends AControllerBase
 
         if($this->request()->isAjax()) {
             $count = $this->request()->getValue('count');
-            $topic = $this->request()->getValue('topic');
-            $topicWhere = "topic = '$topic'";
+            $id = $this->request()->getValue('id');
+            $topicWhere = "treningId = '$id'";
             return $this->json(Hodnotenie::getAll( whereClause: $topicWhere,limit: 2,offset: $count,orderBy: "date DESC"));
         } else {
             return $this->json(Hodnotenie::getAll(orderBy: "date DESC"));
@@ -151,7 +158,7 @@ class HodnotenieController extends AControllerBase
     }
 
     public function saveReview(): Response {
-        $topic = $this->request()->getValue('topic');
+        $id = $this->request()->getValue('id');
         if($this->request()->isAjax()) {
 
             $nickname = $this->request()->getValue('nickname');
@@ -162,21 +169,18 @@ class HodnotenieController extends AControllerBase
 
             $whereClause = "email = '$userEmail'";
             $userID = Pouzivatel::getAll(whereClause: $whereClause);
-            $whereClause = "topic = '$topic'";
-            $treningID = Trening::getAll(whereClause: $whereClause);
+            $treningID = Trening::getOne($id);
 
 
-            $id = $this->request()->getValue('id');
 
             $hodnotenie = new Hodnotenie();
 
             $hodnotenie->setUserID($userID[0]->getId());
-            $hodnotenie->setTreningID($treningID[0]->getId());
+            $hodnotenie->setTreningID($treningID->getId());
             $hodnotenie->setNickname($nickname);
             $hodnotenie->setUserEmail($userEmail);
             $hodnotenie->setText($text);
             $hodnotenie->setRating($rating);
-            $hodnotenie->setTopic($topic);
             $hodnotenie->setDate(date("Y-m-d"));
 
             $hodnotenie->save();

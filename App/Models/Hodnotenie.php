@@ -82,21 +82,6 @@ class Hodnotenie extends Model
         //$this->text = $text;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getUserEmail()
-    {
-        return $this->userEmail;
-    }
-
-    /**
-     * @param mixed $userEmail
-     */
-    public function setUserEmail($userEmail): void
-    {
-        $this->userEmail = $userEmail;
-    }
 
     /**
      * @return mixed

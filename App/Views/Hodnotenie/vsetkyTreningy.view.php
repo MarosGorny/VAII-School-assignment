@@ -55,7 +55,7 @@ $param_url = $data['param'];
             method: "GET",
             data: {
                 count: offset,
-                topic: '<?php echo $trening->getTopic() ?>'
+                id: '<?php echo $trening->getId() ?>'
             },
             success: function (data) {
 
@@ -139,7 +139,7 @@ $param_url = $data['param'];
                         email: '<?php echo $auth->getLoggedUserName(); ?>',
                         text: text,
                         rating: rating,
-                        topic: '<?php echo $trening->getTopic() ?>'
+                        id: '<?php echo $trening->getId() ?>'
                     },
                     success: function (response) {
                         $('#nickname-id').val('');
