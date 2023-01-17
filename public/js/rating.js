@@ -23,7 +23,6 @@ function changeColor(element) {
                     role: newRole
                 },
                 success: function (response) {
-                    console.log(response);
                     $("[data-pouzivatel-id=" + pouzivatelId + "] select").val(newRole);
                 }
             });

@@ -1,76 +1,83 @@
 <?php
-    use App\Models\RezervaciaPriestor;
-    /** @var App\Core\IAuthenticator $auth */
-    /** @var RezervaciaPriestor[] $data */
-    /** @var \App\Models\Pouzivatel[] $pouzivatela */
 
-    $rezervacie_pondelok = $data['pondelok'];
-    $rezervacie_utorok = $data['utorok'];
-    $rezervacie_streda = $data['streda'];
-    $rezervacie_stvrtok = $data['stvrtok'];
-    $rezervacie_piatok = $data['piatok'];
+use App\Models\RezervaciaPriestor;
 
+/** @var App\Core\IAuthenticator $auth */
+/** @var RezervaciaPriestor[] $data */
+/** @var \App\Models\Pouzivatel[] $pouzivatela */
 
+$rezervacie_pondelok = $data['pondelok'];
+$rezervacie_utorok = $data['utorok'];
+$rezervacie_streda = $data['streda'];
+$rezervacie_stvrtok = $data['stvrtok'];
+$rezervacie_piatok = $data['piatok'];
 ?>
 
 
-<div class="row" >
+<div class="row">
     <div class="col-xl-1 col-lg-1 col-md-12 col-12 ">
         <?php if ($auth->isLogged()) { ?>
             <a href="?c=rezervaciePriestor&a=create" class="btn btn-success mt-2">Vytvor rezervaciu</a>
-        <?php }?>
+        <?php } ?>
     </div>
     <div class="col-xl-2 col-lg-5 col-md-6 col-sm-12">
         <h1 class="text-center mt-2">PONDELOK</h1>
         <?php
-        foreach($rezervacie_pondelok as $rezervaciaPriestor) { ?>
-        <div class="card text-center my-3 ">
-            <div class="card-body">
-                <p class="card-text text-left m-0" >
-                    <?php echo $rezervaciaPriestor->getNazov(); if($auth->isAdmin()) echo " [User: " . $rezervaciaPriestor->getUserID() . "]";   ?>
-                <div class="text-left row">
-                    <div class="col-6">
-                        <?php echo $rezervaciaPriestor->getZaciatok() .":00" . " - " . $rezervaciaPriestor->getKoniec() .":00" ?>
-                    </div>
-                    <div class="col-6 text-right">
-                        <?php if ($auth->isLogged()) { ?>
-                            <form class="d-inline-block" method="post" action="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>">
-                                <button name="edit" value="edit" type="submit" class="btn btn-warning px-2"><i class="fa fa-pencil"></i></i></button>
-                            </form>
-
-                        <form class="d-inline-block" method="post" action="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>">
-                            <button name="delete" value="delete" type="submit" class=" btn btn-danger px-2"><i class="fa fa-trash-o" ></i></button>
-
-                        </form>
-                        <?php } ?>
+        foreach ($rezervacie_pondelok as $rezervaciaPriestor) { ?>
+            <div class="card text-center my-3 ">
+                <div class="card-body">
+                    <p class="card-text text-left m-0">
+                        <?php echo $rezervaciaPriestor->getNazov();
+                        if ($auth->isAdmin()) echo " [User: " . $rezervaciaPriestor->getUserID() . "]"; ?>
+                    <div class="text-left row">
+                        <div class="col-6">
+                            <?php echo $rezervaciaPriestor->getZaciatok() . ":00" . " - " . $rezervaciaPriestor->getKoniec() . ":00" ?>
+                        </div>
+                        <div class="col-6 text-right">
+                            <?php if ($auth->isLogged()) { ?>
+                                <form class="d-inline-block" method="post"
+                                      action="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>">
+                                    <button name="edit" value="edit" type="submit" class="btn btn-warning px-2"><i
+                                                class="fa fa-pencil"></i></i></button>
+                                </form>
+                                <form class="d-inline-block" method="post"
+                                      action="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>">
+                                    <button name="delete" value="delete" type="submit" class=" btn btn-danger px-2"><i
+                                                class="fa fa-trash-o"></i></button>
+                                </form>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         <?php } ?>
     </div>
 
     <div class="col-xl-2 col-lg-5 col-md-6 col-sm-12">
         <h1 class="text-center mt-2">UTOROK</h1>
         <?php
-        foreach($rezervacie_utorok as $rezervaciaPriestor) { ?>
+        foreach ($rezervacie_utorok as $rezervaciaPriestor) { ?>
             <div class="card text-center my-3 ">
                 <div class="card-body">
-                    <p class="card-text text-left m-0" >
+                    <p class="card-text text-left m-0">
                         <?php echo $rezervaciaPriestor->getNazov() ?>
                     <div class="text-left row">
                         <div class="col-6">
-                            <?php echo $rezervaciaPriestor->getNazov(); if($auth->isAdmin()) echo " [User: " . $rezervaciaPriestor->getUserID() . "]";   ?>
+                            <?php echo $rezervaciaPriestor->getNazov();
+                            if ($auth->isAdmin()) echo " [User: " . $rezervaciaPriestor->getUserID() . "]"; ?>
                         </div>
                         <div class="col-6 text-right">
                             <?php if ($auth->isLogged()) { ?>
-                                <form class="d-inline-block" method="post" action="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>">
-                                    <button name="edit" value="edit" type="submit" class="btn btn-warning px-2"><i class="fa fa-pencil"></i></i></button>
+                                <form class="d-inline-block" method="post"
+                                      action="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>">
+                                    <button name="edit" value="edit" type="submit" class="btn btn-warning px-2"><i
+                                                class="fa fa-pencil"></i></i></button>
                                 </form>
 
-                                <form class="d-inline-block" method="post" action="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>">
-                                    <button name="delete" value="delete" type="submit" class=" btn btn-danger px-2"><i class="fa fa-trash-o" ></i></button>
-
+                                <form class="d-inline-block" method="post"
+                                      action="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>">
+                                    <button name="delete" value="delete" type="submit" class=" btn btn-danger px-2"><i
+                                                class="fa fa-trash-o"></i></button>
                                 </form>
                             <?php } ?>
                         </div>
@@ -83,24 +90,28 @@
     <div class="col-xl-2 col-lg-5 offset-lg-1 offset-xl-0 col-md-6 col-sm-12">
         <h1 class="text-center mt-2">STREDA</h1>
         <?php
-        foreach($rezervacie_streda as $rezervaciaPriestor) { ?>
+        foreach ($rezervacie_streda as $rezervaciaPriestor) { ?>
             <div class="card text-center my-3 ">
                 <div class="card-body">
-                    <p class="card-text text-left m-0" >
-                        <?php echo $rezervaciaPriestor->getNazov(); if($auth->isAdmin()) echo " [User: " . $rezervaciaPriestor->getUserID() . "]";   ?>
+                    <p class="card-text text-left m-0">
+                        <?php echo $rezervaciaPriestor->getNazov();
+                        if ($auth->isAdmin()) echo " [User: " . $rezervaciaPriestor->getUserID() . "]"; ?>
                     <div class="text-left row">
                         <div class="col-6">
-                            <?php echo $rezervaciaPriestor->getZaciatok() .":00" . " - " . $rezervaciaPriestor->getKoniec() .":00" ?>
+                            <?php echo $rezervaciaPriestor->getZaciatok() . ":00" . " - " . $rezervaciaPriestor->getKoniec() . ":00" ?>
                         </div>
                         <div class="col-6 text-right">
                             <?php if ($auth->isLogged()) { ?>
-                                <form class="d-inline-block" method="post" action="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>">
-                                    <button name="edit" value="edit" type="submit" class="btn btn-warning px-2"><i class="fa fa-pencil"></i></i></button>
+                                <form class="d-inline-block" method="post"
+                                      action="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>">
+                                    <button name="edit" value="edit" type="submit" class="btn btn-warning px-2"><i
+                                                class="fa fa-pencil"></i></i></button>
                                 </form>
 
-                                <form class="d-inline-block" method="post" action="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>">
-                                    <button name="delete" value="delete" type="submit" class=" btn btn-danger px-2"><i class="fa fa-trash-o" ></i></button>
-
+                                <form class="d-inline-block" method="post"
+                                      action="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>">
+                                    <button name="delete" value="delete" type="submit" class=" btn btn-danger px-2"><i
+                                                class="fa fa-trash-o"></i></button>
                                 </form>
                             <?php } ?>
                         </div>
@@ -113,24 +124,28 @@
     <div class="col-xl-2 col-lg-5 col-md-6 col-sm-12">
         <h1 class="text-center mt-2">STVRTOK</h1>
         <?php
-        foreach($rezervacie_stvrtok as $rezervaciaPriestor) { ?>
+        foreach ($rezervacie_stvrtok as $rezervaciaPriestor) { ?>
             <div class="card text-center my-3 ">
                 <div class="card-body">
-                    <p class="card-text text-left m-0" >
-                        <?php echo $rezervaciaPriestor->getNazov(); if($auth->isAdmin()) echo " [User: " . $rezervaciaPriestor->getUserID() . "]";   ?>
+                    <p class="card-text text-left m-0">
+                        <?php echo $rezervaciaPriestor->getNazov();
+                        if ($auth->isAdmin()) echo " [User: " . $rezervaciaPriestor->getUserID() . "]"; ?>
                     <div class="text-left row">
                         <div class="col-6">
-                            <?php echo $rezervaciaPriestor->getZaciatok() .":00" . " - " . $rezervaciaPriestor->getKoniec() .":00" ?>
+                            <?php echo $rezervaciaPriestor->getZaciatok() . ":00" . " - " . $rezervaciaPriestor->getKoniec() . ":00" ?>
                         </div>
                         <div class="col-6 text-right">
                             <?php if ($auth->isLogged()) { ?>
-                                <form class="d-inline-block" method="post" action="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>">
-                                    <button name="edit" value="edit" type="submit" class="btn btn-warning px-2"><i class="fa fa-pencil"></i></i></button>
+                                <form class="d-inline-block" method="post"
+                                      action="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>">
+                                    <button name="edit" value="edit" type="submit" class="btn btn-warning px-2"><i
+                                                class="fa fa-pencil"></i></i></button>
                                 </form>
 
-                                <form class="d-inline-block" method="post" action="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>">
-                                    <button name="delete" value="delete" type="submit" class=" btn btn-danger px-2"><i class="fa fa-trash-o" ></i></button>
-
+                                <form class="d-inline-block" method="post"
+                                      action="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>">
+                                    <button name="delete" value="delete" type="submit" class=" btn btn-danger px-2"><i
+                                                class="fa fa-trash-o"></i></button>
                                 </form>
                             <?php } ?>
                         </div>
@@ -143,24 +158,28 @@
     <div class="col-xl-2 col-lg-10 offset-lg-1 offset-xl-0 col-md-12 col-sm-12">
         <h1 class="text-center mt-2">PIATOK</h1>
         <?php
-        foreach($rezervacie_piatok as $rezervaciaPriestor) { ?>
+        foreach ($rezervacie_piatok as $rezervaciaPriestor) { ?>
             <div class="card text-center my-3 ">
                 <div class="card-body">
-                    <p class="card-text text-left m-0" >
-                        <?php echo $rezervaciaPriestor->getNazov(); if($auth->isAdmin()) echo " [User: " . $rezervaciaPriestor->getUserID() . "]";   ?>
+                    <p class="card-text text-left m-0">
+                        <?php echo $rezervaciaPriestor->getNazov();
+                        if ($auth->isAdmin()) echo " [User: " . $rezervaciaPriestor->getUserID() . "]"; ?>
                     <div class="text-left row">
                         <div class="col-6">
-                            <?php echo $rezervaciaPriestor->getZaciatok() .":00" . " - " . $rezervaciaPriestor->getKoniec() .":00" ?>
+                            <?php echo $rezervaciaPriestor->getZaciatok() . ":00" . " - " . $rezervaciaPriestor->getKoniec() . ":00" ?>
                         </div>
                         <div class="col-6 text-right">
                             <?php if ($auth->isLogged()) { ?>
-                                <form class="d-inline-block" method="post" action="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>">
-                                    <button name="edit" value="edit" type="submit" class="btn btn-warning px-2"><i class="fa fa-pencil"></i></i></button>
+                                <form class="d-inline-block" method="post"
+                                      action="?c=rezervaciePriestor&a=edit&id=<?php echo $rezervaciaPriestor->getId() ?>">
+                                    <button name="edit" value="edit" type="submit" class="btn btn-warning px-2"><i
+                                                class="fa fa-pencil"></i></i></button>
                                 </form>
 
-                                <form class="d-inline-block" method="post" action="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>">
-                                    <button name="delete" value="delete" type="submit" class=" btn btn-danger px-2"><i class="fa fa-trash-o" ></i></button>
-
+                                <form class="d-inline-block" method="post"
+                                      action="?c=rezervaciePriestor&a=delete&id=<?php echo $rezervaciaPriestor->getId() ?>">
+                                    <button name="delete" value="delete" type="submit" class=" btn btn-danger px-2"><i
+                                                class="fa fa-trash-o"></i></button>
                                 </form>
                             <?php } ?>
                         </div>
@@ -169,8 +188,6 @@
             </div>
         <?php } ?>
     </div>
-
-
 </div>
 
 

@@ -13,15 +13,10 @@ use App\Core\IAuthenticator;
 $hodnotenia = $data['Hodnotenie'];
 $trening = $data['Trening'];
 $param_url = $data['param'];
-//$trening2 = null;
-//if($trening->getTopic === 'Ind_trening') {
-//    $trening2 = $data['Trening2'];
-//}
 
 ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<!--<script type="text/javascript" src="public/js/ajaxHodnotenia.js"></script>-->
 
 <script>
     function convertDate($date) {
@@ -34,13 +29,12 @@ $param_url = $data['param'];
         return newDate.toLocaleDateString('sk-SK', options);
     }
 
-    function submitHodnotenieCheck(){
-        console.log("hodnotenie");
+    function submitHodnotenieCheck() {
         var nickname = document.getElementById('nickname-id').value;
         var text = document.getElementById('text-id').value;
         var rating = getActiveCount();
 
-        if(!nickname || !text) {
+        if (!nickname || !text) {
             document.getElementById("form-message").innerHTML = "Musis vyplnit aj meno aj text.";
             return false;
         }
@@ -64,9 +58,8 @@ $param_url = $data['param'];
                 topic: '<?php echo $trening->getTopic() ?>'
             },
             success: function (data) {
-                console.log(data);
-                console.log(data.length);
-                if(data.length !== 0) {
+
+                if (data.length !== 0) {
                     data.forEach(element => {
 
                         element.nickname = decodeURIComponent(escape(element.nickname));
@@ -74,7 +67,6 @@ $param_url = $data['param'];
 
 
                         element.date = convertDate(element.date);
-
 
                         let $comments = $(`
                             <div id="comments">
@@ -95,34 +87,27 @@ $param_url = $data['param'];
                                 </div>
                             </div>
                         `);
-                        if(!$zhora) {
+                        if (!$zhora) {
                             $comments.insertBefore($('#show_more_comments'));
                         } else {
                             $comments.insertAfter($('#hodnotenia-header'));
                         }
 
-
                     });
                     offset += data.length;
-                    if(data.length < 2) {
+                    if (data.length < 2) {
                         document.getElementById("show_more_comments").style.display = "none";
                     }
                 } else {
                     document.getElementById("show_more_comments").style.display = "none";
                 }
-
             }
         })
     }
 
 
-
-
     //GET hodnotenia AJAX
-    $(document).ready(function() {
-        console.log("Nacitane");
-
-
+    $(document).ready(function () {
         $("#show_more_comments").click(function () {
             nacitajHodnotenia();
         });
@@ -130,26 +115,22 @@ $param_url = $data['param'];
     });
 
     function vymazRating() {
-
         stars.forEach((star) => {
             star.classList.remove('active');
         })
-
     }
-
-
 
 
     //POST HODNOTENIE AJAX
     <?php if($auth->isLogged()) { ?>
     $(document).ready(function () {
         $('#hodnotenie-form').submit(function (e) {
-            e.preventDefault(); //Zakaze vo form action a metodu
+            e.preventDefault();
             var nickname = $('#nickname-id').val();
             var text = $('#text-id').val();
             var submitButton = $('#hodnotenie-submit').val();
             var rating = getActiveCount();
-            if(submitHodnotenieCheck()) {
+            if (submitHodnotenieCheck()) {
                 $.ajax({
                     type: 'POST',
                     url: '?c=Hodnotenie&a=saveReview',
@@ -166,7 +147,6 @@ $param_url = $data['param'];
                         vymazRating();
                         document.getElementById("form-message").innerHTML = "Hodnotenie sa odoslalo.";
                         nacitajHodnotenia();
-                        //location.reload();
                     }
                 })
             }
@@ -197,13 +177,14 @@ $param_url = $data['param'];
                 <div class="col-10 col-lg-8  mb-5 mb-md-0 home-block home-page-text">
                     <?php if ($trening->getTopic() == 'Ind_trening' || $trening->getTopic() == 'Sku_trening') { ?>
                         <h1>Samostatné individuálne tréningy tréning</h1>
-                        <p class="lead">Výhodou pri osobných tréningoch je, že v priestore sa nachádzate iba vy a tréner.</p>
+                        <p class="lead">Výhodou pri osobných tréningoch je, že v priestore sa nachádzate iba vy a
+                            tréner.</p>
                         <h1>Skupinové tréningy</h1>
                         <p class="lead">Individuálne tréningy s naším trénerom si viete dohodnúť aj ako skupina.</p>
                     <?php } else { ?>
-                        <h1><?php echo  $trening->getNazov() ?></h1>
-                        <p class="lead"><?php echo  $trening->getOpis() ?></p>
-                    <?php }?>
+                        <h1><?php echo $trening->getNazov() ?></h1>
+                        <p class="lead"><?php echo $trening->getOpis() ?></p>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -214,39 +195,42 @@ $param_url = $data['param'];
     </div>
 
     <div id="comments">
-        <?php if(!empty($hodnotenia)) { ?>
-            <?php foreach ($hodnotenia as $hodnotenie) { ?>
-                <div class="card my-2">
-                    <div class="card-body ">
-                        <h5 class="card-title nickname-text"><?php echo $hodnotenie->getNickname();?></h5>
-                        <h6 class="card-subtitle mb-2 text-muted"><?php echo $hodnotenie->getDate();?></h6>
-                        <p class="card-text comment-text" data-id="<?php echo $hodnotenie->getId();?>"><?php echo $hodnotenie->getText(); ?></p>
-                        <?php if($auth->isAdmin() || ($auth->isLogged() && ($auth->getLoggedUserName() == $hodnotenie->getUserEmail()))) { ?>
-                            <div class="text-right hodnotenie-delete">
-                                <button class="btn btn-warning px-3 edit-comment"><i class="fa fa-pencil"></i></i></button>
-                                <button class="btn btn-danger px-3 delete-comment-btn"><i class="fa fa-trash-o" ></i></button>
-                            </div>
-                        <?php } ?>
-                    </div>
+        <?php if (!empty($hodnotenia)) { ?>
+        <?php foreach ($hodnotenia as $hodnotenie) { ?>
+            <div class="card my-2">
+                <div class="card-body ">
+                    <h5 class="card-title nickname-text"><?php echo $hodnotenie->getNickname(); ?></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><?php echo $hodnotenie->getDate(); ?></h6>
+                    <p class="card-text comment-text"
+                       data-id="<?php echo $hodnotenie->getId(); ?>"><?php echo $hodnotenie->getText(); ?></p>
+                    <?php if ($auth->isAdmin() || ($auth->isLogged() && ($auth->getLoggedUserName() == $hodnotenie->getUserEmail()))) { ?>
+                        <div class="text-right hodnotenie-delete">
+                            <button class="btn btn-warning px-3 edit-comment"><i class="fa fa-pencil"></i></i></button>
+                            <button class="btn btn-danger px-3 delete-comment-btn"><i class="fa fa-trash-o"></i>
+                            </button>
+                        </div>
+                    <?php } ?>
                 </div>
-            <?php } ?>
             </div>
-    <a id="show_more_comments" class="infobtn mb-2 btn btn-outline-secondary btn-lg btn-block rounded-0"role="button">Načítaj viac hodnotení</a>
-        <?php } else { ?>
-            <p> Zatiaľ žiadne hodnotenia!</p>
         <?php } ?>
+    </div>
+    <a id="show_more_comments" class="infobtn mb-2 btn btn-outline-secondary btn-lg btn-block rounded-0" role="button">Načítaj
+        viac hodnotení</a>
+    <?php } else { ?>
+        <p> Zatiaľ žiadne hodnotenia!</p>
+    <?php } ?>
     </div>
 
     <script>
-        $(document).on('click', '.edit-comment', function() {
+        $(document).on('click', '.edit-comment', function () {
             var button = $(this);
             var commentId = $(this).closest('.card-body').find('.comment-text').data('id');
             var currentComment = $(this).closest('.card-body').find('.comment-text').text();
             var currentNickname = $(this).closest('.card-body').find('.nickname-text').text();
             var newNickname = prompt("Edit nickname:", currentNickname);
-            if(newNickname != null && newNickname.length > 0) {
+            if (newNickname != null && newNickname.length > 0) {
                 var newComment = prompt("Edit comment:", currentComment);
-                if (newComment != null ) {
+                if (newComment != null) {
                     $.ajax({
                         type: "POST",
                         url: "?c=hodnotenie&a=edit&id=" + commentId,
@@ -255,7 +239,7 @@ $param_url = $data['param'];
                             newNickname: newNickname,
                             commentId: commentId
                         },
-                        success: function(response) {
+                        success: function (response) {
                             button.closest('.card-body').find('.comment-text').text(newComment);
                             button.closest('.card-body').find('.nickname-text').text(newNickname);
                         }
@@ -265,8 +249,8 @@ $param_url = $data['param'];
 
         });
 
-        $(document).ready(function(){
-            $('.delete-comment-btn').on('click', function() {
+        $(document).ready(function () {
+            $('.delete-comment-btn').on('click', function () {
                 var commentId = $(this).closest('.card-body').find('.comment-text').data('id');
                 if (isNaN(commentId) || commentId <= 0) {
                     alert("Nespravne ID hodnotenia.");
@@ -279,12 +263,12 @@ $param_url = $data['param'];
                 $.ajax({
                     url: "?c=hodnotenie&a=delete&id=" + commentId,
                     type: 'DELETE',
-                    data: { },
-                    success: function(response) {
-                        if(response.success){
+                    data: {},
+                    success: function (response) {
+                        if (response.success) {
                             alert(response.message);
                             $(self).closest('.card').remove();
-                        }else{
+                        } else {
                             alert(response.message);
                         }
                     }
@@ -300,12 +284,13 @@ $param_url = $data['param'];
                     <div class="col-md-12 col-lg-10 col-xl-8">
                         <div class="card">
                             <form id="hodnotenie-form" method="post">
-<!--                            <form method="post" action="?c=Hodnotenie&a=store">-->
-                                <div class="card-body" >
+                                <!--                            <form method="post" action="?c=Hodnotenie&a=store">-->
+                                <div class="card-body">
                                     <div class="d-flex flex-start align-items-center">
                                         <div>
                                             <!--                                        --><?php //echo $auth->getLoggedUserName(); ?>
-                                            <input id="nickname-id" type="text" name="nickname" class="form-control" placeholder="Tvoje meno" required">
+                                            <input id="nickname-id" type="text" name="nickname" class="form-control"
+                                                   placeholder="Tvoje meno" required">
                                         </div>
                                     </div>
                                 </div>
@@ -317,18 +302,19 @@ $param_url = $data['param'];
                                         <textarea class="form-control" id="text-id" rows="4"
                                                   style="background: #fff;" name="text"></textarea>
                                             <p id="form-message"></p>
-<!--                                            <label class="form-label" for="textAreaExample">Message</label>-->
                                         </div>
                                     </div>
 
                                     <div class="row align-items-center content mt-0">
                                         <div class="text-center col-md-6 float-end mt-2 pt-1  ">
-                                            <button id="hodnotenie-submit" type="submit" name="Odoslat" class="btn btn-dark btn-sm">Odoslať hodnotenie!</button>
+                                            <button id="hodnotenie-submit" type="submit" name="Odoslat"
+                                                    class="btn btn-dark btn-sm">Odoslať hodnotenie!
+                                            </button>
                                         </div>
                                         <input type="hidden" id="hodnotenie" name="rating" value="0">
                                         <div class="text-center col-md-0 col-sm-0 mx-auto row align-items-center content mt-0">
                                             <div class="container-star">
-                                                <div class ="star">
+                                                <div class="star">
                                                     <a href="#bottom" class="bi-star-fill offset-2 col-2"></a>
                                                     <a href="#bottom" class="bi-star-fill col-2"></a>
                                                     <a href="#bottom" class="bi-star-fill col-2"></a>
@@ -345,14 +331,8 @@ $param_url = $data['param'];
                     </div>
                 </div>
             </div>
-
-
-
         </section>
-    <?php }?>
-
-
-
-    <a id="bottom"></a>,
+    <?php } ?>
+    <a id="bottom"></a>
 </section>
 
