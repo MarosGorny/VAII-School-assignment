@@ -30,7 +30,9 @@ class TreningController extends AControllerBase
     }
 
 
-
+    /**
+     * Vráti všetky tréningy, používateľov a aj prihlasených používateľov na tréningy
+     */
     public function index(): Response
     {
         $data[] = Trening::getAll(orderBy: 'id');
@@ -43,6 +45,10 @@ class TreningController extends AControllerBase
         return $this->html($data);
     }
 
+    /**
+     * AJAX
+     * Zmeni aktuálny počet a maximálnu kapacitu tréningu podľa parametrov ktoré boli odoslané v POST requeste
+     */
     public function update() {
 
         $id = $this->request()->getValue('id');
@@ -57,6 +63,10 @@ class TreningController extends AControllerBase
         return $this->redirect("?c=trening");
     }
 
+    /**
+     * AJAX
+     * Odhlásanie z trénngu
+     */
     public function odhlasSa() : Response {
         if($this->request()->isAjax()) {
             $treningId = $this->request()->getValue('training_id');
@@ -91,6 +101,10 @@ class TreningController extends AControllerBase
         }
     }
 
+    /**
+     * AJAX
+     * Prihlásenie na tréning
+     */
     public function prihlasSa() : Response {
         if($this->request()->isAjax()) {
             $treningId = $this->request()->getValue('training_id');
@@ -128,10 +142,5 @@ class TreningController extends AControllerBase
         } else {
             return $this->index();
         }
-
     }
-
-
-
-
 }

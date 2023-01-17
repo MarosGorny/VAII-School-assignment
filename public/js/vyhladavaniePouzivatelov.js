@@ -1,5 +1,8 @@
+/**
+ * AJAX
+ * Live vyhľadávanie používateľov
+ */
 var request = null;
-
 $(document).ready(function () {
     var minLength = 1;
     $("#live_search").keyup(function () {
@@ -27,8 +30,6 @@ $(document).ready(function () {
                             $("#searchresult").html(data);
                         }
                     }
-
-
                 })
                 console.log(request);
             }

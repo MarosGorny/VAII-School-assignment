@@ -44,6 +44,10 @@ class RezervaciePriestorController extends AControllerBase
         ]);
     }
 
+    /**
+     * Upraví a uloží rezerváciu do databázy podľa údajov ktoré boli poslané cez POST request
+     * Pokiaľ rezervácia neexistuje, vytvorí sa nová
+     */
     public function store() {
 
         //ak ma hodnotu id, tak editujem, inak vytvram novy post
@@ -76,6 +80,9 @@ class RezervaciePriestorController extends AControllerBase
 
     }
 
+    /**
+     * Vymaže rezerváciu podľa ID ktoré bolo poslané cez POST request
+     */
     public function delete() {
 
         $deleteGet = $this->request()->getValue('delete');
@@ -93,8 +100,10 @@ class RezervaciePriestorController extends AControllerBase
         return $this->redirect("?c=rezervaciePriestor");
     }
 
+    /**
+     * Presmeruje na formulár v ktorom sa upraví rezervácia
+     */
     public function edit() {
-        //najprv si musim post vytiahnut
 
         if($this->request()->getValue('edit') == null) {
             return $this->redirect("?c=rezervaciePriestor");
@@ -111,6 +120,9 @@ class RezervaciePriestorController extends AControllerBase
         return $this->html(['rezervacia' => $rezervaciaNaEdit,'sprava' => null], viewName: 'create.form');
     }
 
+    /**
+     * Vytvorí rezerváciu a presmeruje na formulár v ktorom sa doplnia údaje o rezervácii
+     */
     public function create() {
         return $this->html(['rezervacia' => new RezervaciaPriestor(),'sprava' => null],viewName: 'create.form');
     }

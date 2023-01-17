@@ -6,12 +6,18 @@ $(document).ready(function () {
 
 });
 
+/**
+ * Vymže všetky aktívne hviezdičky z formulára na hodnotenia
+ */
 function vymazRating() {
     stars.forEach((star) => {
         star.classList.remove('active');
     })
 }
 
+/**
+ * Formátuje dátum do SK formátu
+ */
 function convertDate($date) {
     var newDate = new Date($date);
     var options = {
@@ -22,6 +28,9 @@ function convertDate($date) {
     return newDate.toLocaleDateString('sk-SK', options);
 }
 
+/**
+ * Kontrola vstupov pri vypplnaní formulára na hodnotenie
+ */
 function submitHodnotenieCheck() {
     var nickname = document.getElementById('nickname-id').value;
     var text = document.getElementById('text-id').value;
@@ -40,6 +49,10 @@ function submitHodnotenieCheck() {
 
 }
 
+/**
+ * AJAX
+ * Upravovanie hodnotenia
+ */
 $(document).on('click', '.edit-comment', function () {
     var button = $(this);
     var commentId = $(this).closest('.card-body').find('.comment-text').data('id');
@@ -67,6 +80,10 @@ $(document).on('click', '.edit-comment', function () {
 
 });
 
+/**
+ * AJAX
+ * Vymazanie hodnotenia
+ */
 $(document).ready(function () {
     $('.delete-comment-btn').on('click', function () {
         var commentId = $(this).closest('.card-body').find('.comment-text').data('id');

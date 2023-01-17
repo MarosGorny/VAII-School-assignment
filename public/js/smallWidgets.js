@@ -14,14 +14,18 @@
     });
 
 
+    /**
+     * Ukázanie času, ktorý každú hodinu ukáže "GYM O'CLOCK"
+     */
     function displayTime() {
         var currentTime = new Date();
         var hours = currentTime.getHours();
         var minutes = currentTime.getMinutes();
         var seconds = currentTime.getSeconds();
 
-        if (seconds === 0) {
-            document.getElementById("time").innerHTML = "GYM TIME";
+
+        if (seconds === 0 && minutes === 0) {
+            document.getElementById("time").innerHTML = "🔥GYM O'CLOCK🔥";
             document.getElementById("time").classList.add("zoom");
         } else {
             if (seconds < 10) {

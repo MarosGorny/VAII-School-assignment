@@ -28,15 +28,20 @@ class HodnotenieController extends AControllerBase
         return $this->html();
     }
 
+    /**
+     * AJAX
+     * Upraví nickname a text hodnotenia a uloží do databázy
+     * V POST requeste dostal, nový nick, nový koment, a ID hodnotenia
+     */
     public function edit() {
 
         if($this->request()->isAjax()) {
             $newNickname = $this->request()->getValue('newNickname');
             $newComment = $this->request()->getValue('newComment');
-            $commentId = $this->request()->getValue('commentId');
+            $hodnotenieID = $this->request()->getValue('commentId');
 
             if($newComment != null && $newNickname != null) {
-                $hodnotenie = Hodnotenie::getOne($commentId);
+                $hodnotenie = Hodnotenie::getOne($hodnotenieID);
                 $hodnotenie->setText($newComment);
                 $hodnotenie->setNickname($newNickname);
                 $hodnotenie->save();
@@ -48,10 +53,12 @@ class HodnotenieController extends AControllerBase
 
             return $this->json($response);
         }
-
-
     }
 
+    /**
+     * AJAX
+     * Vymaže hodnotenie podľa ID ktoré dostalo v POST requeste
+     */
     public function delete() {
 
         if($this->request()->isAjax()) {
@@ -86,6 +93,9 @@ class HodnotenieController extends AControllerBase
         }
     }
 
+    /**
+     * Ak je id NULL upraví hodnotenie, ak nie je, tak vytvorí nové
+     */
     public function store() {
 
         //ak ma hodnotu id, tak editujem, inak vytvram novy post
@@ -106,6 +116,9 @@ class HodnotenieController extends AControllerBase
     }
 
 
+    /**
+     * Vráti 3 hodnotenia o skupinových a individuálnych tréningoch
+     */
     public function skupIndividTrening(): Response
     {
         $ind = 1;
@@ -118,6 +131,9 @@ class HodnotenieController extends AControllerBase
         return $this->html(['Hodnotenie' => $hodnotenia_ind_sku, 'Trening' => $trening_ind,'param' => "skupIndividTrening"],viewName: 'vsetkyTreningy');
     }
 
+    /**
+     * Vráti 3 hodnotenia o silových tréningoch
+     */
     public function silovyTrening(): Response
     {
         $sil = 3;
@@ -127,6 +143,9 @@ class HodnotenieController extends AControllerBase
         return $this->html(['Hodnotenie' => $hodnotenia_silovy,'Trening' => $trening_silovy,'param' => "silovyTrening"],viewName: 'vsetkyTreningy');
     }
 
+    /**
+     * Vráti 3 hodnotenia o kondičných tréningoch
+     */
     public function kondicnyTrening(): Response
     {
         $kon = 4;
@@ -136,6 +155,9 @@ class HodnotenieController extends AControllerBase
         return $this->html(['Hodnotenie' => $hodnotenia_silovy,'Trening' => $trening_silovy,'param' => "kondicnyTrening"],viewName: 'vsetkyTreningy');
     }
 
+    /**
+     * Vráti 3 hodnotenia o funkčných tréningoch
+     */
     public function funkcnyTrening(): Response
     {
         $fun = 5;
@@ -145,18 +167,26 @@ class HodnotenieController extends AControllerBase
         return $this->html(['Hodnotenie' => $hodnotenia_silovy,'Trening' => $trening_silovy,'param' => "funkcnyTrening"],viewName: 'vsetkyTreningy');
     }
 
+    /**
+     * AJAX
+     * Vráti ďalšie dve hodnotenia podľa offsetu a podľa typu tréningu
+     */
     public function getTwoMoreReviews():Response {
 
         if($this->request()->isAjax()) {
             $count = $this->request()->getValue('count');
             $id = $this->request()->getValue('id');
-            $topicWhere = "treningId = '$id'";
-            return $this->json(Hodnotenie::getAll( whereClause: $topicWhere,limit: 2,offset: $count,orderBy: "date DESC"));
+            $where = "treningId = '$id'";
+            return $this->json(Hodnotenie::getAll( whereClause: $where,limit: 2,offset: $count,orderBy: "date DESC"));
         } else {
             return $this->json(Hodnotenie::getAll(orderBy: "date DESC"));
         }
     }
 
+    /**
+     * AJAX
+     * Uloží hodnotenie do databázy podľa údajov ktoré boli poslané cez POST request
+     */
     public function saveReview(): Response {
         $id = $this->request()->getValue('id');
         if($this->request()->isAjax()) {

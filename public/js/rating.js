@@ -1,5 +1,9 @@
 
-
+/**
+ * AJAX
+ * Ak používateľ(admin) klikne na zmenu role, zmení sa farba a aj daná rola
+ *
+ */
 function changeColor(element) {
 
     var initialRole = $(element).val();
@@ -37,8 +41,10 @@ function changeColor(element) {
 var stars = document.querySelectorAll('.star a');
 var submitBtn = document.querySelector('#hodnotenie');
 
-//nastavi vsetky hviezdy evenlistnere click
-//
+
+/**
+ * Po označení hviezdičky vo formulári, označí tiež všetky hviezdy ktoré sú pred ňou
+ */
 stars.forEach((item,index1) => {
     item.addEventListener('click',() => {
         stars.forEach((star, index2) => {
@@ -49,6 +55,9 @@ stars.forEach((item,index1) => {
     }
 )
 
+/**
+ * Vráti počet zaznačených hviezdičiek v hodnotení
+ */
 function getActiveCount() {
     return document.querySelectorAll('.active').length;
 }

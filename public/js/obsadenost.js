@@ -8,6 +8,10 @@
     const submitButtons = document.querySelectorAll('#aktualizujTrening');
 
 
+    /**
+     * Pridanie jedného prihláseného používateľa (NIE do DB)
+     * Akcia sa musí ešte potvrdiť
+     */
     buttonsAdd.forEach(button => {
         button.addEventListener("click", function () {
             var closestParent = this.parentElement.parentElement;
@@ -29,6 +33,10 @@
         })
     });
 
+    /**
+     * Odobratie jedného prihláseného používateľa (NIE z DB)
+     * Akcia sa musí ešte potvrdiť
+     */
     buttonMinus.forEach(button => {
         button.addEventListener("click", function () {
             var closestParent = this.parentElement.parentElement;
@@ -46,6 +54,11 @@
         })
     });
 
+
+    /**
+     * Vyresetovanie prihlasených používatelov (NIE v DB)
+     * Akcia sa musí ešte potvrdiť
+     */
     buttonsRest.forEach(button => {
         button.addEventListener('click', function () {
             var closestParent = this.parentElement.parentElement;
@@ -59,6 +72,10 @@
         })
     });
 
+    /**
+     * Zmena kapacity tréningu
+     * Akcia sa musí ešte potvrdiť
+     */
     inputsMaxKapacity.forEach( input => {
         input.addEventListener('change', function () {
             var closestParent = this.parentElement.parentElement;
@@ -101,6 +118,11 @@
         alert(pocet);
     }
 
+    /**
+     * Potvrdenie a zmena
+     *  - počtu prihlasených na tréningu
+     *  - Maximálnej kapacity na trénngi
+     */
     submitButtons.forEach(button => {
         button.addEventListener('click', function () {
             var closestParent = this.parentElement.parentElement.parentElement;

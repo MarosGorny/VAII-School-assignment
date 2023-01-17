@@ -25,7 +25,7 @@ class RegisterController extends AControllerBase
 
     /**
      * Register a user
-     * @return \App\Core\Responses\RedirectResponse|\App\Core\Responses\ViewResponse
+     * @return \App\Core\Responses\RedirectResponse
      */
     public function register(): Response
     {

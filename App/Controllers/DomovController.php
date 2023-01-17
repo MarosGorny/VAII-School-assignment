@@ -40,17 +40,14 @@ class DomovController extends AControllerBase
 
     /**
      * Example of an action (authorization needed)
-     * @return \App\Core\Responses\Response|\App\Core\Responses\ViewResponse
+     * @return \App\Core\Responses\Response
      */
     public function index(): Response
     {
         return $this->html();
     }
 
-    /**
-     * Example of an action accessible without authorization
-     * @return \App\Core\Responses\ViewResponse
-     */
+
     public function kontakty(): Response
     {
         return $this->html();
@@ -64,11 +61,20 @@ class DomovController extends AControllerBase
         return $this->html();
     }
 
+    /**
+     * Vrati vsetkých používateľov zoradených podla emailu
+     */
     public function pouzivatelia(): Response {
         $pouzivatelia = Pouzivatel::getAll(orderBy: "email");
         return $this->html(['pouzivatelia' => $pouzivatelia]);
     }
 
+    /**
+     * AJAX
+     * Vráti všetkých najedných používateľov podľa textu.
+     * Hladá aj podla emailu aj podla userID
+     *  Ak nenájde vráti echo "Žiadne dáta sa nenašli"
+     */
     public function getUsers(): Response {
         $pouzivateliaHladat = null;
 
@@ -86,6 +92,10 @@ class DomovController extends AControllerBase
         return $this->html(['pouzivateliaHladat' => $pouzivateliaHladat]);
     }
 
+    /**
+     * AJAX
+     * Nastaví používatelovi rolu podľa toho aká bola v POST requeste
+     */
     public function changeRole(): Response {
         $pouzivateliaHladat = null;
 

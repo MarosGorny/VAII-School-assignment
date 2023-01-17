@@ -1,5 +1,10 @@
 
 $(document).ready(function () {
+
+    /**
+     * AJAX
+     * Prihlásenie na tréning
+     */
     $("button[name='submit-signIn']").click(function (e) {
         e.preventDefault();
         var button = this;
@@ -25,6 +30,10 @@ $(document).ready(function () {
         });
     });
 
+    /**
+     * AJAX
+     * Odhlásenie z tréningu
+     */
     $("button[name='submit-signOut']").click(function (e) {
         e.preventDefault();
         var button = this;
