@@ -5,6 +5,8 @@ namespace App\Controllers;
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
 use App\Models\Hodnotenie;
+use App\Models\Pouzivatel;
+use App\Models\PrihlaseniPouzivatelia;
 use App\Models\RezervaciaPriestor;
 use App\Models\Trening;
 
@@ -53,6 +55,40 @@ class TreningController extends AControllerBase
         $postToEdit->setMaximalnaKapacita($this->request()->getValue('kapacita'));
         $postToEdit->save();
         return $this->redirect("?c=trening");
+    }
+
+    public function prihlasSa() : Response {
+        if($this->request()->isAjax()) {
+            $treningId = $this->request()->getValue('training_id');
+            $pouzivatelEmail = $this->request()->getValue('pouzivatel_email');
+
+            $trening = Trening::getOne($treningId);
+            $whereClause = "email = '$pouzivatelEmail'";
+            $pouzivatel = Pouzivatel::getAll(whereClause: $whereClause,limit: 1);
+            $pouzivatelId = $pouzivatel[0]->getId();
+
+            $whereClause = "userID = '$pouzivatelId' AND treningID = '$treningId'";
+            if(!empty(PrihlaseniPouzivatelia::getAll(whereClause: $whereClause))) {
+                return $this->json(['success' => false, 'message' => 'Already present.']);
+            }
+
+            if(!empty($trening) && !empty($pouzivatel)) {
+                $prihlasenie = new PrihlaseniPouzivatelia();
+                $prihlasenie->setTreningID($treningId);
+                $prihlasenie->setUserID($pouzivatelId);
+                $prihlasenie->save();
+
+                return $this->json(['success' => true, 'message' => 'Signed up successfully.']);
+            }
+
+
+             return $this->json(['success' => false, 'message' => 'Signed up unsuccessfully.']);
+
+
+        } else {
+            return $this->index();
+        }
+
     }
 
 

@@ -15,6 +15,31 @@ foreach ($data as $trening) {
 
 ?>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+
+    $(document).ready(function(){
+        $("button[name='submit-info']").click(function(e){
+            e.preventDefault();
+            var trainingId = $(this).data('training-id');
+            var pouzivatelEmail = $(this).data('pouzivatel-email')
+            $.ajax({
+                type: "POST",
+                url: "?c=trening&a=prihlasSa",
+                data: {
+                    training_id: trainingId,
+                    pouzivatel_email: pouzivatelEmail
+                },
+                success: function(response) {
+                    // handle the response here
+                }
+            });
+        });
+    });
+
+</script>
+
 
 <section class="container-fluid px-0">
     <div class="row align-items-center">
@@ -98,8 +123,25 @@ foreach ($data as $trening) {
                     <?php } ?>
                     <p class="lead">Silove treningy su vyborne na nabratie sily a zvacsanie svalov.</p>
                 </div>
-                <a class="btn btn-secondary btn-lg btn-block rounded-0" href="#" role="button">Prihlásiť sa</a>
-                <a class="infobtn btn btn-outline-secondary btn-lg btn-block rounded-0" href="?c=hodnotenie&a=silovyTrening" role="button">Informácie</a>
+
+
+                    <a class="btn btn-secondary btn-lg btn-block rounded-0" href="#" role="button" type="submit" >Prihlásiť sa</a>
+
+<!--                    <a class="infobtn btn btn-outline-secondary btn-lg btn-block rounded-0" href="?c=trening&a=prihlasSa" role="button">Informácie</a>-->
+<!--                <a class="infobtn btn btn-outline-secondary btn-lg btn-block rounded-0" href="#" role="button" onclick="submitForm(--><?php //echo $treningy[3]->getNazov() ?>//);">Informácie</a>
+                <button name="submit-info" type="submit" class="infobtn btn btn-outline-secondary btn-lg btn-block rounded-0"
+                        data-training-id="<?php echo $treningy[3]->getId(); ?>"
+                        data-pouzivatel-email="<?php echo $auth->getLoggedUserId(); ?>"
+                >Info</i></button>
+
+<!--                    <input type="hidden" id="treningID" name="treningID">-->
+<!--                    <input type="hidden" id="submit" name="submit">-->
+
+<!--                <form hidden class="infobtn btn btn-outline-secondary btn-lg btn-block rounded-0" method="post" action="?c=rezervaciePriestor&a=delete&id=--><?php //echo "S" ?><!--">-->
+<!--                    <a class="infobtn btn btn-outline-secondary btn-lg btn-block rounded-0" href="?c=trening&a=prihlasSa" role="button">Informácie</a>-->
+<!---->
+<!--                </form>-->
+
             </div>
         </div>
         <div class="col-md-4 col-lg-4 d-none d-md-flex d-lg-flex home-block order-md-1">

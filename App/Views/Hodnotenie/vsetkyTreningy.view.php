@@ -212,7 +212,7 @@ $param_url = $data['param'];
                         <h5 class="card-title nickname-text"><?php echo $hodnotenie->getNickname();?></h5>
                         <h6 class="card-subtitle mb-2 text-muted"><?php echo $hodnotenie->getDate();?></h6>
                         <p class="card-text comment-text" data-id="<?php echo $hodnotenie->getId();?>"><?php echo $hodnotenie->getText(); ?></p>
-                        <?php if($auth->isAdmin() || ($auth->getLoggedUserName() == $hodnotenie->getUserEmail())) { ?>
+                        <?php if($auth->isAdmin() || ($auth->isLogged() && ($auth->getLoggedUserName() == $hodnotenie->getUserEmail()))) { ?>
                             <div class="text-right hodnotenie-delete">
                                 <button class="btn btn-warning px-3 edit-comment"><i class="fa fa-pencil"></i></i></button>
                                 <button class="btn btn-danger px-3 delete-comment-btn"><i class="fa fa-trash-o" ></i></button>
