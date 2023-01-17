@@ -145,7 +145,6 @@ $actual_request_uri = $_SERVER["REQUEST_URI"];
 <!--    own js-->
 <script src="../../public/js/obsadenost.js" type="application/javascript"></script>
 <script src="../../public/js/rating.js" type="application/javascript"></script>
-<script src="../../public/js/ajaxHodnotenia.js" type="application/javascript"></script>
 <script src="../../public/js/smallWidgets.js" type="application/javascript"></script>
 
 </body>
