@@ -28,11 +28,11 @@ function submitHodnotenieCheck() {
     var rating = getActiveCount();
 
     if (!nickname || !text) {
-        document.getElementById("form-message").innerHTML = "Musis vyplnit aj meno aj text.";
+        document.getElementById("form-message").innerHTML = "Musíš vyplnť meno aj text";
         return false;
     }
     if (rating === 0) {
-        document.getElementById("form-message").innerHTML = "Este oznac hviezdicky :).";
+        document.getElementById("form-message").innerHTML = "Musíš zvoliť hodnotenie od 1 po 5 hviezdičiek";
         return false;
     }
     document.getElementById("form-message").innerHTML = "";

@@ -80,11 +80,7 @@ class DomovController extends AControllerBase
                 echo "<h6 class='text-danger text-center mt-3'>Žiadne dáta sa nenašli</h6>";?><?php
             }
 
-            if(!empty($pouzivateliaHladat)) {
-                return $this->html(['pouzivateliaHladat' => $pouzivateliaHladat]);
-            } else {
-                return $this->json(['success' => false]);
-            }
+            return $this->html(['pouzivateliaHladat' => $pouzivateliaHladat]);
         }
 
         return $this->html(['pouzivateliaHladat' => $pouzivateliaHladat]);
