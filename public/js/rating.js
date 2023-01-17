@@ -34,24 +34,6 @@ function changeColor(element) {
 }
 
 
-    // $(document).ready(function(){
-    //     $('.pouzivatelia').change(function(){
-    //         var pouzivatelId = $(this).closest('li').data('pouzivatel-id');
-    //         var newRole = $(this).val();
-    //         $.ajax({
-    //             type: "POST",
-    //             url: '?c=domov&a=changeRole',
-    //             data: {
-    //                 pouzivatel_id: pouzivatelId,
-    //                 role: newRole },
-    //             success: function(response) {
-    //                 console.log(response);
-    //             }
-    //         });
-    //     });
-    // });
-
-
 var stars = document.querySelectorAll('.star a');
 var submitBtn = document.querySelector('#hodnotenie');
 

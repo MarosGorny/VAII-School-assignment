@@ -95,6 +95,10 @@ class RezervaciePriestorController extends AControllerBase
 
     public function edit() {
         //najprv si musim post vytiahnut
+
+        if($this->request()->getValue('edit') == null) {
+            return $this->redirect("?c=rezervaciePriestor");
+        }
         $id = $this->request()->getValue('id');
 
 

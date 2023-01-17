@@ -21,7 +21,8 @@
 <!--    </div>-->
     <div class="form-group">
         <label for="nazov-form">Názov</label>
-        <input type="text" class="form-control" id="nazov-form" name="nazov" placeholder="Názov aktivity">
+        <input type="text" class="form-control" id="nazov-form" name="nazov" placeholder="Názov aktivity"
+               value="<?php if ($rezervacia_data->getId()) echo $rezervacia_data->getNazov(); ?>">
     </div>
     <div class="form-group">
         <label for="exampleFormControlSelect1">Deň</label>

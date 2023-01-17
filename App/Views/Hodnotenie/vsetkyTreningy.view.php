@@ -46,7 +46,7 @@ $param_url = $data['param'];
                                 <div class="card my-2">
                                     <div class="card-body">
                                         <h5 class="card-title">${element.nickname}</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted">${element.date}</h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">${element.rating}/5 - ${element.date}</h6>
                                         <p class="card-text">${element.text}</p>
                                         <div class="text-right hodnotenie-delete">
                                             <form method="post" action="?c=hodnotenie&a=delete&id=${element.id}">
@@ -162,7 +162,7 @@ $param_url = $data['param'];
             <div class="card my-2">
                 <div class="card-body ">
                     <h5 class="card-title nickname-text"><?php echo $hodnotenie->getNickname(); ?></h5>
-                    <h6 class="card-subtitle mb-2 text-muted"><?php echo $hodnotenie->getDate(); ?></h6>
+                    <h6 class="card-subtitle mb-2 text-muted"><?php echo $hodnotenie->getRating(). "/5 - " . $hodnotenie->getDate(); ?></h6>
                     <p class="card-text comment-text"
                        data-id="<?php echo $hodnotenie->getId(); ?>"><?php echo $hodnotenie->getText(); ?></p>
                     <?php if ($auth->isAdmin() || ($auth->isLogged() && ($auth->getLoggedUserName() == $hodnotenie->getUserEmail()))) { ?>
@@ -208,6 +208,7 @@ $param_url = $data['param'];
                                         <div class="form-outline w-100">
                                         <textarea class="form-control" id="text-id" rows="4"
                                                   style="background: #fff;" name="text"></textarea>
+                                            <h6 id="form-message" class='text-danger text-center mt-3'></h6>
                                             <p id="form-message"></p>
                                         </div>
                                     </div>
