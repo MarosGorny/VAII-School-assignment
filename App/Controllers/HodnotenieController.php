@@ -17,21 +17,63 @@ class HodnotenieController extends AControllerBase
         return $this->html();
     }
 
-    public function delete() {
-        $deleteGet = $this->request()->getValue('delete');
-        $urlParam = $this->request()->getValue('urlParam');
-        if($deleteGet != null) {
-            $id = $this->request()->getValue('id');
+    public function edit() {
 
-            $hodnotenieNaVymazanie = Hodnotenie::getOne($id);
+        if($this->request()->isAjax()) {
+            $newNickname = $this->request()->getValue('newNickname');
+            $newComment = $this->request()->getValue('newComment');
+            $commentId = $this->request()->getValue('commentId');
 
-            //ak tam je tak ju vymazem
-            if($hodnotenieNaVymazanie) {
-                $hodnotenieNaVymazanie->delete();
+            if($newComment != null && $newNickname != null) {
+                $hodnotenie = Hodnotenie::getOne($commentId);
+                $hodnotenie->setText($newComment);
+                $hodnotenie->setNickname($newNickname);
+                $hodnotenie->save();
+
+                $response =['status' => 'success', 'message' => 'Hodnotenie úspešne aktualizované',"newNickname" => $newNickname, 'newComment' => $newComment];
+            } else {
+                $response =['status' => 'error', 'message' => 'Chyba pri aktualizovai hodnotenia',"newNickname" => $newNickname, 'newComment' => $newComment];
             }
+
+            return $this->json($response);
         }
-        $redirectValue = "?c=hodnotenie&a=$urlParam";
-        return $this->redirect($redirectValue);
+
+
+    }
+
+    public function delete() {
+
+        if($this->request()->isAjax()) {
+            $id = $this->request()->getValue('id');
+            $hodnotenieNaVymazanie = Hodnotenie::getOne($id);
+            if (!empty($hodnotenieNaVymazanie)) {
+                $hodnotenieNaVymazanie->delete();
+                return $this->json(['success' => true, 'message' => 'Comment deleted successfully.']);
+            } else {
+                return $this->json(['success' => false, 'message' => 'Error deleting comment.']);
+            }
+
+        } else {
+            $deleteGet = $this->request()->getValue('delete');
+            $urlParam = $this->request()->getValue('urlParam');
+            if($deleteGet != null) {
+                $id = $this->request()->getValue('id');
+
+                $hodnotenieNaVymazanie = Hodnotenie::getOne($id);
+
+                //ak tam je tak ju vymazem
+                if($hodnotenieNaVymazanie) {
+                    $hodnotenieNaVymazanie->delete();
+                }
+            }
+            if($urlParam != null) {
+                $redirectValue = "?c=hodnotenie&a=$urlParam";
+            } else {
+                $redirectValue = "?c=domov";
+            }
+
+            return $this->redirect($redirectValue);
+        }
     }
 
     public function store() {

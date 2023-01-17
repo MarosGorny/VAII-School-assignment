@@ -168,6 +168,8 @@ $param_url = $data['param'];
 
 </script>
 
+</script>
+
 <div id="results"></div>
 <section class="container-fluid px-0">
     <div class="row align-items-center content">
@@ -201,37 +203,84 @@ $param_url = $data['param'];
     <div class="home-block home-page-text hodnotenie-div">
         <h1 class="text-center">Hodnotenia</h1>
     </div>
-    <?php if(!empty($hodnotenia)) { ?>
-        <?php foreach ($hodnotenia as $hodnotenie) { ?>
-            <div id="comments" >
-            <div class="card my-2">
-                <div class="card-body ">
-                    <h5 class="card-title"><?php echo $hodnotenie->getNickname();?></h5>
-                    <h6 class="card-subtitle mb-2 text-muted"><?php echo $hodnotenie->getDate();?></h6>
-                    <p class="card-text"><?php echo $hodnotenie->getText(); ?></p>
-                    <?php if($auth->isAdmin() || ($auth->getLoggedUserName() == $hodnotenie->getUserEmail())) { ?>
-                    <div class="text-right hodnotenie-delete">
-                        <form method="post" action="?c=hodnotenie&a=edit&id=<?php echo $hodnotenie->getId() ?>">
-                            <button name="edit" value="edit" type="submit" class="btn btn-warning px-3"><i class="fa fa-pencil"></i></i></button>
-                            <input type="hidden" id="trening-urlParam" name="urlParam" value="<?php echo $param_url;?>">
-                        </form>
 
-                        <form method="post" action="?c=hodnotenie&a=delete&id=<?php echo $hodnotenie->getId() ?>">
-                            <button name="delete" value="delete" type="submit" class="btn btn-danger px-3"><i class="fa fa-trash-o" ></i></button>
-                            <input type="hidden" id="trening-urlParam" name="urlParam" value="<?php echo $param_url;?>">
-                        </form>
+    <div id="comments">
+        <?php if(!empty($hodnotenia)) { ?>
+            <?php foreach ($hodnotenia as $hodnotenie) { ?>
+                <div class="card my-2">
+                    <div class="card-body ">
+                        <h5 class="card-title nickname-text"><?php echo $hodnotenie->getNickname();?></h5>
+                        <h6 class="card-subtitle mb-2 text-muted"><?php echo $hodnotenie->getDate();?></h6>
+                        <p class="card-text comment-text" data-id="<?php echo $hodnotenie->getId();?>"><?php echo $hodnotenie->getText(); ?></p>
+                        <?php if($auth->isAdmin() || ($auth->getLoggedUserName() == $hodnotenie->getUserEmail())) { ?>
+                            <div class="text-right hodnotenie-delete">
+                                <button class="btn btn-warning px-3 edit-comment"><i class="fa fa-pencil"></i></i></button>
+                                <button class="btn btn-danger px-3 delete-comment-btn"><i class="fa fa-trash-o" ></i></button>
+                            </div>
+                        <?php } ?>
                     </div>
-                    <?php } ?>
-
                 </div>
-            </div>
+            <?php } ?>
+        <?php } else { ?>
+            <p> There are no comments !</p>
         <?php } ?>
-        </div>
-        <button id="show_more_comments">Show more comments</button>
-    <?php } else { ?>
-        <p> There are no comments !</p>
-    <?php } ?>
+    </div>
 
+    <script>
+        $(document).on('click', '.edit-comment', function() {
+            var button = $(this);
+            var commentId = $(this).closest('.card-body').find('.comment-text').data('id');
+            var currentComment = $(this).closest('.card-body').find('.comment-text').text();
+            var currentNickname = $(this).closest('.card-body').find('.nickname-text').text();
+            var newNickname = prompt("Edit nickname:", currentNickname);
+            if(newNickname != null && newNickname.length > 0) {
+                var newComment = prompt("Edit comment:", currentComment);
+                if (newComment != null ) {
+                    $.ajax({
+                        type: "POST",
+                        url: "?c=hodnotenie&a=edit&id=" + commentId,
+                        data: {
+                            newComment: newComment,
+                            newNickname: newNickname,
+                            commentId: commentId
+                        },
+                        success: function(response) {
+                            button.closest('.card-body').find('.comment-text').text(newComment);
+                            button.closest('.card-body').find('.nickname-text').text(newNickname);
+                        }
+                    });
+                }
+            }
+
+        });
+
+        $(document).ready(function(){
+            $('.delete-comment-btn').on('click', function() {
+                var commentId = $(this).closest('.card-body').find('.comment-text').data('id');
+                if (isNaN(commentId) || commentId <= 0) {
+                    alert("Nespravne ID hodnotenia.");
+                    return;
+                }
+                if (!confirm("Naozaj chceš vymazať hodnotenie?")) {
+                    return;
+                }
+                var self = this;
+                $.ajax({
+                    url: "?c=hodnotenie&a=delete&id=" + commentId,
+                    type: 'DELETE',
+                    data: { },
+                    success: function(response) {
+                        if(response.success){
+                            alert(response.message);
+                            $(self).closest('.card').remove();
+                        }else{
+                            alert(response.message);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 
     <?php if ($auth->isLogged()) { ?>
         <section class="container-fluid">
