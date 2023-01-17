@@ -23,14 +23,6 @@ class RegisterController extends AControllerBase
         return $this->redirect(Configuration::REGISTER_URL);
     }
 
-//    /**
-//     * Register a user
-//     * @param $userEmail
-//     * @param $pass
-//     * @return bool
-//     */
-//    function register($userEmail, $pass): bool;
-
     /**
      * Register a user
      * @return \App\Core\Responses\RedirectResponse|\App\Core\Responses\ViewResponse
@@ -59,7 +51,6 @@ class RegisterController extends AControllerBase
                     $data = ['message' => 'Používateľ už existuje!'];
                     return $this->html($data);
                 }
-                //echo '<script>alert("Úspešná registrácia!")</script>';
             }
         }
 

@@ -1,5 +1,5 @@
 <?php
-$layout = 'auth';
+$layout = 'root';
 /** @var Array $data */
 ?>
 <div class="container">

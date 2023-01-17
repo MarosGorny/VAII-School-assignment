@@ -55,7 +55,7 @@ $param_url = $data['param'];
 
     var offset = 3;
 
-    function nacitajHodnotenia() {
+    function nacitajHodnotenia($zhora = false) {
         $.ajax({
             url: '?c=Hodnotenie&a=getTwoMoreReviews',
             method: "GET",
@@ -76,24 +76,32 @@ $param_url = $data['param'];
                         element.date = convertDate(element.date);
 
 
-                        $(
-                            '<div id="comments">\n' +
-                            '<div class="card my-2">\n' +
-                            '<div class="card-body">\n' +
-                            '<h5 class="card-title">' + element.nickname + '</h5>\n' +
-                            '<h6 class="card-subtitle mb-2 text-muted">' + element.date + '</h6>\n' +
-                            '<p class="card-text">' + element.text + '</p>\n' +
-                            '<div class="text-right hodnotenie-delete"> \n' +
+                        let $comments = $(`
+                            <div id="comments">
+                                <div class="card my-2">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${element.nickname}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">${element.date}</h6>
+                                        <p class="card-text">${element.text}</p>
+                                        <div class="text-right hodnotenie-delete">
+                                            <form method="post" action="?c=hodnotenie&a=delete&id=${element.id}">
+<!--                                                <button name="delete" value="delete" type="submit" class="btn btn-danger px-3">-->
+<!--                                                    <i class="fa fa-trash-o"></i>-->
+<!--                                                </button>-->
+                                                <input type="hidden" id="trening-topic" name="topic" value="">
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `);
+                        if(!$zhora) {
+                            $comments.insertBefore($('#show_more_comments'));
+                        } else {
+                            $comments.insertAfter($('#hodnotenia-header'));
+                        }
 
-                            '<form method="post" action="?c=hodnotenie&a=delete&id='+ element.id + '"> \n' +
-                                '<button name="delete" value="delete" type="submit" class="btn btn-danger px-3"><i class="fa fa-trash-o" ></i></button>\n' +
-                                '<input type="hidden" id="trening-topic" name="topic" value="">' +
-                            '</form>\n' +
-                            '</div>\n' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>'
-                        ).insertBefore($('#show_more_comments'));
+
                     });
                     offset += data.length;
                     if(data.length < 2) {
@@ -121,13 +129,20 @@ $param_url = $data['param'];
 
     });
 
+    function vymazRating() {
+
+        stars.forEach((star) => {
+            star.classList.remove('active');
+        })
+
+    }
+
 
 
 
     //POST HODNOTENIE AJAX
     <?php if($auth->isLogged()) { ?>
     $(document).ready(function () {
-        console.log("???");
         $('#hodnotenie-form').submit(function (e) {
             e.preventDefault(); //Zakaze vo form action a metodu
             var nickname = $('#nickname-id').val();
@@ -148,16 +163,10 @@ $param_url = $data['param'];
                     success: function (response) {
                         $('#nickname-id').val('');
                         $('#text-id').val('');
+                        vymazRating();
                         document.getElementById("form-message").innerHTML = "Hodnotenie sa odoslalo.";
                         nacitajHodnotenia();
-                        // if (response === "success") {
-                        //     console.log("??");
-                        //     $('#nickname-id').val('');
-                        //     $('#text-id').val('');
-                        // } else {
-                        //     console.log("!!!");
-                        //     $('#form-message').html(response);
-                        // }
+                        //location.reload();
                     }
                 })
             }
@@ -201,7 +210,7 @@ $param_url = $data['param'];
     </div>
 
     <div class="home-block home-page-text hodnotenie-div">
-        <h1 class="text-center">Hodnotenia</h1>
+        <h1 id="#hodnotenia-header" class="text-center">Hodnotenia</h1>
     </div>
 
     <div id="comments">
@@ -221,8 +230,10 @@ $param_url = $data['param'];
                     </div>
                 </div>
             <?php } ?>
+            </div>
+    <a id="show_more_comments" class="infobtn mb-2 btn btn-outline-secondary btn-lg btn-block rounded-0"role="button">Načítaj viac hodnotení</a>
         <?php } else { ?>
-            <p> There are no comments !</p>
+            <p> Zatiaľ žiadne hodnotenia!</p>
         <?php } ?>
     </div>
 
