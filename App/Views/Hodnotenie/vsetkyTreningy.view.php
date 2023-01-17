@@ -103,7 +103,6 @@ $param_url = $data['param'];
                         id: '<?php echo $trening->getId() ?>'
                     },
                     success: function (response) {
-                        console.log(response);
                         $('#nickname-id').val('');
                         $('#text-id').val('');
                         vymazRating();

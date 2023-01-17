@@ -12,11 +12,9 @@ $(document).ready(function () {
         if (text !== "") {
             if(text.length >= minLength) {
                 $("#searchresult").css("display", "inline");
-                console.log("xxx");
                 //Ak tam ostal request(minuly), tak ho zabije
                 if (request != null)
                     request.abort();
-                console.log("???")
                 request = $.ajax({
 
                     url: '?c=domov&a=getUsers',
@@ -25,13 +23,11 @@ $(document).ready(function () {
 
 
                     success: function (data) {
-                        console.log(data);
                         if (text === $(oldValue).val()) {
                             $("#searchresult").html(data);
                         }
                     }
                 })
-                console.log(request);
             }
         } else {
             $("#searchresult").css("display", "none");
