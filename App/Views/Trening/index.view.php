@@ -1,17 +1,43 @@
 <?php
 /** @var App\Core\IAuthenticator $auth */
-/** @var App\Models\Trening[] $data */
+/** @var $data */
 /** @var App\Models\Trening[] $treningy */
+/** @var App\Models\PrihlaseniPouzivatelia[] $treningy */
+/** @var $userID */
 
-$trening1 = null;
 
 $treningy = array(null);
+$prihlasenia['Sil_trening'] = false;
+$prihlasenia['Kon_trening'] = false;
+$prihlasenia['Fun_trening'] = false;
 
-foreach ($data as $trening) {
+foreach ($data[0] as $trening) {
     $treningy[] = $trening;
-//    if ($trening->getTopic() == "Ind_trening")
-//        $trening1 = $trening;
 }
+
+if($auth->isLogged()) {
+    foreach ($data[1] as $pouzivatel) {
+        if($pouzivatel->getEmail() == $auth->getLoggedUserId());
+        $userID = $pouzivatel->getId();
+        break;
+    }
+
+    foreach ($data[2] as $zaznam) {
+        if($zaznam->getUserID() == $userID) {
+            if($zaznam->getTreningID() == 3) {
+                $prihlasenia['Sil_trening'] = true;
+            } else if($zaznam->getTreningID() == 4) {
+                $prihlasenia['Kon_trening'] = true;
+            } else if($zaznam->getTreningID() == 5) {
+                $prihlasenia['Fun_trening'] = true;
+            }
+        }
+
+    }
+}
+
+
+
 
 ?>
 
@@ -20,8 +46,9 @@ foreach ($data as $trening) {
 <script>
 
     $(document).ready(function(){
-        $("button[name='submit-info']").click(function(e){
+        $("button[name='submit-signIn']").click(function(e){
             e.preventDefault();
+            var button = this;
             var trainingId = $(this).data('training-id');
             var pouzivatelEmail = $(this).data('pouzivatel-email')
             $.ajax({
@@ -32,10 +59,44 @@ foreach ($data as $trening) {
                     pouzivatel_email: pouzivatelEmail
                 },
                 success: function(response) {
-                    // handle the response here
+                    if(response.success) {
+                        // TODO Treba doriesit aby to znova fungovalo aj ked sa to vymeni
+                        // $("button[name='submit-signIn']").replaceWith(
+                        //     "<button name='submit-signOut' type='submit' class='btn btn-outline-danger btn-lg btn-block rounded-0' data-training-id='" + trainingId + "' data-pouzivatel-email='" + pouzivatelEmail + "'>Odhlásiť sa</i></button>"
+                        // );
+                        location.reload();
+                    }
+                    alert(response.message);
                 }
             });
         });
+
+        $("button[name='submit-signOut']").click(function(e){
+            e.preventDefault();
+            var button = this;
+            var trainingId = $(this).data('training-id');
+            var pouzivatelEmail = $(this).data('pouzivatel-email')
+            $.ajax({
+                type: "POST",
+                url: "?c=trening&a=odhlasSa",
+                data: {
+                    training_id: trainingId,
+                    pouzivatel_email: pouzivatelEmail
+                },
+                success: function(response) {
+                    if(response.success) {
+                        // TODO Treba doriesit aby to znova fungovalo aj ked sa to vymeni
+                        // $("button[name='submit-signOut']").replaceWith(
+                        //     "<button name='submit-signIn' type='submit' class='btn btn-secondary btn-lg btn-block rounded-0' data-training-id='" + trainingId + "' data-pouzivatel-email='" + pouzivatelEmail + "'>Prihlásiť sa</i></button>"
+                        // );
+                        location.reload();
+                    }
+                    alert(response.message);
+
+                }
+            });
+        });
+
     });
 
 </script>
@@ -76,7 +137,6 @@ foreach ($data as $trening) {
                     <h2>Samostatné individuálne tréningy</h2>
                     <p class="lead">Výhodou pri osobných tréningoch je, že v priestore sa nachádzate iba vy a tréner.</p>
                 </div>
-                <a class="btn btn-secondary btn-lg btn-block rounded-0 " href="#" role="button">Prihlásiť sa</a>
                 <a class="infobtn btn btn-outline-secondary btn-lg btn-block rounded-0" href="?c=hodnotenie&a=skupIndividTrening" role="button">Informácie</a>
             </div>
         </div>
@@ -123,24 +183,22 @@ foreach ($data as $trening) {
                     <?php } ?>
                     <p class="lead">Silove treningy su vyborne na nabratie sily a zvacsanie svalov.</p>
                 </div>
+                <?php if($auth->isLogged()) {?>
+                    <?php if($prihlasenia['Sil_trening'] ) { ?>
+                        <button name="submit-signOut" type="submit" class="btn btn-outline-danger btn-lg btn-block rounded-0"
+                                data-training-id="<?php echo $treningy[3]->getId(); ?>"
+                                data-pouzivatel-email="<?php echo $auth->getLoggedUserId(); ?>"
+                        >Odhlásiť sa</i></button>
+                    <?php } else { ?>
+                        <button name="submit-signIn" type="submit" class="btn btn-secondary btn-lg btn-block rounded-0"
+                                data-training-id="<?php echo $treningy[3]->getId(); ?>"
+                                data-pouzivatel-email="<?php echo $auth->getLoggedUserId(); ?>"
+                        >Prihlásiť sa</i></button>
+                    <?php } ?>
+                <?php } ?>
 
+                <a class="infobtn btn btn-outline-secondary btn-lg btn-block rounded-0" href="?c=hodnotenie&a=silovyTrening" role="button">Informácie</a>
 
-                    <a class="btn btn-secondary btn-lg btn-block rounded-0" href="#" role="button" type="submit" >Prihlásiť sa</a>
-
-<!--                    <a class="infobtn btn btn-outline-secondary btn-lg btn-block rounded-0" href="?c=trening&a=prihlasSa" role="button">Informácie</a>-->
-<!--                <a class="infobtn btn btn-outline-secondary btn-lg btn-block rounded-0" href="#" role="button" onclick="submitForm(--><?php //echo $treningy[3]->getNazov() ?>//);">Informácie</a>
-                <button name="submit-info" type="submit" class="infobtn btn btn-outline-secondary btn-lg btn-block rounded-0"
-                        data-training-id="<?php echo $treningy[3]->getId(); ?>"
-                        data-pouzivatel-email="<?php echo $auth->getLoggedUserId(); ?>"
-                >Info</i></button>
-
-<!--                    <input type="hidden" id="treningID" name="treningID">-->
-<!--                    <input type="hidden" id="submit" name="submit">-->
-
-<!--                <form hidden class="infobtn btn btn-outline-secondary btn-lg btn-block rounded-0" method="post" action="?c=rezervaciePriestor&a=delete&id=--><?php //echo "S" ?><!--">-->
-<!--                    <a class="infobtn btn btn-outline-secondary btn-lg btn-block rounded-0" href="?c=trening&a=prihlasSa" role="button">Informácie</a>-->
-<!---->
-<!--                </form>-->
 
             </div>
         </div>
@@ -185,7 +243,19 @@ foreach ($data as $trening) {
                     <?php } ?>
                     <p class="lead">Kondicne treningy su vhodne na chudnutie, rysovanie tela alebo zlepsenie si kondicky.</p>
                 </div>
-                <a class="btn btn-secondary btn-lg btn-block rounded-0" href="#" role="button">Prihlásiť sa</a>
+                <?php if($auth->isLogged()) {?>
+                    <?php if($prihlasenia['Kon_trening'] ) { ?>
+                        <button name="submit-signOut" type="submit" class="btn btn-outline-danger btn-lg btn-block rounded-0"
+                                data-training-id="<?php echo $treningy[4]->getId(); ?>"
+                                data-pouzivatel-email="<?php echo $auth->getLoggedUserId(); ?>"
+                        >Odhlásiť sa</i></button>
+                    <?php } else { ?>
+                        <button name="submit-signIn" type="submit" class="btn btn-secondary btn-lg btn-block rounded-0"
+                                data-training-id="<?php echo $treningy[4]->getId(); ?>"
+                                data-pouzivatel-email="<?php echo $auth->getLoggedUserId(); ?>"
+                        >Prihlásiť sa</i></button>
+                    <?php } ?>
+                <?php } ?>
                 <a class="infobtn btn btn-outline-secondary btn-lg btn-block rounded-0" href="?c=hodnotenie&a=kondicnyTrening" role="button">Informácie</a>
             </div>
         </div>
@@ -231,7 +301,19 @@ foreach ($data as $trening) {
                     <?php } ?>
                     <p class="lead">Funkcne treningy sluzia na lepsiu stabilitu a koordinaciu celeho tela.</p>
                 </div>
-                <a class="btn btn-secondary btn-lg btn-block rounded-0" href="#" role="button">Prihlásiť sa</a>
+                <?php if($auth->isLogged()) {?>
+                    <?php if($prihlasenia['Fun_trening'] ) { ?>
+                        <button name="submit-signOut" type="submit" class="btn btn-outline-danger btn-lg btn-block rounded-0"
+                                data-training-id="<?php echo $treningy[5]->getId(); ?>"
+                                data-pouzivatel-email="<?php echo $auth->getLoggedUserId(); ?>"
+                        >Odhlásiť sa</i></button>
+                    <?php } else { ?>
+                        <button name="submit-signIn" type="submit" class="btn btn-secondary btn-lg btn-block rounded-0"
+                                data-training-id="<?php echo $treningy[5]->getId(); ?>"
+                                data-pouzivatel-email="<?php echo $auth->getLoggedUserId(); ?>"
+                        >Prihlásiť sa</i></button>
+                    <?php } ?>
+                <?php } ?>
                 <a class="infobtn btn btn-outline-secondary btn-lg btn-block rounded-0" href="?c=hodnotenie&a=funkcnyTrening" role="button">Informácie</a>
             </div>
         </div>
