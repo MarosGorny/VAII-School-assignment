@@ -39,3 +39,57 @@ function submitHodnotenieCheck() {
     return true;
 
 }
+
+$(document).on('click', '.edit-comment', function () {
+    var button = $(this);
+    var commentId = $(this).closest('.card-body').find('.comment-text').data('id');
+    var currentComment = $(this).closest('.card-body').find('.comment-text').text();
+    var currentNickname = $(this).closest('.card-body').find('.nickname-text').text();
+    var newNickname = prompt("Edit nickname:", currentNickname);
+    if (newNickname != null && newNickname.length > 0) {
+        var newComment = prompt("Edit comment:", currentComment);
+        if (newComment != null) {
+            $.ajax({
+                type: "POST",
+                url: "?c=hodnotenie&a=edit&id=" + commentId,
+                data: {
+                    newComment: newComment,
+                    newNickname: newNickname,
+                    commentId: commentId
+                },
+                success: function (response) {
+                    button.closest('.card-body').find('.comment-text').text(newComment);
+                    button.closest('.card-body').find('.nickname-text').text(newNickname);
+                }
+            });
+        }
+    }
+
+});
+
+$(document).ready(function () {
+    $('.delete-comment-btn').on('click', function () {
+        var commentId = $(this).closest('.card-body').find('.comment-text').data('id');
+        if (isNaN(commentId) || commentId <= 0) {
+            alert("Nespravne ID hodnotenia.");
+            return;
+        }
+        if (!confirm("Naozaj chceš vymazať hodnotenie?")) {
+            return;
+        }
+        var self = this;
+        $.ajax({
+            url: "?c=hodnotenie&a=delete&id=" + commentId,
+            type: 'DELETE',
+            data: {},
+            success: function (response) {
+                if (response.success) {
+                    alert(response.message);
+                    $(self).closest('.card').remove();
+                } else {
+                    alert(response.message);
+                }
+            }
+        });
+    });
+});

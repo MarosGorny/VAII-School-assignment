@@ -6,6 +6,7 @@ use App\Core\AControllerBase;
 use App\Core\Responses\Response;
 use App\Models\Pouzivatel;
 use App\Models\RezervaciaPriestor;
+use App\Models\Trening;
 
 class RezervaciePriestorController extends AControllerBase
 {
@@ -52,8 +53,16 @@ class RezervaciePriestorController extends AControllerBase
 
         //text je podla html atributu name
         $rezervaciaPriestor->setDen($this->request()->getValue('den'));
+        $rezervaciaPriestor->setNazov($this->request()->getValue('nazov'));
         $rezervaciaPriestor->setZacitok($this->request()->getValue('zaciatok'));
         $rezervaciaPriestor->setKoniec($this->request()->getValue('koniec'));
+
+        $pouzivatelEmail = $this->request()->getValue('pouzivatel_email');
+
+        $whereClause = "email = '$pouzivatelEmail'";
+        $pouzivatel = Pouzivatel::getAll(whereClause: $whereClause,limit: 1);
+        $pouzivatelId = $pouzivatel[0]->getId();
+        $rezervaciaPriestor->setUserID($pouzivatelId);
 
 
         if($this->request()->getValue('zaciatok') >= $this->request()->getValue('koniec')) {
