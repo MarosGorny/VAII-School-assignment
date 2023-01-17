@@ -118,11 +118,11 @@ class TreningController extends AControllerBase
                 $trening->setAktualnyPocet($trening->getAktualnyPocet()+1);
                 $trening->save();
 
-                return $this->json(['success' => true, 'message' => 'Signed up successfully.']);
+                return $this->json(['success' => true, 'message' => 'Úspešne prihlásený.']);
             }
 
 
-             return $this->json(['success' => false, 'message' => 'Signed up unsuccessfully.']);
+             return $this->json(['success' => false, 'message' => 'Prihlásanie sa nepodarilo.']);
 
 
         } else {

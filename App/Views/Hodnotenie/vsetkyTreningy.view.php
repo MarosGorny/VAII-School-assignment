@@ -17,35 +17,12 @@ $param_url = $data['param'];
 ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<script src="../../../public/js/vsetkyTreningy.js"></script>
 
 <script>
-    function convertDate($date) {
-        var newDate = new Date($date);
-        var options = {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric'
-        };
-        return newDate.toLocaleDateString('sk-SK', options);
-    }
 
-    function submitHodnotenieCheck() {
-        var nickname = document.getElementById('nickname-id').value;
-        var text = document.getElementById('text-id').value;
-        var rating = getActiveCount();
 
-        if (!nickname || !text) {
-            document.getElementById("form-message").innerHTML = "Musis vyplnit aj meno aj text.";
-            return false;
-        }
-        if (rating === 0) {
-            document.getElementById("form-message").innerHTML = "Este oznac hviezdicky :).";
-            return false;
-        }
-        document.getElementById("form-message").innerHTML = "";
-        return true;
 
-    }
 
     var offset = 3;
 
@@ -106,19 +83,7 @@ $param_url = $data['param'];
     }
 
 
-    //GET hodnotenia AJAX
-    $(document).ready(function () {
-        $("#show_more_comments").click(function () {
-            nacitajHodnotenia();
-        });
 
-    });
-
-    function vymazRating() {
-        stars.forEach((star) => {
-            star.classList.remove('active');
-        })
-    }
 
 
     //POST HODNOTENIE AJAX
@@ -142,6 +107,7 @@ $param_url = $data['param'];
                         id: '<?php echo $trening->getId() ?>'
                     },
                     success: function (response) {
+                        console.log(response);
                         $('#nickname-id').val('');
                         $('#text-id').val('');
                         vymazRating();
@@ -157,7 +123,7 @@ $param_url = $data['param'];
 
 </script>
 
-</script>
+<!--<script src="../../../public/js/vyhladavaniePouzivatelov.js"></script>-->
 
 <div id="results"></div>
 <section class="container-fluid px-0">

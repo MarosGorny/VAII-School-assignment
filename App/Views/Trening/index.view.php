@@ -17,9 +17,12 @@ foreach ($data[0] as $trening) {
 
 if ($auth->isLogged()) {
     foreach ($data[1] as $pouzivatel) {
-        if ($pouzivatel->getEmail() == $auth->getLoggedUserId()) ;
-        $userID = $pouzivatel->getId();
-        break;
+        if ($pouzivatel->getEmail() == $auth->getLoggedUserId())  {
+            $userID = $pouzivatel->getId();
+            break;
+        }
+
+
     }
 
     foreach ($data[2] as $zaznam) {
@@ -140,7 +143,7 @@ if ($auth->isLogged()) {
         <div class="col-md-8 text-center order-1 order-md-2 home-block">
             <div class="row justify-content-center ">
                 <div class="col-10 col-lg-8 mb-0 home-page-text">
-                    <h2><?php echo $treningy[2]->getNazov(); ?> </h2>
+                    <h2><?php echo $treningy[3]->getNazov(); ?> </h2>
                     <p class="pt-0 mt-0"><small>Počet prihlasených: <span id="obsadenostPocetDisplay">
                             <?php echo $treningy[3]->getAktualnyPocet(); ?> </span> / <span
                                     id="obsadenostMaxKapacitaDisplay">

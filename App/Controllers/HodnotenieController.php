@@ -138,7 +138,7 @@ class HodnotenieController extends AControllerBase
 
     public function funkcnyTrening(): Response
     {
-        $fun = 4;
+        $fun = 5;
         $topicWhere = "treningId = '$fun'";
         $hodnotenia_silovy = Hodnotenie::getAll(whereClause: $topicWhere, limit: 3, orderBy: 'date DESC');
         $trening_silovy = Trening::getOne($fun);
@@ -178,7 +178,6 @@ class HodnotenieController extends AControllerBase
             $hodnotenie->setUserID($userID[0]->getId());
             $hodnotenie->setTreningID($treningID->getId());
             $hodnotenie->setNickname($nickname);
-            $hodnotenie->setUserEmail($userEmail);
             $hodnotenie->setText($text);
             $hodnotenie->setRating($rating);
             $hodnotenie->setDate(date("Y-m-d"));
