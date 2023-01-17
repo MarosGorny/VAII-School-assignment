@@ -62,7 +62,7 @@ $actual_request_uri = $_SERVER["REQUEST_URI"];
 
                     <?php if ($auth->isLogged() && $auth->getRole() == 'Admin') { ?>
                         <li class="nav-item <?php if ($actual_request_uri == "/?c=domov&a=pouzivatelia") echo 'active' ?>">
-                            <a class="nav-link" href="/?c=domov&a=pouzivatelia">Pouzivatelia
+                            <a class="nav-link" href="/?c=domov&a=pouzivatelia">Používatelia
                                 <?php if ($actual_request_uri == "/?c=domov&a=pouzivatelia")
                                     echo "<span class=\"sr-only\">(current)</span>"; ?>
                             </a>

@@ -167,7 +167,7 @@ $param_url = $data['param'];
             <div class="col-10 col-lg-8  mb-5 mb-md-0 home-block home-page-text">
                 <h2>Kedy?</h2>
                 <p class="lead"><?php echo $trening->getTermin() ?></p>
-                <h2>Co k tomu potrbeujem?</h2>
+                <h2>Čo k tomu potrebujem?</h2>
                 <p class="lead"><?php echo $trening->getPotrebneVeci() ?></p>
             </div>
         </div>

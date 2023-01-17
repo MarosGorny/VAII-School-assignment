@@ -117,11 +117,10 @@ if ($auth->isLogged()) {
             <div class="row justify-content-center">
                 <div class="col-10 col-lg-8  mb-0 home-block home-page-text">
 
-                    <h2 class="mb-0 pb-0 ">Skupinové tréningy</h2>
-                    <p class="lead">Individuálne tréningy s naším trénerom si viete dohodnúť aj ako skupinka.</p>
-                    <h2>Samostatné individuálne tréningy</h2>
-                    <p class="lead">Výhodou pri osobných tréningoch je, že v priestore sa nachádzate iba vy a
-                        tréner.</p>
+                    <h2 class="mb-0 pb-0 "><?php echo $treningy[2]->getNazov(); ?> </h2>
+                    <p class="lead"><?php echo $treningy[2]->getOpis(); ?> </p>
+                    <h2><?php echo $treningy[1]->getNazov(); ?></h2>
+                    <p class="lead"><?php echo $treningy[1]->getOpis(); ?></p>
                 </div>
                 <a class="infobtn btn btn-outline-secondary btn-lg btn-block rounded-0"
                    href="?c=hodnotenie&a=skupIndividTrening" role="button">Informácie</a>
@@ -141,7 +140,7 @@ if ($auth->isLogged()) {
         <div class="col-md-8 text-center order-1 order-md-2 home-block">
             <div class="row justify-content-center ">
                 <div class="col-10 col-lg-8 mb-0 home-page-text">
-                    <h2>Silove treningy</h2>
+                    <h2><?php echo $treningy[2]->getNazov(); ?> </h2>
                     <p class="pt-0 mt-0"><small>Počet prihlasených: <span id="obsadenostPocetDisplay">
                             <?php echo $treningy[3]->getAktualnyPocet(); ?> </span> / <span
                                     id="obsadenostMaxKapacitaDisplay">
@@ -170,7 +169,7 @@ if ($auth->isLogged()) {
                             </form>
                         </div>
                     <?php } ?>
-                    <p class="lead">Silove treningy su vyborne na nabratie sily a zvacsanie svalov.</p>
+                    <p class="lead"><?php echo $treningy[3]->getOpis()?></p>
                 </div>
                 <?php if ($auth->isLogged()) { ?>
                     <?php if ($prihlasenia['Sil_trening']) { ?>
@@ -204,7 +203,7 @@ if ($auth->isLogged()) {
         <div class="col-md-8 text-center">
             <div class="row justify-content-center">
                 <div class="col-10 col-lg-8  mb-0 home-block home-page-text">
-                    <h2>Kondicne treningy</h2>
+                    <h2><?php echo $treningy[4]->getNazov(); ?> </h2>
                     <p class="pt-0 mt-0"><small>Počet prihlasených: <span id="obsadenostPocetDisplay">
                             <?php echo $treningy[4]->getAktualnyPocet(); ?> </span> / <span
                                     id="obsadenostMaxKapacitaDisplay">
@@ -234,8 +233,7 @@ if ($auth->isLogged()) {
                             </form>
                         </div>
                     <?php } ?>
-                    <p class="lead">Kondicne treningy su vhodne na chudnutie, rysovanie tela alebo zlepsenie si
-                        kondicky.</p>
+                    <p class="lead"><?php echo $treningy[4]->getOpis()?></p>
                 </div>
                 <?php if ($auth->isLogged()) { ?>
                     <?php if ($prihlasenia['Kon_trening']) { ?>
@@ -268,7 +266,7 @@ if ($auth->isLogged()) {
         <div class="col-md-8 text-center order-1 order-md-2 ">
             <div class="row justify-content-center ">
                 <div class="col-10 col-lg-8 mb-0 home-page-text">
-                    <h2>Funkcne treningy</h2>
+                    <h2><?php echo $treningy[5]->getNazov(); ?> </h2>
                     <p class="pt-0 mt-0"><small>Počet prihlasených: <span id="obsadenostPocetDisplay">
                             <?php echo $treningy[5]->getAktualnyPocet(); ?> </span> / <span
                                     id="obsadenostMaxKapacitaDisplay">
@@ -298,7 +296,7 @@ if ($auth->isLogged()) {
                             </form>
                         </div>
                     <?php } ?>
-                    <p class="lead">Funkcne treningy sluzia na lepsiu stabilitu a koordinaciu celeho tela.</p>
+                    <p class="lead"><?php echo $treningy[5]->getOpis()?></p>
                 </div>
                 <?php if ($auth->isLogged()) { ?>
                     <?php if ($prihlasenia['Fun_trening']) { ?>

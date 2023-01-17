@@ -10,8 +10,6 @@ class Hodnotenie extends Model
     protected $userID;
     protected $treningID;
     protected $text;
-    protected $userEmail;
-    protected $topic;
     protected $nickname;
     protected $rating;
     protected $date;
@@ -80,23 +78,6 @@ class Hodnotenie extends Model
     {
         $this->text = utf8_encode($text);
         //$this->text = $text;
-    }
-
-
-    /**
-     * @return mixed
-     */
-    public function getTopic()
-    {
-        return $this->topic;
-    }
-
-    /**
-     * @param mixed $topic
-     */
-    public function setTopic($topic): void
-    {
-        $this->topic = $topic;
     }
 
     /**
