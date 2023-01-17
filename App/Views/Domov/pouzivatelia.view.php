@@ -73,7 +73,7 @@ $pouzivatelia = $data['pouzivatelia'];
                     if(request != null)
                         request.abort();
                     request = $.ajax({
-                        url: '?c=domov&a=pouziv',
+                        url: '?c=domov&a=getUsers',
                         method:"POST",
                         data:{text:text},
 

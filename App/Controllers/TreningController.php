@@ -22,6 +22,8 @@ class TreningController extends AControllerBase
         //Metody ktore sa ukazu ked sa odhlasim/prihlasim
         switch ($action) {
             case "update":
+            case "odhlasSa":
+            case "prihlasSa":
                 return $this->app->getAuth()->isLogged();
         }
         return true;
@@ -34,8 +36,6 @@ class TreningController extends AControllerBase
         $data[] = Trening::getAll(orderBy: 'id');
         $data[] = Pouzivatel::getAll();
         $data[] = PrihlaseniPouzivatelia::getAll();
-//        $trenings = Trening::getAll(orderBy: 'id');
-//        $users = Pouzivatel::getAll();
         if ($data[0] == null || $data[1] == null) {
             return $this->redirect("?c=trening");
         }
@@ -46,14 +46,11 @@ class TreningController extends AControllerBase
     public function update() {
 
         $id = $this->request()->getValue('id');
-        $postToEdit = Trening::getOne($id); //zislo by sa dorobit, ze co ak mi id neexistuje?
-
+        $postToEdit = Trening::getOne($id);
         if ($postToEdit == null) {
             return $this->redirect("?c=trening");
         }
 
-        //text je podla toho ako sme ho nastavili v name
-        //<input type="text" name="text">
         $postToEdit->setAktualnyPocet($this->request()->getValue('pocet'));
         $postToEdit->setMaximalnaKapacita($this->request()->getValue('kapacita'));
         $postToEdit->save();

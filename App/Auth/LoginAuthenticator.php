@@ -18,12 +18,6 @@ class LoginAuthenticator extends DummyAuthenticator
                 return true;
             }
         }
-        // TODO append do dat, ze taky uzivatel neexistuje
-
-//        if ($login == $password) {
-//            $_SESSION['user'] = $login;
-//            return true;
-//        }
 
         return false;
     }

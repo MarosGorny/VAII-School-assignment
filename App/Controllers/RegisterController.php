@@ -35,26 +35,31 @@ class RegisterController extends AControllerBase
         if(isset($formData['submit'])) {
             $passwordFirst = $formData['password'];
             $passwordSecond = $formData['password_second'];
-            $registered = $this->checkPasswordLength($passwordFirst) && $this->checkEqualityOfPasswords($passwordFirst,$passwordSecond);
-            if($registered) {
-                //po splneniPodmienok
-
-                $pouzivatel = $this->tryCreateUser();
-
-
-                if($pouzivatel != null ) {
-                    $_SESSION['user'] = $pouzivatel->getEmail();
-                    $_SESSION['role'] = $pouzivatel->getRole();
-                    return $this->redirect('?c=domov');
-                } else {
-                    //TODO uzivatel uz existuje
-                    $data = ['message' => 'Používateľ už existuje!'];
-                    return $this->html($data);
-                }
+            if(!$this->checkPasswordLength($passwordFirst)) {
+                $data = (['message' => 'Krátke heslo!']);
+                return $this->html($data);
             }
+            if(!$this->checkEqualityOfPasswords($passwordFirst,$passwordSecond)) {
+                $data = (['message' => 'Heslá sa nezhodujú!']);
+                return $this->html($data);
+            }
+
+            //po splneniPodmienok
+
+            $pouzivatel = $this->tryCreateUser();
+
+            if($pouzivatel != null ) {
+                $_SESSION['user'] = $pouzivatel->getEmail();
+                $_SESSION['role'] = $pouzivatel->getRole();
+                return $this->redirect('?c=domov');
+            } else {
+                $data = ['message' => 'Používateľ už existuje!'];
+                return $this->html($data);
+            }
+
         }
 
-        $data = ($registered === false ? ['message' => 'Krátke heslo!'] : []);
+        $data = ($registered === false ? ['message' => 'Chyba!'] : []);
         return $this->html($data);
     }
 
@@ -67,7 +72,7 @@ class RegisterController extends AControllerBase
         $email = $this->request()->getValue('email');
         $password = $this->request()->getValue('password');
 
-        //TODO remove special characters and make it upper case?
+        //TODO What if user add one dot into email?
         if($email != null && $password != null) {
             if(Pouzivatel::getAll(whereClause: "email = '$email'") == null) {
                 $newUser = new Pouzivatel();
@@ -80,7 +85,6 @@ class RegisterController extends AControllerBase
                 return $newUser;
             }
         }
-
         return null;
     }
 
@@ -90,7 +94,6 @@ class RegisterController extends AControllerBase
      */
     private function checkPasswordLength($password): bool
     {
-        //TODO append error msg
         return strlen($password) >= 8;
     }
 
@@ -100,7 +103,6 @@ class RegisterController extends AControllerBase
      */
     private function checkEqualityOfPasswords($password,$passwordSecond): bool
     {
-        //TODO append error msg
         return $password == $passwordSecond;
     }
 

@@ -6,14 +6,25 @@ use App\Core\AControllerBase;
 use App\Core\Responses\Response;
 use App\Models\Hodnotenie;
 use App\Models\Pouzivatel;
-use App\Models\RezervaciaPriestor;
 use App\Models\Trening;
 
 class HodnotenieController extends AControllerBase
 {
+    public function authorize(string $action)
+    {
+        switch ($action) {
+            case "delete":
+            case "store":
+            case "edit":
+            case "saveReview":
+                return $this->app->getAuth()->isLogged();
+        }
+        return true;
+    }
+
+
     public function index(): Response
     {
-
         return $this->html();
     }
 
@@ -32,7 +43,7 @@ class HodnotenieController extends AControllerBase
 
                 $response =['status' => 'success', 'message' => 'Hodnotenie úspešne aktualizované',"newNickname" => $newNickname, 'newComment' => $newComment];
             } else {
-                $response =['status' => 'error', 'message' => 'Chyba pri aktualizovai hodnotenia',"newNickname" => $newNickname, 'newComment' => $newComment];
+                $response =['status' => 'error', 'message' => 'Chyba pri aktualizovaní hodnotenia',"newNickname" => $newNickname, 'newComment' => $newComment];
             }
 
             return $this->json($response);
@@ -48,9 +59,9 @@ class HodnotenieController extends AControllerBase
             $hodnotenieNaVymazanie = Hodnotenie::getOne($id);
             if (!empty($hodnotenieNaVymazanie)) {
                 $hodnotenieNaVymazanie->delete();
-                return $this->json(['success' => true, 'message' => 'Comment deleted successfully.']);
+                return $this->json(['success' => true, 'message' => 'Hodnotenie vymazané úspešne.']);
             } else {
-                return $this->json(['success' => false, 'message' => 'Error deleting comment.']);
+                return $this->json(['success' => false, 'message' => 'Chyba pri vymazávaní hodnotenia.']);
             }
 
         } else {
@@ -61,7 +72,6 @@ class HodnotenieController extends AControllerBase
 
                 $hodnotenieNaVymazanie = Hodnotenie::getOne($id);
 
-                //ak tam je tak ju vymazem
                 if($hodnotenieNaVymazanie) {
                     $hodnotenieNaVymazanie->delete();
                 }
@@ -83,7 +93,6 @@ class HodnotenieController extends AControllerBase
 
         $hodnotenie = ( $id ? Hodnotenie::getOne($id) : new Hodnotenie());
 
-        //text je podla html atributu name
         $hodnotenie->setText($this->request()->getValue('text'));
         $hodnotenie->setNickname($this->request()->getValue('nickname'));
         $hodnotenie->setTopic('Ind_trening');
@@ -91,14 +100,9 @@ class HodnotenieController extends AControllerBase
         $hodnotenie->setDate(date("Y-m-d"));
         $hodnotenie->setUserEmail($_SESSION['user']);
 
-
-
         $hodnotenie->save();
 
         return $this->redirect("?c=hodnotenie&a=skupIndividTrening");
-
-
-
     }
 
 
@@ -166,7 +170,6 @@ class HodnotenieController extends AControllerBase
 
             $hodnotenie = new Hodnotenie();
 
-            //text je podla html atributu name
             $hodnotenie->setUserID($userID[0]->getId());
             $hodnotenie->setTreningID($treningID[0]->getId());
             $hodnotenie->setNickname($nickname);
@@ -178,14 +181,7 @@ class HodnotenieController extends AControllerBase
 
             $hodnotenie->save();
         }
-        if($topic == "Ind_trening" || $topic == "Sku_trening") {
-            return $this->json("");
-        } else {
-            return $this->json("");
-        }
-
-
-
+        return $this->json("");
     }
 
 }

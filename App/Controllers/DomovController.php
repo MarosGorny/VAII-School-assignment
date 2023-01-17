@@ -21,7 +21,21 @@ class DomovController extends AControllerBase
      */
     public function authorize($action)
     {
+
+        //Metody ktore sa ukazu ked sa odhlasim/prihlasim
+        switch ($action) {
+            case "delete":
+            case "create":
+            case "store":
+            case "edit":
+            case"getUsers" :
+                return $this->app->getAuth()->isLogged();
+            case "pouzivatelia":
+            case "changeRole":
+                return $this->app->getAuth()->isAdmin();
+        }
         return true;
+
     }
 
     /**
@@ -50,30 +64,20 @@ class DomovController extends AControllerBase
         return $this->html();
     }
 
-    public function otazkyOdpovede(): Response {
-        return $this->html();
-    }
-
     public function pouzivatelia(): Response {
-        //vytiahnut vsetky rezervacie
         $pouzivatelia = Pouzivatel::getAll(orderBy: "email");
         return $this->html(['pouzivatelia' => $pouzivatelia]);
     }
 
-    public function pouziv(): Response {
-//        $pouzivatelia = Pouzivatel::getAll(orderBy: "email");
+    public function getUsers(): Response {
         $pouzivateliaHladat = null;
-
-
-
 
         if($this->request()->isAjax()) {
             $input = $this->request()->getValue('text');
 
-            //vytiahnut vsetky rezervacie
             $pouzivateliaHladat = Pouzivatel::getAll(whereClause: "email LIKE '{$input}%' OR id LIKE'{$input}%'",orderBy: "email");
             if(empty($pouzivateliaHladat)) {
-                echo "<h6 class='text-danger text-center mt-3'>Ziadne data sa nenasli</h6>";?><?php
+                echo "<h6 class='text-danger text-center mt-3'>Žiadne dáta sa nenašli</h6>";?><?php
             }
 
             if(!empty($pouzivateliaHladat)) {
@@ -89,13 +93,11 @@ class DomovController extends AControllerBase
     public function changeRole(): Response {
         $pouzivateliaHladat = null;
 
-
         if($this->request()->isAjax()) {
             $userId = $this->request()->getValue('pouzivatel_id');
             $role = $this->request()->getValue('role');
 
             if($role != null && $userId != null) {
-                $whereClause = "email = '$userId'";
                 $pouzivatel = Pouzivatel::getOne($userId);
 
                 $pouzivatel->setRole($role);
